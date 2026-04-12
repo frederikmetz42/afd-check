@@ -6,7 +6,7 @@
 <title>Was die AfD verspricht, und wie sie abstimmt</title>
 <meta name="description" content="Was die AfD verspricht, und wie sie abstimmt. Faktencheck mit Originalquellen.">
 <meta property="og:title" content="Was die AfD verspricht, und wie sie abstimmt">
-<meta property="og:description" content="Waehl ein Thema. Wir zeigen dir Zitate, Abstimmungen und Zahlen, alle mit Originalquellen.">
+<meta property="og:description" content="Wähl ein Thema. Wir zeigen dir Zitate, Abstimmungen und Zahlen, alle mit Originalquellen.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F50D;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -679,7 +679,7 @@ footer .b-footer-dot {
     </div>
 
     <div class="b-next-wrap" id="next-topic-wrap">
-      <button class="b-next-btn" onclick="showNextTopic()">Naechstes Thema &rarr;</button>
+      <button class="b-next-btn" onclick="showNextTopic()">Nächstes Thema &rarr;</button>
     </div>
   </div>
 
@@ -785,15 +785,19 @@ function showCascade(index) {
     '</div>'
   );
 
-  // 5. Source — compact, small font
+  // 5. Sources — compact, small font, multiple per topic
+  var sourceLinks = (topic.sources || []).map(function(s) {
+    return '<a href="' + s.url + '" target="_blank" rel="noopener" class="b-source">' + s.text + ' &#8599;</a>';
+  }).join('<br>');
+
   parts.push(
     '<div class="b-evidence-layer">' +
       '<div class="b-layer-label">' +
         '<div class="b-layer-icon" style="background: var(--bg);" aria-hidden="true">&#x1F517;</div>' +
-        '<span class="b-layer-tag" style="color: var(--text-muted);">Quelle</span>' +
+        '<span class="b-layer-tag" style="color: var(--text-muted);">Quellen</span>' +
       '</div>' +
-      '<p style="font-size:12px; color: var(--text-muted); line-height: 1.5;">' +
-        '<a href="' + topic.source.url + '" target="_blank" rel="noopener" class="b-source">' + topic.source.text + ' &#8599;</a>' +
+      '<p style="font-size:12px; color: var(--text-muted); line-height: 1.8;">' +
+        sourceLinks +
       '</p>' +
     '</div>'
   );
