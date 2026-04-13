@@ -6,20 +6,52 @@ const GUIDE_DATA = [
     icon: "🔒",
     hook: "Du willst Politiker, die das Migrationsproblem wirklich lösen. Nicht nur darüber reden.",
     promise: "Die AfD verspricht Massenabschiebungen, geschlossene Grenzen, hartes Durchgreifen. Kein anderer traut sich das, sagen sie.",
-    betrayal: "Das Chancen-Aufenthaltsrecht gab Geduldeten nach 5 Jahren eine Aufenthaltserlaubnis. Bedingung: Arbeit, Sprache, keine Straftaten. Weniger Geduldete, mehr Ordnung im System. Die AfD hat geschlossen dagegen gestimmt. Alle 66 Abgeordneten. Obwohl sie ständig über zu viele Geduldete klagen. Eigene Gesetzentwürfe zur Abschiebung? Kein einziger.",
-    consequence: "Weniger Geduldete wäre ein Ergebnis. Aber Ergebnisse bringen keine Stimmen. Schau dir an, was sie einbringen. Nicht was sie versprechen.",
+    patternSummary: "Die AfD hat gegen Integration, Abschiebung und Sicherheitsgesetze gestimmt.",
+    evidence: [
+      {
+        vote: "Chancen-Aufenthaltsrecht",
+        year: 2022,
+        description: "Bleiberecht für integrierte Geduldete mit Arbeit und Sprachkenntnissen.",
+        afd: "Alle 66 dagegen.",
+        others: "SPD, Grüne, FDP dafür (371 Ja).",
+        url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/chancen-aufenthaltsrecht"
+      },
+      {
+        vote: "Rückführungsverbesserungsgesetz",
+        year: 2024,
+        description: "Erleichterte Abschiebungen mit mehr Befugnissen für Behörden.",
+        afd: "Dagegen gestimmt.",
+        others: "SPD, Grüne, FDP dafür.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw03-de-rueckfuehrung-986284"
+      },
+      {
+        vote: "Sicherheitspaket nach Solingen",
+        year: 2024,
+        description: "Schärfere Asylregeln und erweiterte Messerverbotszonen.",
+        afd: "Dagegen gestimmt.",
+        others: "SPD, Grüne, FDP dafür (357 Ja).",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw42-de-drittstaatenangehoerige-1023860"
+      }
+    ],
+    counterArgument: {
+      text: "Die Gesetze gehen nicht weit genug. Das Chancen-Aufenthaltsrecht belohnt illegale Migration. Die Rückführungsgesetze enthalten nur winzige Mikro-Änderungen.",
+      source: "Gottfried Curio, innenpolitischer Sprecher AfD-Fraktion",
+      url: "https://afdbundestag.de/gottfried-curio-geplantes-chancen-aufenthaltsrecht-belohnt-illegale-migration/"
+    },
+    rebuttal: "Gegen Integration UND Abschiebung UND Sicherheit gestimmt. Wer alles ablehnt, will das Problem behalten. Eigene Gesetzentwürfe mit Mehrheitschance: null.",
+    consequence: "Weniger Geduldete wäre ein Ergebnis. Aber Ergebnisse bringen keine Stimmen. Schau dir an, was sie einbringen.",
     sources: [
       {
         text: "Abgeordnetenwatch: Namentliche Abstimmung Chancen-Aufenthaltsrecht, 02.12.2022",
         url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/chancen-aufenthaltsrecht"
       },
       {
-        text: "Bundestag: Einführung des Chancen-Aufenthaltsrechts (Debatte und Beschluss)",
-        url: "https://www.bundestag.de/dokumente/textarchiv/2022/kw48-de-chancen-aufenthaltsrecht-923118"
+        text: "Bundestag: Rückführungsverbesserungsgesetz, 18.01.2024",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw03-de-rueckfuehrung-986284"
       },
       {
-        text: "Bundestag Drucksache 20/3717: Gesetzentwurf Chancen-Aufenthaltsrecht",
-        url: "https://dserver.bundestag.de/btd/20/037/2003717.pdf"
+        text: "Bundestag: Sicherheitspaket nach Solingen, 18.10.2024",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw42-de-drittstaatenangehoerige-1023860"
       }
     ],
     pattern: "Sie blockieren Lösungen für Probleme, über die sie am lautesten klagen.",
@@ -32,8 +64,40 @@ const GUIDE_DATA = [
     icon: "💶",
     hook: "Du willst mehr Geld am Ende des Monats. Das ist kein politisches Statement, das ist Alltag.",
     promise: "Die AfD sagt: Wir kämpfen für die kleinen Leute. Gegen die da oben. Für dich.",
-    betrayal: "Die AfD hat gegen die Mindestlohnerhöhung auf 12 Euro gestimmt. Alle 75 dagegen. Sie lehnt die Vermögensteuer ab. Die trifft nur Vermögen über 2 Millionen. Sie will die Erbschaftsteuer abschaffen. Davon profitiert das oberste Prozent.",
-    consequence: "Laut ZEW-Studie spart ein Ehepaar mit 40.000 Euro Jahreseinkommen durch die AfD-Steuerpläne nichts. Ein Ehepaar mit 180.000 Euro spart 19.190 Euro. Je reicher, desto mehr Entlastung.",
+    patternSummary: "Die AfD stimmt gegen Mindestlohn und Bürgergeld, will aber die Erbschaftsteuer abschaffen.",
+    evidence: [
+      {
+        vote: "Mindestlohnerhöhung auf 12 Euro",
+        year: 2022,
+        description: "Anhebung des Mindestlohns von 9,82 auf 12 Euro pro Stunde.",
+        afd: "Alle 75 dagegen.",
+        others: "SPD, Grüne, FDP dafür (399 Ja).",
+        url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/anhebung-des-mindestlohns-fuer-minijobs"
+      },
+      {
+        vote: "Bürgergeld",
+        year: 2022,
+        description: "Ersetzte Hartz IV durch höhere Regelsätze und weniger Sanktionen.",
+        afd: "Geschlossen dagegen.",
+        others: "SPD, Grüne, FDP dafür (385 Ja).",
+        url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/einfuehrung-des-buergergeldes"
+      },
+      {
+        vote: "Abschaffung der Erbschaftsteuer (AfD-Antrag)",
+        year: 2026,
+        description: "Komplette Streichung der Erbschaft- und Schenkungsteuer.",
+        afd: "Eigener Antrag, einzige Befürworter.",
+        others: "SPD, CDU/CSU, Grüne, FDP, Linke alle dagegen.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2026/kw05-de-erbschaftsteuer-1137006"
+      }
+    ],
+    counterArgument: {
+      text: "Die Mindestlohnkommission soll über den Mindestlohn entscheiden, nicht der Koalitionsvertrag. Die Erbschaftsteuer bedroht Familienbesitz durch gestiegene Immobilienpreise.",
+      source: "AfD-Fraktion, Bundestag 2022",
+      url: "https://afdbundestag.de/juergen-pohl-der-kompromiss-beim-mindestlohn-ist-weder-fisch-noch-fleisch/"
+    },
+    rebuttal: "90% der Erbschaften liegen unter dem Freibetrag und zahlen nichts. Laut ZEW-Studie spart ein Ehepaar mit 40.000 Euro durch AfD-Steuerpläne nichts. Mit 180.000 Euro: 19.190 Euro.",
+    consequence: "Laut ZEW spart, wer wenig verdient, nichts. Je reicher, desto mehr Entlastung. Das ist kein Plan für den kleinen Mann.",
     sources: [
       {
         text: "Abgeordnetenwatch: Namentliche Abstimmung Mindestlohn auf 12 Euro, 2022",
@@ -58,20 +122,52 @@ const GUIDE_DATA = [
     icon: "⚡",
     hook: "Du ärgerst dich über hohe Strompreise. Zurecht. Das ist ein echtes Problem.",
     promise: "Die AfD sagt: Zurück zu Kohle und Kernkraft. Dann wird Strom wieder billig.",
-    betrayal: "Solar kostet heute 4,7 Cent pro Kilowattstunde. Kohle kostet 11 bis 15 Cent. Solar ist halb so teuer. Die AfD hat gegen den Ausbau erneuerbarer Energien gestimmt. Eigene Energiegesetze hat sie nie eingebracht.",
-    consequence: "Ihr Plan bedeutet teureren Strom, nicht billigeren. Du würdest mehr zahlen.",
+    patternSummary: "Die AfD stimmt gegen Solar und Wind, obwohl beides billiger ist als Kohle und Atom.",
+    evidence: [
+      {
+        vote: "EEG-Novelle",
+        year: 2022,
+        description: "Beschleunigte den Ausbau erneuerbarer Energien.",
+        afd: "Geschlossen dagegen.",
+        others: "SPD, Grüne, FDP dafür.",
+        url: "https://www.abgeordnetenwatch.de/bundestag/19/abstimmungen/erneuerbare-energien-gesetz-eeg"
+      },
+      {
+        vote: "Solarpaket I",
+        year: 2024,
+        description: "Vereinfachte Balkonkraftwerke und beschleunigte Solarausbau.",
+        afd: "Geschlossen dagegen.",
+        others: "SPD, Grüne, FDP dafür (384 Ja).",
+        url: "https://www.bundestag.de/parlament/plenum/abstimmung/abstimmung?id=914"
+      },
+      {
+        vote: "Klimaschutzfolgenbereinigungsgesetz (AfD-Entwurf)",
+        year: 2025,
+        description: "23 Klimagesetze aufheben, Austritt aus Pariser Abkommen.",
+        afd: "Eigener Entwurf (131 Ja).",
+        others: "443 dagegen. Alle anderen Fraktionen geschlossen.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw46-de-klimaschutzfolgen-1123122"
+      }
+    ],
+    counterArgument: {
+      text: "Erneuerbare haben trotz Subventionen keine Wettbewerbsfähigkeit erreicht. Die Energiewende ist gescheitert. Deutschland braucht Grundlastkraftwerke für sichere Versorgung.",
+      source: "AfD-Fraktion, Arbeitskreis Klimaschutz und Energie",
+      url: "https://afdbundestag.de/arbeitskreise/klimaschutzundenergie/"
+    },
+    rebuttal: "Fraunhofer ISE: Solar kostet 4 bis 5 Cent pro kWh, Kohle 11 bis 15, neue AKW 10 bis 18. Die AfD will die teurere Option.",
+    consequence: "Ihr Plan bedeutet teureren Strom. Du würdest mehr zahlen, nicht weniger.",
     sources: [
       {
         text: "Fraunhofer ISE: Stromgestehungskosten erneuerbare Energien, 2024",
         url: "https://www.ise.fraunhofer.de/de/veroeffentlichungen/studien/studie-stromgestehungskosten-erneuerbare-energien.html"
       },
       {
-        text: "Abgeordnetenwatch: Abstimmung Erneuerbare-Energien-Gesetz (EEG)",
-        url: "https://www.abgeordnetenwatch.de/bundestag/19/abstimmungen/erneuerbare-energien-gesetz-eeg"
+        text: "Bundestag: Solarpaket I, 26.04.2024",
+        url: "https://www.bundestag.de/parlament/plenum/abstimmung/abstimmung?id=914"
       },
       {
-        text: "Bundesnetzagentur: Monitoringbericht Energie 2024",
-        url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/Monitoringberichte/start.html"
+        text: "Bundestag: Klimaschutzfolgenbereinigungsgesetz, 13.11.2025",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw46-de-klimaschutzfolgen-1123122"
       }
     ],
     pattern: "Sie versprechen günstige Energie und kämpfen für die teurere Option.",
@@ -84,7 +180,39 @@ const GUIDE_DATA = [
     icon: "🏛️",
     hook: "Du hast die Nase voll von korrupten Politikern. Wer hat das nicht.",
     promise: "Die AfD sagt: Null Toleranz bei Korruption. Wir räumen auf.",
-    betrayal: "Alice Weidel: 396.000 Euro Strafe für illegale Spenden aus der Schweiz. Petr Bystron: Ermittlungen wegen russischem Geld über Voice of Europe. Maximilian Krahs Mitarbeiter: verurteilt als chinesischer Spion im EU-Parlament. Die AfD hat 2023 gegen die Verschärfung des Lobbyregistergesetzes gestimmt.",
+    patternSummary: "Die AfD stimmt gegen jedes Transparenzgesetz und kassiert gleichzeitig Auslandsgeld.",
+    evidence: [
+      {
+        vote: "Lobbyregister-Verschärfung",
+        year: 2023,
+        description: "Strengere Regeln für Lobbyisten im Bundestag.",
+        afd: "Dagegen gestimmt.",
+        others: "SPD, Grüne, FDP dafür.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2023/kw42-de-lobbyregister-971428"
+      },
+      {
+        vote: "Hinweisgeberschutzgesetz (Whistleblower-Schutz)",
+        year: 2023,
+        description: "Schützte Whistleblower in Unternehmen und Behörden vor Repressalien.",
+        afd: "Geschlossen dagegen.",
+        others: "SPD, Grüne, FDP dafür.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2023/kw11-de-hinweisgeber-937542"
+      },
+      {
+        vote: "Strafbarkeit unzulässiger Interessenvertretung",
+        year: 2024,
+        description: "Verschärfte Strafbarkeit von Abgeordnetenbestechung.",
+        afd: "Dagegen gestimmt.",
+        others: "Koalitionsfraktionen dafür.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw17-de-lobbyismus-999782"
+      }
+    ],
+    counterArgument: {
+      text: "Die Koalitionsvorschläge gehen nicht weit genug. Die AfD hat einen eigenen Entwurf mit legislativem Fußabdruck eingebracht, der alle Lobbykontakte dokumentiert.",
+      source: "AfD-Fraktion, Lobbyregister-Debatte 2023",
+      url: "https://www.bundestag.de/presse/hib/kurzmeldungen-972716"
+    },
+    rebuttal: "Eigener Entwurf ohne Mehrheit. Gleichzeitig gegen jede Verschärfung gestimmt, die durchkommt. Dazu: Weidel (396.000 Euro Strafe), Bystron (russisches Geld), Krah-Mitarbeiter (China-Spion).",
     consequence: "Die AfD stimmt gegen Transparenzgesetze und kassiert gleichzeitig Geld aus dem Ausland.",
     sources: [
       {
@@ -100,8 +228,8 @@ const GUIDE_DATA = [
         url: "https://www.zdf.de/nachrichten/politik/ausland/krah-mitarbeiter-spionage-china-urteil-100.html"
       },
       {
-        text: "Bundestag: Lobbyregistergesetz Verschärfung 2023 (Debatte und Beschluss)",
-        url: "https://www.bundestag.de/dokumente/textarchiv/2023/kw42-de-lobbyregister-971428"
+        text: "Bundestag: Hinweisgeberschutzgesetz, 11.05.2023",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2023/kw11-de-hinweisgeber-937542"
       }
     ],
     pattern: "Gegen Transparenz stimmen und gleichzeitig Auslandsgeld kassieren.",
@@ -114,24 +242,52 @@ const GUIDE_DATA = [
     icon: "🛡️",
     hook: "Du willst dich sicher fühlen. In deiner Stadt, in deiner Nachbarschaft. Das ist dein Recht.",
     promise: "Die AfD sagt: Mehr Polizei, härtere Strafen, konsequent abschieben.",
-    betrayal: "Die Überrepräsentation von Nichtdeutschen in der Kriminalstatistik ist real. Die Tatverdächtigenbelastungszahl liegt bei 5.091 pro 100.000 (Deutsche: 1.878). Das sind die BKA-Zahlen. Gleichzeitig zeigt die Kriminologie: Alter, Geschlecht und Aufenthaltsstatus erklären den Großteil. Junge Männer ohne sicheren Status sind häufiger tatverdächtig, egal woher sie kommen. Seit 2016 sinkt die Kriminalität bei Zuwanderern deutlich. Die AfD hat gegen Gesetze gestimmt, die genau diese Ursachen angehen: Integration, Aufenthaltsstatus, Sprachkurse.",
-    consequence: "Die Zahlen sind echt. Die Frage ist, ob du eine Partei willst, die sie erklärt und anpackt, oder eine, die sie nur wiederholt.",
+    patternSummary: "Die AfD stimmt gegen jedes Sicherheitsgesetz und nennt alles zu wenig.",
+    evidence: [
+      {
+        vote: "Sicherheitspaket nach Solingen",
+        year: 2024,
+        description: "Erweiterte Befugnisse bei Waffenverboten und biometrischer Überwachung.",
+        afd: "Dagegen gestimmt. Nannte es eine Luftnummer.",
+        others: "SPD, Grüne, FDP dafür (357 Ja).",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw42-de-drittstaatenangehoerige-1023860"
+      },
+      {
+        vote: "Rückführungsverbesserungsgesetz",
+        year: 2024,
+        description: "Längere Abschiebehaft und erweiterte Befugnisse für Behörden.",
+        afd: "Dagegen. Bernd Baumann: nur winzige Mikro-Änderungen.",
+        others: "SPD, Grüne, FDP dafür.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw03-de-rueckfuehrung-986284"
+      },
+      {
+        vote: "Bundespolizeigesetz-Modernisierung",
+        year: 2025,
+        description: "Erweiterte Befugnisse der Bundespolizei bei Überwachung und Abschiebehaft.",
+        afd: "Enthaltung. Kritisierte zu strenge Voraussetzungen.",
+        others: "Koalition dafür.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw51-de-bundespolizei-1129174"
+      }
+    ],
+    counterArgument: {
+      text: "Alles Luftnummern. Die Maßnahmen sind völlig unzureichend. Deutschland braucht komplette Grenzsicherung mit sofortiger Zurückweisung aller illegalen Migranten.",
+      source: "Martin Hess, innenpolitischer Sprecher AfD-Fraktion",
+      url: "https://afdbundestag.de/martin-hess-sicherheitspaket-der-ampel-entpuppt-sich-als-luftnummer/"
+    },
+    rebuttal: "Jede Verbesserung ablehnen und nur Maximalforderungen stellen ergibt null umgesetzte Maßnahmen. Eigene Anträge haben nie eine Mehrheit, weil die AfD keine Kompromisse eingeht.",
+    consequence: "Die Zahlen sind echt. Die Frage ist, ob du eine Partei willst, die anpackt, oder eine, die nur wiederholt.",
     sources: [
       {
         text: "BKA: Polizeiliche Kriminalstatistik 2024, Tatverdächtige nach Nationalität",
         url: "https://www.bka.de/DE/AktuelleInformationen/StatistikenLagebilder/PolizeilicheKriminalstatistik/PKS2024/PKSTabellen/BundTVNationalitaet/bundTVNationalitaet.html"
       },
       {
-        text: "BKA: PKS 2024 Ausgewählte Zahlen im Überblick (BMI)",
-        url: "https://www.bmi.bund.de/SharedDocs/downloads/DE/publikationen/themen/sicherheit/BMI25028_pks-2024.pdf"
+        text: "Bundestag: Sicherheitspaket nach Solingen, 18.10.2024",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw42-de-drittstaatenangehoerige-1023860"
       },
       {
-        text: "KFN Forschungsbericht 161: Kriminalität von Zuwanderern",
-        url: "https://kfn.de/publikationen/kfn-forschungsberichte/"
-      },
-      {
-        text: "Mediendienst Integration: Migration und Kriminalität (Einordnung PKS)",
-        url: "https://mediendienst-integration.de/news/migration-und-kriminalitaet/"
+        text: "Bundestag: Rückführungsverbesserungsgesetz, 18.01.2024",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw03-de-rueckfuehrung-986284"
       }
     ],
     pattern: "Angst mobilisiert Stimmen. Ursachen bekämpfen löst das Problem.",
@@ -144,7 +300,39 @@ const GUIDE_DATA = [
     icon: "🇩🇪",
     hook: "Du willst stolz auf dein Land sein. Ohne dass jemand dich gleich Nazi nennt. Kann man verstehen.",
     promise: "Die AfD sagt: Wir sind die echten Patrioten. Alle anderen schämen sich für Deutschland.",
-    betrayal: "Ihr Spitzenmann Höcke wurde verurteilt. Für eine SA-Parole. Zweimal. Der BGH hat es im August 2025 rechtskräftig bestätigt (3 StR 484/24). Gauland nannte die Nazi-Zeit einen Vogelschiss. Drei Landesverbände sind vom Verfassungsschutz als gesichert rechtsextrem eingestuft.",
+    patternSummary: "Höcke nutzt SA-Parolen, der Verfassungsschutz stuft die Gesamtpartei als rechtsextrem ein.",
+    evidence: [
+      {
+        vote: "Höcke: SA-Parole (BGH-Urteil)",
+        year: 2025,
+        description: "BGH bestätigte die Verurteilung wegen Verwendung einer SA-Parole.",
+        afd: "Höcke bleibt Landesvorsitzender Thüringen.",
+        others: "Rechtskräftig, keine Revision möglich (3 StR 484/24).",
+        url: "https://www.bundesgerichtshof.de/SharedDocs/Pressemitteilungen/DE/2025/2025168.html"
+      },
+      {
+        vote: "Verfassungsschutz: Gesamtpartei gesichert rechtsextrem",
+        year: 2025,
+        description: "BfV stufte die gesamte AfD als gesichert rechtsextremistische Bestrebung ein.",
+        afd: "Klagt dagegen (VG Köln).",
+        others: "Einstufung basiert auf über 1.000 Seiten Gutachten.",
+        url: "https://www.verfassungsschutz.de/DE/themen/rechtsextremismus/rechtsextremismus_node.html"
+      },
+      {
+        vote: "Correctiv: Geheimtreffen Potsdam (Remigration)",
+        year: 2024,
+        description: "AfD-Politiker trafen sich mit Rechtsextremen. Thema: Remigration auch für deutsche Staatsbürger.",
+        afd: "Distanzierte sich teilweise. Nutzt Remigration seitdem in Wahlwerbung.",
+        others: "Millionen-Demonstrationen in über 70 Städten.",
+        url: "https://correctiv.org/aktuelles/neue-rechte/2024/01/10/geheimplan-remigration-vertreibung-afd-rechtsextreme-november-treffen/"
+      }
+    ],
+    counterArgument: {
+      text: "Der Verfassungsschutz ist ein politisches Instrument der Regierung. Die Correctiv-Berichterstattung wurde in Teilen gerichtlich beanstandet (LG Hamburg). Es war ein privates Treffen.",
+      source: "AfD-Bundesvorstand, diverse Stellungnahmen",
+      url: "https://correctiv.org/aktuelles/neue-rechte/2026/01/10/zwei-jahre-nach-der-potsdam-recherche-von-angeblichen-deportationsluegen-bis-zum-moeglichen-afd-verbotsverfahren/"
+    },
+    rebuttal: "Das 1.000-Seiten-Gutachten ist keine Kampagne. Das Gericht beanstandete Formulierungen, nicht die Kerntatsache. Die AfD nutzt Remigration seitdem selbst in offizieller Wahlwerbung.",
     consequence: "Sie haben Patriotismus nicht neu definiert. Sie haben Extremismus dahinter versteckt.",
     sources: [
       {
@@ -156,8 +344,8 @@ const GUIDE_DATA = [
         url: "https://www.verfassungsschutz.de/DE/themen/rechtsextremismus/rechtsextremismus_node.html"
       },
       {
-        text: "ZDF: Höcke-Urteil wegen NS-Parole rechtskräftig",
-        url: "https://www.zdfheute.de/politik/deutschland/bjoern-hoecke-afd-urteil-ns-parole-bgh-100.html"
+        text: "Correctiv: Geheimplan Remigration, Recherche vom 10.01.2024",
+        url: "https://correctiv.org/aktuelles/neue-rechte/2024/01/10/geheimplan-remigration-vertreibung-afd-rechtsextreme-november-treffen/"
       }
     ],
     pattern: "Patriotismus als Schutzschild für Positionen, die Gerichte als rechtsextrem einstufen.",
@@ -170,20 +358,52 @@ const GUIDE_DATA = [
     icon: "🌍",
     hook: "Du ärgerst dich über EU-Bürokratie. Zu viele Regeln, zu wenig Mitsprache. Geht vielen so.",
     promise: "Die AfD will den Dexit. Oder zumindest eine radikale EU-Reform. Zurück zur nationalen Souveränität.",
-    betrayal: "54 Prozent der deutschen Exporte gehen in die EU. Der Brexit hat gezeigt, was ein Austritt kostet. Und was machen AfD-Abgeordnete im EU-Parlament? Bystron nimmt russisches Geld über Voice of Europe. Krahs Mitarbeiter spioniert für China.",
-    consequence: "Ihre Version von Souveränität heißt: abhängig von Putin und Xi statt von demokratischen Partnern.",
+    patternSummary: "Die AfD stimmt gegen EU-Freihandel, EU-Kooperation und EU-Mindestlohn gleichzeitig.",
+    evidence: [
+      {
+        vote: "NextGenerationEU (Corona-Wiederaufbaufonds)",
+        year: 2021,
+        description: "EU-Wiederaufbaufonds über 750 Milliarden Euro nach Corona.",
+        afd: "Geschlossen dagegen.",
+        others: "CDU/CSU, SPD, Grüne, FDP dafür (478 Ja).",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2021/kw12-de-eu-eigenmittel-826488"
+      },
+      {
+        vote: "CETA (Freihandel EU-Kanada)",
+        year: 2022,
+        description: "Ratifizierung des Freihandelsabkommens mit Kanada.",
+        afd: "Geschlossen dagegen.",
+        others: "SPD, Grüne, FDP, CDU/CSU dafür.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2022/kw48-de-ceta-923086"
+      },
+      {
+        vote: "EU-Mindestlohnrichtlinie",
+        year: 2024,
+        description: "EU-Richtlinie für angemessene Mindestlöhne in allen Mitgliedstaaten.",
+        afd: "Hielt die Richtlinie für rechtswidrig.",
+        others: "Im EU-Parlament mit breiter Mehrheit angenommen.",
+        url: "https://afdbundestag.de/eugh-urteil-zur-mindestlohnrichtlinie-bestaetigt-auffassung-der-afd-fraktion/"
+      }
+    ],
+    counterArgument: {
+      text: "Die EU ist nicht reformierbar. Wenn nötig, müssen die Menschen entscheiden, ähnlich wie bei Großbritannien. Die EU-Mindestlohnrichtlinie ist ein rechtswidriger Eingriff in nationale Souveränität.",
+      source: "Alice Weidel, AfD-Grundsatzprogramm",
+      url: "https://www.afd.de/wahlprogramm/"
+    },
+    rebuttal: "Der Brexit hat Großbritannien laut OBR dauerhaft 4% BIP gekostet. Gegen Freihandel UND Kooperation, aber keine Alternative für den EU-Binnenmarkt (54% der deutschen Exporte).",
+    consequence: "Ihre Souveränität heißt: abhängig von Putin und Xi statt von demokratischen Partnern.",
     sources: [
       {
         text: "Destatis: Außenhandel zwischen den EU-Staaten 2024",
         url: "https://www.destatis.de/Europa/DE/Thema/Aussenhandel/EU_Handelspartner_Deutschland.html"
       },
       {
-        text: "Abgeordnetenwatch: Bystron und Voice of Europe",
-        url: "https://www.abgeordnetenwatch.de/recherchen/informationsfreiheit/geld-aus-russland-die-affaere-um-petr-bystron"
+        text: "Bundestag: CETA-Ratifizierung, 01.12.2022",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2022/kw48-de-ceta-923086"
       },
       {
-        text: "AfD Wahlprogramm: Kapitel Europa und Souveränität",
-        url: "https://www.afd.de/wahlprogramm/"
+        text: "Bundestag: EU-Eigenmittelbeschluss, 25.03.2021",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2021/kw12-de-eu-eigenmittel-826488"
       }
     ],
     pattern: "Souveränität predigen und von autoritären Regimen kassieren.",
@@ -196,9 +416,45 @@ const GUIDE_DATA = [
     icon: "👨‍👩‍👧",
     hook: "Du findest Gendern nervig. Das geht vielen so. Auch Leuten, die nicht rechts sind.",
     promise: "Die AfD will Gendern verbieten. Schluss mit dem Gender-Wahnsinn, sagen sie.",
-    betrayal: "0,005 Prozent der Bevölkerung ändern ihren Geschlechtseintrag. Das ist der ganze Wahnsinn. Gleichzeitig hat die AfD keinen Plan für Mieten, Renten oder Pflege.",
+    patternSummary: "Die AfD investiert massiv Redezeit in 0,005% Betroffene und hat null eigene Sozialgesetze.",
+    evidence: [
+      {
+        vote: "Selbstbestimmungsgesetz",
+        year: 2024,
+        description: "Geschlechtseintrag per Standesamt ändern statt per Gericht und Gutachten.",
+        afd: "Geschlossen dagegen.",
+        others: "SPD, Grüne, FDP dafür (372 Ja).",
+        url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/selbstbestimmungsgesetz"
+      },
+      {
+        vote: "Abschaffung Frauenquoten (AfD-Antrag)",
+        year: 2020,
+        description: "AfD beantragte die Streichung der Frauenquote in Aufsichtsräten.",
+        afd: "Eigener Antrag.",
+        others: "Alle anderen Fraktionen dagegen.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2020/kw38-de-gleichstellung-791798"
+      },
+      {
+        vote: "Bundesstiftung Gleichstellung",
+        year: 2021,
+        description: "Gründung einer Stiftung zur Förderung der Gleichstellung.",
+        afd: "Geschlossen dagegen.",
+        others: "CDU/CSU und SPD dafür.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2021/kw15-de-bundesstiftung-gleichstellung-830888"
+      }
+    ],
+    counterArgument: {
+      text: "Gleichstellung ist ein ideologischer Begriff. Wir fordern Gleichberechtigung (gleiche Rechte), nicht Gleichstellung (gleiche Ergebnisse). Biologische Realitäten dürfen nicht geleugnet werden.",
+      source: "AfD-Fraktion, Antrag Gleichberechtigung sicherstellen",
+      url: "https://afdbundestag.de/gleichberechtigung-sicherstellen-gleichstellung-beenden/"
+    },
+    rebuttal: "0,005% der Bevölkerung ändern ihren Geschlechtseintrag. Kein eigener Gesetzentwurf zu Pflege, Rente oder Wohnen, der eine Mehrheit fand.",
     consequence: "Gender ist ihre billigste Ablenkung. Kostet nichts, mobilisiert zuverlässig. Frag dich, wie oft Gendern dein Leben wirklich beeinflusst hat.",
     sources: [
+      {
+        text: "Abgeordnetenwatch: Abstimmung Selbstbestimmungsgesetz, 12.04.2024",
+        url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/selbstbestimmungsgesetz"
+      },
       {
         text: "Bundesjustizamt: Änderungen Geschlechtseintrag nach SBGG, 2024",
         url: "https://www.bundesjustizamt.de/DE/Themen/Buergerdienste/SBGG/SBGG_node.html"
@@ -206,10 +462,6 @@ const GUIDE_DATA = [
       {
         text: "AfD Grundsatzprogramm: Kapitel Familie und Gender",
         url: "https://www.afd.de/grundsatzprogramm/"
-      },
-      {
-        text: "Destatis: Bevölkerungsstand Deutschland 2024",
-        url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bevoelkerung/Bevoelkerungsstand/_inhalt.html"
       }
     ],
     pattern: "Kulturkampf statt Sachpolitik. Emotion statt Lösung.",
@@ -222,7 +474,39 @@ const GUIDE_DATA = [
     icon: "🏦",
     hook: "Du fragst dich, ob deine Rente reichen wird. Nach 40 Jahren Arbeit sollte das nicht unsicher sein.",
     promise: "Die AfD sagt: Wir schützen die deutsche Rente. Wir kämpfen für deine Altersvorsorge.",
-    betrayal: "Im Dezember 2025 hat der Bundestag das Rentenpaket beschlossen. Rentenniveau bei 48 Prozent stabilisiert. Die AfD hat geschlossen dagegen gestimmt. Alle 140 Abgeordneten. Im Grundsatzprogramm will die AfD die Rente um Kapitaldeckung erweitern. Das heißt: Teile deiner Rente sollen an der Börse angelegt werden. Wer wenig verdient, kann wenig anlegen. Wer schlecht anlegt, verliert.",
+    patternSummary: "Die AfD hat gegen Grundrente und Rentenniveau-Stabilisierung gestimmt, beides für Geringverdiener.",
+    evidence: [
+      {
+        vote: "Grundrente",
+        year: 2020,
+        description: "Aufstockung für Geringverdiener mit mindestens 33 Jahren Beiträgen.",
+        afd: "Dagegen gestimmt.",
+        others: "CDU/CSU und SPD dafür.",
+        url: "https://www.bundestag.de/webarchiv/textarchiv/2020/kw27-de-grundrente-703572"
+      },
+      {
+        vote: "Rentenpaket (48% Rentenniveau)",
+        year: 2025,
+        description: "Stabilisierte das Rentenniveau bei 48 Prozent.",
+        afd: "Alle 140 dagegen.",
+        others: "318 dafür, 225 dagegen.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw49-de-rentenpaket-1128720"
+      },
+      {
+        vote: "Bürgergeld (betrifft Aufstocker-Rentner)",
+        year: 2022,
+        description: "Höhere Grundsicherung, auch für Rentner mit Aufstockungsbedarf.",
+        afd: "Geschlossen dagegen.",
+        others: "SPD, Grüne, FDP dafür.",
+        url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/einfuehrung-des-buergergeldes"
+      }
+    ],
+    counterArgument: {
+      text: "Die Grundrente ist nicht zielgenau, zu teuer und weitgehend wirkungslos. Die Mindestlohnkommission, nicht der Koalitionsvertrag, soll über solche Fragen entscheiden.",
+      source: "Ulrike Schielke-Ziesing, rentenpolitische Sprecherin AfD-Fraktion",
+      url: "https://afdbundestag.de/schielke-ziesing-afd-fraktion-lehnt-wirkungslose-grundrente-ab/"
+    },
+    rebuttal: "Gegen Grundrente UND Rentenniveau-Stabilisierung gestimmt. Das sind die zwei Maßnahmen, die Geringverdienern helfen. Die AfD-Alternative (Kapitaldeckung) nützt vor allem Besserverdienern.",
     consequence: "Sie stimmen gegen Rentenstabilisierung heute und versprechen ein Börsenmodell für morgen. Für wen ist das sicherer?",
     sources: [
       {
@@ -230,12 +514,8 @@ const GUIDE_DATA = [
         url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw49-de-rentenpaket-1128720"
       },
       {
-        text: "AfD Wahlprogramm: Rente und Soziales",
-        url: "https://www.afd.de/wahlprogramm-rente-soziales/"
-      },
-      {
-        text: "AfD-Fraktion: Eckpunktepapier Alterssicherung",
-        url: "https://afdbundestag.de/eckpunktepapier-alterssicherung/"
+        text: "Bundestag: Grundrente, 02.07.2020",
+        url: "https://www.bundestag.de/webarchiv/textarchiv/2020/kw27-de-grundrente-703572"
       },
       {
         text: "DGB Faktencheck: Wohin will die AfD mit der Rente?",
@@ -252,24 +532,52 @@ const GUIDE_DATA = [
     icon: "🏥",
     hook: "Du wartest ewig auf einen Arzttermin. Pflegekräfte sind am Limit. Das merkst du selbst.",
     promise: "Die AfD sagt: Wir bringen das Gesundheitssystem in Ordnung. Pflege muss sich wieder lohnen.",
-    betrayal: "Die AfD hat 2019 gegen bessere Pflegelöhne gestimmt. Das Pflegelöhneverbesserungsgesetz sollte verbindliche Mindestlöhne in der Pflege ermöglichen. Die AfD nannte es einen Eingriff in die Marktwirtschaft. Beim Pflegepersonal-Stärkungsgesetz 2018 hat sie sich enthalten. Beim Pflegekompetenzgesetz 2025 hat sie dagegen gestimmt. Eigene Pflegegesetze? Keine.",
-    consequence: "Pflegekräfte kündigen wegen schlechter Bezahlung. Die AfD stimmt gegen jedes Gesetz, das daran etwas ändert.",
-    sources: [
+    patternSummary: "Die AfD hat gegen jedes Pflegegesetz seit 7 Jahren gestimmt. Eigene Vorschläge: null.",
+    evidence: [
       {
-        text: "Bundestag: Gesetz für bessere Löhne in der Pflege (AfD dagegen), 24.10.2019",
-        url: "https://www.bundestag.de/webarchiv/textarchiv/2019/kw43-de-pflegeloehneverbesserungsgesetz-663300"
+        vote: "Pflegereform (PUEG)",
+        year: 2023,
+        description: "Erhöhte Pflegegeld und verbesserte Pflegeunterstützungsgeld.",
+        afd: "Dagegen gestimmt.",
+        others: "SPD, Grüne, FDP dafür (377 Ja).",
+        url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/pflegereform"
       },
       {
-        text: "Bundestag: Pflegepersonal-Stärkungsgesetz (AfD Enthaltung), 09.11.2018",
-        url: "https://www.bundestag.de/webarchiv/textarchiv/2018/kw45-de-pflegepersonalstaerkungsgesetz-575082"
-      },
-      {
-        text: "Bundestag: Pflegekompetenzgesetz und Sparpaket (AfD dagegen), 06.11.2025",
+        vote: "Pflegekompetenzgesetz",
+        year: 2025,
+        description: "Mehr Befugnisse für Pflegefachkräfte und weniger Bürokratie.",
+        afd: "Dagegen gestimmt.",
+        others: "CDU/CSU und SPD dafür.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw45-de-pflege-1116730"
       },
       {
-        text: "AfD-Fraktion: Grundsatzthesen zur Pflege",
-        url: "https://afdbundestag.de/afd-grundsatzthesen-zur-pflege/"
+        vote: "Pflegepersonal-Stärkungsgesetz",
+        year: 2018,
+        description: "Mehr Stellen und bessere Bedingungen in der Pflege.",
+        afd: "Enthaltung.",
+        others: "CDU/CSU und SPD dafür.",
+        url: "https://www.bundestag.de/webarchiv/textarchiv/2018/kw45-de-pflegepersonalstaerkungsgesetz-575082"
+      }
+    ],
+    counterArgument: {
+      text: "Die Gesetze sind unausgereift. Mehr Kompetenz für Pflegekräfte ist richtig, aber der Entwurf regelt viele Details nicht. Die Kompetenzen müssen exakt definiert werden.",
+      source: "Joachim Bloch, AfD-Fraktion",
+      url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw37-de-pflegekompetenzgesetz-1099328"
+    },
+    rebuttal: "Gegen jedes Pflegegesetz seit 7 Jahren. Immer unausgereift, immer dagegen. Eigene mehrheitsfähige Vorschläge: null.",
+    consequence: "Pflegekräfte kündigen wegen schlechter Bezahlung. Die AfD stimmt gegen jedes Gesetz, das daran etwas ändert.",
+    sources: [
+      {
+        text: "Bundestag: Pflegereform PUEG, 26.05.2023",
+        url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/pflegereform"
+      },
+      {
+        text: "Bundestag: Pflegekompetenzgesetz, 06.11.2025",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw45-de-pflege-1116730"
+      },
+      {
+        text: "Bundestag: Pflegepersonal-Stärkungsgesetz, 09.11.2018",
+        url: "https://www.bundestag.de/webarchiv/textarchiv/2018/kw45-de-pflegepersonalstaerkungsgesetz-575082"
       }
     ],
     pattern: "Probleme benennen, aber gegen jede Lösung stimmen.",
