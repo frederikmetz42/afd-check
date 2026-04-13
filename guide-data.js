@@ -341,10 +341,10 @@ const GUIDE_DATA = [
     ],
     counterArgument: {
       text: "Die anderen Parteien hassen Deutschland. Robert Habeck schrieb 2010: 'Vaterlandsliebe fand ich stets zum Kotzen.' Claudia Roth stand neben einem Banner 'Deutschland, du mieses Stück Scheiße.' Die Linke lehnt nationale Symbole ab. Wir sind die Einzigen, die stolz auf ihr Land sind.",
-      source: "AfD-Bundesvorstand, diverse Stellungnahmen. Habeck-Zitat aus seinem Buch 'Patriotismus: Ein Plädoyer' (2010), in dem er anschließend beschreibt, wie er gelernt hat, Patriotismus positiv zu sehen.",
+      source: "AfD-Bundesvorstand, diverse Stellungnahmen. Habeck-Zitat aus 'Patriotismus: Ein Plädoyer' (2010).",
       url: "https://correctiv.org/aktuelles/neue-rechte/2026/01/10/zwei-jahre-nach-der-potsdam-recherche-von-angeblichen-deportationsluegen-bis-zum-moeglichen-afd-verbotsverfahren/"
     },
-    rebuttal: "Die Habeck- und Roth-Zitate sind real. Teile der deutschen Linken haben ein echtes Problem mit Patriotismus. Das stimmt. Aber die Frage ist nicht: Habeck oder Höcke. Die Frage ist: Welche Art von Stolz willst du? Stolz auf Deutschland und SA-Parolen schließen sich aus. Man kann sein Land lieben, ohne den Holocaust als Vogelschiss zu bezeichnen. 1.000 Seiten Verfassungsschutz-Gutachten sind keine Kampagne.",
+    rebuttal: "Die Roth-Szene ist real. Das Habeck-Zitat ist aus dem Zusammenhang gerissen: Sein Buch heißt 'Patriotismus: Ein Plädoyer' und argumentiert FÜR einen aufgeklärten Patriotismus. Er beschreibt, wie er gelernt hat, Verantwortung für sein Land zu übernehmen. Das Zitat allein klingt anders als das ganze Kapitel. Trotzdem: Teile der deutschen Linken haben ein echtes Patriotismusproblem. Das stimmt. Die Frage ist, ob die AfD-Version die Antwort darauf ist. Man kann stolz auf sein Land sein, ohne SA-Parolen zu benutzen oder den Holocaust als Vogelschiss zu bezeichnen.",
     consequence: "Du willst stolz auf Deutschland sein. Das ist fair. Aber bist du stolz auf ein Deutschland, in dem ein Parteiführer für SA-Parolen verurteilt wird? Oder auf ein Deutschland, das aus seiner Geschichte gelernt hat?",
     sources: [
       {
