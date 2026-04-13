@@ -6,7 +6,7 @@ const GUIDE_DATA = [
     icon: "🔒",
     hook: "Du willst Politiker, die das Migrationsproblem wirklich lösen. Nicht nur darüber reden.",
     promise: "Die AfD verspricht Massenabschiebungen, geschlossene Grenzen, hartes Durchgreifen. Kein anderer traut sich das, sagen sie.",
-    patternSummary: "Die AfD hat gegen Integration, Abschiebung und Sicherheitsgesetze gestimmt.",
+    patternSummary: "Die AfD stimmt für Härte, aber gegen Ordnung. Verschärfung ja, Lösung nein.",
     evidence: [
       {
         vote: "Chancen-Aufenthaltsrecht",
@@ -31,15 +31,23 @@ const GUIDE_DATA = [
         afd: "Dagegen gestimmt.",
         others: "SPD, Grüne, FDP dafür (357 Ja).",
         url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw42-de-drittstaatenangehoerige-1023860"
+      },
+      {
+        vote: "Zustrombegrenzungsgesetz",
+        year: 2025,
+        description: "Begrenzung der Migration durch strengere Aufenthaltsregeln. Hier hat die AfD dafür gestimmt.",
+        afd: "Dafür gestimmt (zusammen mit CDU/CSU).",
+        others: "SPD, Grüne dagegen. Historischer Bruch der Brandmauer.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw05-de-zustrombegrenzung-1030892"
       }
     ],
     counterArgument: {
-      text: "Die Gesetze gehen nicht weit genug. Das Chancen-Aufenthaltsrecht belohnt illegale Migration. Die Rückführungsgesetze enthalten nur winzige Mikro-Änderungen.",
-      source: "Gottfried Curio, innenpolitischer Sprecher AfD-Fraktion",
+      text: "Wir haben beim Zustrombegrenzungsgesetz dafür gestimmt. Das zeigt: Wir stimmen zu, wenn ein Gesetz wirklich etwas bringt. Die Ampel-Gesetze waren Symbolpolitik.",
+      source: "AfD-Fraktion, Stellungnahme Zustrombegrenzungsgesetz, Februar 2025",
       url: "https://afdbundestag.de/gottfried-curio-geplantes-chancen-aufenthaltsrecht-belohnt-illegale-migration/"
     },
-    rebuttal: "Gegen Integration UND Abschiebung UND Sicherheit gestimmt. Wer alles ablehnt, will das Problem behalten. Eigene Gesetzentwürfe mit Mehrheitschance: null.",
-    consequence: "Weniger Geduldete wäre ein Ergebnis. Aber Ergebnisse bringen keine Stimmen. Schau dir an, was sie einbringen.",
+    rebuttal: "Stimmt. Beim Zustrombegrenzungsgesetz hat die AfD dafür gestimmt. Reine Verschärfung, das können sie. Aber gegen Integration, Rückführung und Sicherheitspaket gleichzeitig. Verschärfung ohne Ordnung erzeugt mehr Geduldete mit weniger Rechten. Also genau das Chaos, über das die AfD dann klagt.",
+    consequence: "Wer nur zumacht, aber keine Wege schafft, bekommt nicht weniger Menschen. Sondern mehr Menschen ohne Status. Die dann bleiben, ohne Arbeitserlaubnis.",
     sources: [
       {
         text: "Abgeordnetenwatch: Namentliche Abstimmung Chancen-Aufenthaltsrecht, 02.12.2022",
@@ -52,10 +60,14 @@ const GUIDE_DATA = [
       {
         text: "Bundestag: Sicherheitspaket nach Solingen, 18.10.2024",
         url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw42-de-drittstaatenangehoerige-1023860"
+      },
+      {
+        text: "Bundestag: Zustrombegrenzungsgesetz, 29.01.2025",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw05-de-zustrombegrenzung-1030892"
       }
     ],
-    pattern: "Sie blockieren Lösungen für Probleme, über die sie am lautesten klagen.",
-    question: "Weißt du, wie die AfD bei Migrations-Gesetzen im Bundestag abstimmt? Mich hat das überrascht."
+    pattern: "Sie stimmen für das, was hart aussieht. Gegen das, was Ordnung schafft.",
+    question: "Wusstest du, dass die AfD beim Zustrombegrenzungsgesetz dafür gestimmt hat, aber gegen Rückführung und Integration? Was sagt das über ihren Plan?"
   },
   {
     id: "establishment",
@@ -300,7 +312,7 @@ const GUIDE_DATA = [
     icon: "🇩🇪",
     hook: "Du willst stolz auf dein Land sein. Ohne dass jemand dich gleich Nazi nennt. Kann man verstehen.",
     promise: "Die AfD sagt: Wir sind die echten Patrioten. Alle anderen schämen sich für Deutschland.",
-    patternSummary: "Höcke nutzt SA-Parolen, der Verfassungsschutz stuft die Gesamtpartei als rechtsextrem ein.",
+    patternSummary: "Teile der Linken haben ein Patriotismus-Problem. Die AfD hat ein Extremismus-Problem. Beides ist real.",
     evidence: [
       {
         vote: "Höcke: SA-Parole (BGH-Urteil)",
@@ -328,12 +340,12 @@ const GUIDE_DATA = [
       }
     ],
     counterArgument: {
-      text: "Der Verfassungsschutz ist ein politisches Instrument der Regierung. Die Correctiv-Berichterstattung wurde in Teilen gerichtlich beanstandet (LG Hamburg). Es war ein privates Treffen.",
-      source: "AfD-Bundesvorstand, diverse Stellungnahmen",
+      text: "Die anderen Parteien hassen Deutschland. Robert Habeck schrieb 2010: 'Vaterlandsliebe fand ich stets zum Kotzen.' Claudia Roth stand neben einem Banner 'Deutschland, du mieses Stück Scheiße.' Die Linke lehnt nationale Symbole ab. Wir sind die Einzigen, die stolz auf ihr Land sind.",
+      source: "AfD-Bundesvorstand, diverse Stellungnahmen. Habeck-Zitat aus seinem Buch 'Patriotismus: Ein Plädoyer' (2010), in dem er anschließend beschreibt, wie er gelernt hat, Patriotismus positiv zu sehen.",
       url: "https://correctiv.org/aktuelles/neue-rechte/2026/01/10/zwei-jahre-nach-der-potsdam-recherche-von-angeblichen-deportationsluegen-bis-zum-moeglichen-afd-verbotsverfahren/"
     },
-    rebuttal: "Das 1.000-Seiten-Gutachten ist keine Kampagne. Das Gericht beanstandete Formulierungen, nicht die Kerntatsache. Die AfD nutzt Remigration seitdem selbst in offizieller Wahlwerbung.",
-    consequence: "Sie haben Patriotismus nicht neu definiert. Sie haben Extremismus dahinter versteckt.",
+    rebuttal: "Die Habeck- und Roth-Zitate sind real. Teile der deutschen Linken haben ein echtes Problem mit Patriotismus. Das stimmt. Aber die Frage ist nicht: Habeck oder Höcke. Die Frage ist: Welche Art von Stolz willst du? Stolz auf Deutschland und SA-Parolen schließen sich aus. Man kann sein Land lieben, ohne den Holocaust als Vogelschiss zu bezeichnen. 1.000 Seiten Verfassungsschutz-Gutachten sind keine Kampagne.",
+    consequence: "Du willst stolz auf Deutschland sein. Das ist fair. Aber bist du stolz auf ein Deutschland, in dem ein Parteiführer für SA-Parolen verurteilt wird? Oder auf ein Deutschland, das aus seiner Geschichte gelernt hat?",
     sources: [
       {
         text: "BGH Pressemitteilung 168/2025: Höcke-Verurteilung wegen SA-Parole rechtskräftig",
@@ -348,8 +360,8 @@ const GUIDE_DATA = [
         url: "https://correctiv.org/aktuelles/neue-rechte/2024/01/10/geheimplan-remigration-vertreibung-afd-rechtsextreme-november-treffen/"
       }
     ],
-    pattern: "Patriotismus als Schutzschild für Positionen, die Gerichte als rechtsextrem einstufen.",
-    question: "Wenn du an Deutschland denkst, worauf bist du stolz? Und vertritt die AfD genau das?"
+    pattern: "Stolz auf Deutschland und Extremismus sind nicht dasselbe. Die AfD vermischt beides.",
+    question: "Du willst eine Partei, die stolz auf Deutschland ist. Aber auf welches Deutschland? Eins mit SA-Parolen? Oder eins, das aus seiner Geschichte gelernt hat?"
   },
   {
     id: "eu",
