@@ -6,13 +6,14 @@ const GUIDE_DATA = [
     icon: "🔒",
     hook: "Du willst Politiker, die das Migrationsproblem wirklich lösen. Nicht nur darüber reden.",
     promise: "Die AfD verspricht Massenabschiebungen, geschlossene Grenzen, hartes Durchgreifen. Kein anderer traut sich das, sagen sie.",
-    patternSummary: "Die AfD stimmt für Härte, aber gegen Ordnung. Verschärfung ja, Lösung nein.",
+    patternSummary: "Die AfD stimmt für Verschärfung, aber gegen Ordnung. Härte ohne System löst nichts.",
     evidence: [
       {
         vote: "Chancen-Aufenthaltsrecht",
         year: 2022,
         description: "Bleiberecht für integrierte Geduldete mit Arbeit und Sprachkenntnissen.",
         afd: "Alle 66 dagegen.",
+        cdu: "CDU/CSU: dagegen",
         others: "SPD, Grüne, FDP dafür (371 Ja).",
         url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/chancen-aufenthaltsrecht"
       },
@@ -21,6 +22,7 @@ const GUIDE_DATA = [
         year: 2024,
         description: "Erleichterte Abschiebungen mit mehr Befugnissen für Behörden.",
         afd: "Dagegen gestimmt.",
+        cdu: "CDU/CSU: dagegen (zu wenig weitreichend)",
         others: "SPD, Grüne, FDP dafür.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw03-de-rueckfuehrung-986284"
       },
@@ -29,17 +31,35 @@ const GUIDE_DATA = [
         year: 2024,
         description: "Schärfere Asylregeln und erweiterte Messerverbotszonen.",
         afd: "Dagegen gestimmt.",
+        cdu: "CDU/CSU: dagegen (forderte härtere Maßnahmen)",
         others: "SPD, Grüne, FDP dafür (357 Ja).",
         url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw42-de-drittstaatenangehoerige-1023860"
       },
       {
         vote: "Zustrombegrenzungsgesetz",
         year: 2025,
-        description: "Begrenzung der Migration durch strengere Aufenthaltsregeln. Hier hat die AfD dafür gestimmt.",
-        afd: "Dafür gestimmt (zusammen mit CDU/CSU).",
-        others: "SPD, Grüne dagegen. Historischer Bruch der Brandmauer.",
+        description: "Begrenzung der Migration durch strengere Aufenthaltsregeln.",
+        afd: "Dafür gestimmt.",
+        cdu: "CDU/CSU: dafür (CDU und AfD stimmten gemeinsam dafür)",
+        others: "SPD, Grüne dagegen.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw05-de-zustrombegrenzung-1030892"
       }
+    ],
+    afdAgreed: [
+      {
+        text: "Zustrombegrenzungsgesetz (Feb 2025): Die AfD stimmte dafür. Schärfere Regeln für Asylverfahren sind ein legitimes Anliegen.",
+        url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw05-de-zustrombegrenzung-1030892"
+      },
+      {
+        text: "Das Vollzugsdefizit bei Abschiebungen ist real. 230.000 Ausreisepflichtige, 21.206 Abschiebungen (2024). Das darf man kritisieren."
+      }
+    ],
+    contextFacts: [
+      {label: "Asylerstanträge", value: "~230.000 (2024)", context: "Peak 2016: 745.000. Minus 69%."},
+      {label: "Geduldete", value: "179.000 (Ende 2024)", context: "Niedrigster Stand seit 2016."},
+      {label: "Erwerbstätigkeit 2015er-Flüchtlinge", value: "68%", context: "Männer: 76%, über dem deutschen Schnitt (72%)."},
+      {label: "Abschiebungen 2024", value: "21.206", context: "Ausreisepflichtige: ~230.000. Das Vollzugsdefizit ist real."},
+      {label: "Art. 16a GG", value: "2/3-Mehrheit nötig", context: "Asylrecht ändern braucht Grundgesetzänderung. Verwaltungsregeln und Verfahren gehen mit einfacher Mehrheit."}
     ],
     counterArgument: {
       text: "Wir haben beim Zustrombegrenzungsgesetz dafür gestimmt. Das zeigt: Wir stimmen zu, wenn ein Gesetz wirklich etwas bringt. Die Ampel-Gesetze waren Symbolpolitik.",
@@ -83,6 +103,7 @@ const GUIDE_DATA = [
         year: 2022,
         description: "Anhebung des Mindestlohns von 9,82 auf 12 Euro pro Stunde.",
         afd: "Alle 75 dagegen.",
+        cdu: "CDU/CSU: dagegen",
         others: "SPD, Grüne, FDP dafür (399 Ja).",
         url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/anhebung-des-mindestlohns-fuer-minijobs"
       },
@@ -91,6 +112,7 @@ const GUIDE_DATA = [
         year: 2022,
         description: "Ersetzte Hartz IV durch höhere Regelsätze und weniger Sanktionen.",
         afd: "Geschlossen dagegen.",
+        cdu: "CDU/CSU: dagegen",
         others: "SPD, Grüne, FDP dafür (385 Ja).",
         url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/einfuehrung-des-buergergeldes"
       },
@@ -99,8 +121,18 @@ const GUIDE_DATA = [
         year: 2026,
         description: "Komplette Streichung der Erbschaft- und Schenkungsteuer.",
         afd: "Eigener Antrag, einzige Befürworter.",
+        cdu: "CDU/CSU: dagegen",
         others: "SPD, CDU/CSU, Grüne, FDP, Linke alle dagegen.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2026/kw05-de-erbschaftsteuer-1137006"
+      }
+    ],
+    afdAgreed: [
+      {
+        text: "Die AfD fordert die Abschaffung des Solidaritätszuschlags. Das würde auch Normalverdiener entlasten.",
+        url: "https://www.afd.de/wahlprogramm/"
+      },
+      {
+        text: "Kalte Progression ist ein echtes Problem. Die AfD hat Recht, dass Steuerklassen regelmäßig angepasst werden müssen."
       }
     ],
     counterArgument: {
@@ -141,6 +173,7 @@ const GUIDE_DATA = [
         year: 2022,
         description: "Beschleunigte den Ausbau erneuerbarer Energien.",
         afd: "Geschlossen dagegen.",
+        cdu: "CDU/CSU: dagegen",
         others: "SPD, Grüne, FDP dafür.",
         url: "https://www.abgeordnetenwatch.de/bundestag/19/abstimmungen/erneuerbare-energien-gesetz-eeg"
       },
@@ -149,6 +182,7 @@ const GUIDE_DATA = [
         year: 2024,
         description: "Vereinfachte Balkonkraftwerke und beschleunigte Solarausbau.",
         afd: "Geschlossen dagegen.",
+        cdu: "CDU/CSU: enthalten",
         others: "SPD, Grüne, FDP dafür (384 Ja).",
         url: "https://www.bundestag.de/parlament/plenum/abstimmung/abstimmung?id=914"
       },
@@ -157,8 +191,17 @@ const GUIDE_DATA = [
         year: 2025,
         description: "23 Klimagesetze aufheben, Austritt aus Pariser Abkommen.",
         afd: "Eigener Entwurf (131 Ja).",
+        cdu: "CDU/CSU: dagegen",
         others: "443 dagegen. Alle anderen Fraktionen geschlossen.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw46-de-klimaschutzfolgen-1123122"
+      }
+    ],
+    afdAgreed: [
+      {
+        text: "Die AfD hat Recht, dass Versorgungssicherheit wichtig ist. Die Frage ist nur, welche Energiequelle die günstigste liefert."
+      },
+      {
+        text: "Hohe Strompreise sind ein echtes Problem für die Industrie. Das sehen auch CDU und FDP so."
       }
     ],
     counterArgument: {
@@ -199,6 +242,7 @@ const GUIDE_DATA = [
         year: 2023,
         description: "Strengere Regeln für Lobbyisten im Bundestag.",
         afd: "Dagegen gestimmt.",
+        cdu: "CDU/CSU: dafür",
         others: "SPD, Grüne, FDP dafür.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2023/kw42-de-lobbyregister-971428"
       },
@@ -207,6 +251,7 @@ const GUIDE_DATA = [
         year: 2023,
         description: "Schützte Whistleblower in Unternehmen und Behörden vor Repressalien.",
         afd: "Geschlossen dagegen.",
+        cdu: "CDU/CSU: dagegen",
         others: "SPD, Grüne, FDP dafür.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2023/kw11-de-hinweisgeber-937542"
       },
@@ -215,8 +260,18 @@ const GUIDE_DATA = [
         year: 2024,
         description: "Verschärfte Strafbarkeit von Abgeordnetenbestechung.",
         afd: "Dagegen gestimmt.",
+        cdu: "CDU/CSU: dagegen",
         others: "Koalitionsfraktionen dafür.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw17-de-lobbyismus-999782"
+      }
+    ],
+    afdAgreed: [
+      {
+        text: "Die AfD hat einen eigenen Lobbyregister-Entwurf mit legislativem Fußabdruck eingebracht. Der ging weiter als der Koalitionsentwurf.",
+        url: "https://www.bundestag.de/presse/hib/kurzmeldungen-972716"
+      },
+      {
+        text: "Korruption gibt es in allen Parteien. Maskenaffäre (CDU), Cum-Ex (SPD), Wirecard (CDU). Die AfD hat Recht, dass das ein systemisches Problem ist."
       }
     ],
     counterArgument: {
@@ -261,6 +316,7 @@ const GUIDE_DATA = [
         year: 2024,
         description: "Erweiterte Befugnisse bei Waffenverboten und biometrischer Überwachung.",
         afd: "Dagegen gestimmt. Nannte es eine Luftnummer.",
+        cdu: "CDU/CSU: dagegen (forderte härtere Maßnahmen)",
         others: "SPD, Grüne, FDP dafür (357 Ja).",
         url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw42-de-drittstaatenangehoerige-1023860"
       },
@@ -269,6 +325,7 @@ const GUIDE_DATA = [
         year: 2024,
         description: "Längere Abschiebehaft und erweiterte Befugnisse für Behörden.",
         afd: "Dagegen. Bernd Baumann: nur winzige Mikro-Änderungen.",
+        cdu: "CDU/CSU: dagegen (zu wenig weitreichend)",
         others: "SPD, Grüne, FDP dafür.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2024/kw03-de-rueckfuehrung-986284"
       },
@@ -277,9 +334,24 @@ const GUIDE_DATA = [
         year: 2025,
         description: "Erweiterte Befugnisse der Bundespolizei bei Überwachung und Abschiebehaft.",
         afd: "Enthaltung. Kritisierte zu strenge Voraussetzungen.",
+        cdu: "CDU/CSU: dafür",
         others: "Koalition dafür.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw51-de-bundespolizei-1129174"
       }
+    ],
+    afdAgreed: [
+      {
+        text: "Die Überrepräsentation bei bestimmten Delikten ist real. Das zu benennen ist keine Hetze, das ist Verwaltungskritik."
+      },
+      {
+        text: "Das Vollzugsdefizit bei Abschiebungen krimineller Ausreisepflichtiger ist ein echtes Problem. 230.000 Ausreisepflichtige, davon viele mit Straftaten."
+      }
+    ],
+    contextFacts: [
+      {label: "Straftaten gesamt", value: "5,2 Mio. (2024)", context: "2016: 6,4 Mio. Minus 19%."},
+      {label: "TVBZ Nichtdeutsche", value: "4.960 pro 100.000", context: "2014: 6.260. Minus 21%. Trotzdem höher als Deutsche (1.878)."},
+      {label: "Überrepräsentation", value: "Real", context: "Kriminologie: Alter, Geschlecht, Aufenthaltsstatus erklären den Großteil. Nicht Herkunft."},
+      {label: "Aufklärungsquote", value: "58,4% (2024)", context: "Höchster Wert seit 2007."}
     ],
     counterArgument: {
       text: "Alles Luftnummern. Die Maßnahmen sind völlig unzureichend. Deutschland braucht komplette Grenzsicherung mit sofortiger Zurückweisung aller illegalen Migranten.",
@@ -319,6 +391,7 @@ const GUIDE_DATA = [
         year: 2025,
         description: "BGH bestätigte die Verurteilung wegen Verwendung einer SA-Parole.",
         afd: "Höcke bleibt Landesvorsitzender Thüringen.",
+        cdu: "CDU/CSU: forderte Konsequenzen",
         others: "Rechtskräftig, keine Revision möglich (3 StR 484/24).",
         url: "https://www.bundesgerichtshof.de/SharedDocs/Pressemitteilungen/DE/2025/2025168.html"
       },
@@ -327,6 +400,7 @@ const GUIDE_DATA = [
         year: 2025,
         description: "BfV stufte die gesamte AfD als gesichert rechtsextremistische Bestrebung ein.",
         afd: "Klagt dagegen (VG Köln).",
+        cdu: "CDU/CSU: stützt Einstufung",
         others: "Einstufung basiert auf über 1.000 Seiten Gutachten.",
         url: "https://www.verfassungsschutz.de/DE/themen/rechtsextremismus/rechtsextremismus_node.html"
       },
@@ -335,8 +409,17 @@ const GUIDE_DATA = [
         year: 2024,
         description: "AfD-Politiker trafen sich mit Rechtsextremen. Thema: Remigration auch für deutsche Staatsbürger.",
         afd: "Distanzierte sich teilweise. Nutzt Remigration seitdem in Wahlwerbung.",
+        cdu: "CDU/CSU: distanzierte sich klar",
         others: "Millionen-Demonstrationen in über 70 Städten.",
         url: "https://correctiv.org/aktuelles/neue-rechte/2024/01/10/geheimplan-remigration-vertreibung-afd-rechtsextreme-november-treffen/"
+      }
+    ],
+    afdAgreed: [
+      {
+        text: "Teile der Grünen und Linken tun sich schwer mit Patriotismus. Das Habeck-Zitat und die Roth-Szene sind real, auch wenn der Kontext anders ist als oft dargestellt."
+      },
+      {
+        text: "Die Forderung nach einer offeneren Leitkultur-Debatte ist nicht automatisch rechts. Auch CDU und SPD führen diese Debatte."
       }
     ],
     counterArgument: {
@@ -377,6 +460,7 @@ const GUIDE_DATA = [
         year: 2021,
         description: "EU-Wiederaufbaufonds über 750 Milliarden Euro nach Corona.",
         afd: "Geschlossen dagegen.",
+        cdu: "CDU/CSU: dafür (Koalitionspartner)",
         others: "CDU/CSU, SPD, Grüne, FDP dafür (478 Ja).",
         url: "https://www.bundestag.de/dokumente/textarchiv/2021/kw12-de-eu-eigenmittel-826488"
       },
@@ -385,6 +469,7 @@ const GUIDE_DATA = [
         year: 2022,
         description: "Ratifizierung des Freihandelsabkommens mit Kanada.",
         afd: "Geschlossen dagegen.",
+        cdu: "CDU/CSU: dafür",
         others: "SPD, Grüne, FDP, CDU/CSU dafür.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2022/kw48-de-ceta-923086"
       },
@@ -393,8 +478,17 @@ const GUIDE_DATA = [
         year: 2024,
         description: "EU-Richtlinie für angemessene Mindestlöhne in allen Mitgliedstaaten.",
         afd: "Hielt die Richtlinie für rechtswidrig.",
+        cdu: "CDU/CSU: dafür (im EU-Parlament zugestimmt)",
         others: "Im EU-Parlament mit breiter Mehrheit angenommen.",
         url: "https://afdbundestag.de/eugh-urteil-zur-mindestlohnrichtlinie-bestaetigt-auffassung-der-afd-fraktion/"
+      }
+    ],
+    afdAgreed: [
+      {
+        text: "EU-Bürokratie ist ein echtes Problem. Auch CDU und FDP kritisieren die Regulierungsdichte aus Brüssel."
+      },
+      {
+        text: "Die demokratische Legitimation des EU-Parlaments ist schwächer als die nationaler Parlamente. Das ist keine Verschwörungstheorie, das ist Verfassungsrecht (BVerfG, Lissabon-Urteil 2009)."
       }
     ],
     counterArgument: {
@@ -435,6 +529,7 @@ const GUIDE_DATA = [
         year: 2024,
         description: "Geschlechtseintrag per Standesamt ändern statt per Gericht und Gutachten.",
         afd: "Geschlossen dagegen.",
+        cdu: "CDU/CSU: dagegen",
         others: "SPD, Grüne, FDP dafür (372 Ja).",
         url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/selbstbestimmungsgesetz"
       },
@@ -443,6 +538,7 @@ const GUIDE_DATA = [
         year: 2020,
         description: "AfD beantragte die Streichung der Frauenquote in Aufsichtsräten.",
         afd: "Eigener Antrag.",
+        cdu: "CDU/CSU: dagegen",
         others: "Alle anderen Fraktionen dagegen.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2020/kw38-de-gleichstellung-791798"
       },
@@ -451,8 +547,17 @@ const GUIDE_DATA = [
         year: 2021,
         description: "Gründung einer Stiftung zur Förderung der Gleichstellung.",
         afd: "Geschlossen dagegen.",
+        cdu: "CDU/CSU: dafür (Koalitionspartner)",
         others: "CDU/CSU und SPD dafür.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2021/kw15-de-bundesstiftung-gleichstellung-830888"
+      }
+    ],
+    afdAgreed: [
+      {
+        text: "Viele Deutsche finden Gendern nervig. Das ist keine AfD-Position, das ist Mehrheitsmeinung (Infratest dimap 2023: 65% lehnen Gendern ab)."
+      },
+      {
+        text: "Die Unterscheidung zwischen Gleichberechtigung (gleiche Rechte) und Gleichstellung (gleiche Ergebnisse) ist eine legitime Debatte."
       }
     ],
     counterArgument: {
@@ -493,6 +598,7 @@ const GUIDE_DATA = [
         year: 2020,
         description: "Aufstockung für Geringverdiener mit mindestens 33 Jahren Beiträgen.",
         afd: "Dagegen gestimmt.",
+        cdu: "CDU/CSU: dafür (Koalitionspartner)",
         others: "CDU/CSU und SPD dafür.",
         url: "https://www.bundestag.de/webarchiv/textarchiv/2020/kw27-de-grundrente-703572"
       },
@@ -501,6 +607,7 @@ const GUIDE_DATA = [
         year: 2025,
         description: "Stabilisierte das Rentenniveau bei 48 Prozent.",
         afd: "Alle 140 dagegen.",
+        cdu: "CDU/CSU: dafür",
         others: "318 dafür, 225 dagegen.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw49-de-rentenpaket-1128720"
       },
@@ -509,8 +616,17 @@ const GUIDE_DATA = [
         year: 2022,
         description: "Höhere Grundsicherung, auch für Rentner mit Aufstockungsbedarf.",
         afd: "Geschlossen dagegen.",
+        cdu: "CDU/CSU: dagegen",
         others: "SPD, Grüne, FDP dafür.",
         url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/einfuehrung-des-buergergeldes"
+      }
+    ],
+    afdAgreed: [
+      {
+        text: "Die AfD fordert keine Erhöhung des Rentenalters über 67. Das teilt sie mit SPD und Linken."
+      },
+      {
+        text: "Eine kapitalgedeckte Zusatzrente nach schwedischem Vorbild ist kein schlechter Vorschlag. Auch die FDP fordert das."
       }
     ],
     counterArgument: {
@@ -551,6 +667,7 @@ const GUIDE_DATA = [
         year: 2023,
         description: "Erhöhte Pflegegeld und verbesserte Pflegeunterstützungsgeld.",
         afd: "Dagegen gestimmt.",
+        cdu: "CDU/CSU: dagegen",
         others: "SPD, Grüne, FDP dafür (377 Ja).",
         url: "https://www.abgeordnetenwatch.de/bundestag/20/abstimmungen/pflegereform"
       },
@@ -559,6 +676,7 @@ const GUIDE_DATA = [
         year: 2025,
         description: "Mehr Befugnisse für Pflegefachkräfte und weniger Bürokratie.",
         afd: "Dagegen gestimmt.",
+        cdu: "CDU/CSU: dafür",
         others: "CDU/CSU und SPD dafür.",
         url: "https://www.bundestag.de/dokumente/textarchiv/2025/kw45-de-pflege-1116730"
       },
@@ -567,8 +685,17 @@ const GUIDE_DATA = [
         year: 2018,
         description: "Mehr Stellen und bessere Bedingungen in der Pflege.",
         afd: "Enthaltung.",
+        cdu: "CDU/CSU: dafür (Koalitionspartner)",
         others: "CDU/CSU und SPD dafür.",
         url: "https://www.bundestag.de/webarchiv/textarchiv/2018/kw45-de-pflegepersonalstaerkungsgesetz-575082"
+      }
+    ],
+    afdAgreed: [
+      {
+        text: "Die AfD kritisiert die Bürokratie in der Pflege. Pflegekräfte bestätigen: Dokumentation frisst Arbeitszeit."
+      },
+      {
+        text: "Der Fachkräftemangel in der Pflege ist real. 500.000 fehlende Pflegekräfte bis 2030 (PwC-Studie). Das bestreitet niemand."
       }
     ],
     counterArgument: {
