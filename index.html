@@ -651,6 +651,115 @@ body {
   color: var(--text-muted);
 }
 
+.b-vote-cdu {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.b-vote-divergent {
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+
+/* ---- AfD agreed box ---- */
+.b-agreed-box {
+  background: var(--accent-fragmal);
+  border-left: 3px solid var(--accent-secondary);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.b-agreed-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  margin-bottom: 8px;
+}
+
+.b-agreed-item {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.b-agreed-item + .b-agreed-item {
+  margin-top: 6px;
+}
+
+/* ---- Context facts ---- */
+.b-context-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  padding: 4px 0;
+}
+
+.b-context-arrow {
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+
+.b-context-arrow.open {
+  transform: rotate(90deg);
+}
+
+.b-context-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.b-context-content.collapsed {
+  max-height: 0;
+}
+
+.b-context-row {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  align-items: baseline;
+}
+
+.b-context-row:last-child {
+  border-bottom: none;
+}
+
+.b-context-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  grid-column: 1;
+}
+
+.b-context-value {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent-primary);
+  grid-column: 2;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.b-context-detail {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  grid-column: 1 / -1;
+  margin-top: -2px;
+}
+
 .b-vote-item-link {
   display: inline-flex;
   align-items: center;
@@ -920,7 +1029,36 @@ function showCascade(index) {
     '</div>'
   );
 
-  // Layer 2: Promise
+  // Layer 2: Context Facts (collapsible, if present)
+  if (topic.contextFacts && topic.contextFacts.length) {
+    var factRows = topic.contextFacts.map(function(f) {
+      return (
+        '<div class="b-context-row">' +
+          '<div class="b-context-label">' + f.label + '</div>' +
+          '<div class="b-context-value">' + f.value + '</div>' +
+          (f.context ? '<div class="b-context-detail">' + f.context + '</div>' : '') +
+        '</div>'
+      );
+    }).join('');
+
+    parts.push(
+      '<div class="b-evidence-layer">' +
+        '<div class="b-context-section">' +
+          '<div class="b-context-toggle" onclick="toggleContext(this)">' +
+            'Die Zahlen im Kontext' +
+            '<span class="b-context-arrow" aria-hidden="true">&#9658;</span>' +
+          '</div>' +
+          '<div class="b-context-content collapsed" style="margin-top:0;">' +
+            '<div style="background: rgba(255,248,240,0.7); border-radius: 8px; padding: 2px 0; margin-top: 8px;">' +
+              factRows +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  // Layer 3: Promise
   parts.push(
     '<div class="b-evidence-layer">' +
       '<div class="b-layer-label">' +
@@ -948,6 +1086,18 @@ function showCascade(index) {
       var linkHtml = ev.url
         ? '<a href="' + ev.url + '" target="_blank" rel="noopener" class="b-vote-item-link">&#x1F517; Quelle &#8599;</a>'
         : '';
+
+      // CDU line: detect divergence by comparing direction keywords
+      var cduHtml = '';
+      if (ev.cdu) {
+        var afdDir = /daf.r/i.test(ev.afd) ? 'dafür' : /dagegen/i.test(ev.afd) ? 'dagegen' : '';
+        var cduDir = /daf.r/i.test(ev.cdu) ? 'dafür' : /dagegen/i.test(ev.cdu) ? 'dagegen' : '';
+        var isDivergent = afdDir && cduDir && afdDir !== cduDir;
+        cduHtml = '<div class="b-vote-cdu' + (isDivergent ? ' b-vote-divergent' : '') + '">' +
+          (isDivergent ? '&#x21D4; ' : '') + ev.cdu +
+        '</div>';
+      }
+
       return (
         '<div class="b-vote-item">' +
           '<div class="b-vote-item-header">' +
@@ -958,6 +1108,7 @@ function showCascade(index) {
           '<p class="b-vote-item-desc">' + ev.description + '</p>' +
           '<div class="b-vote-item-result">' +
             '<div class="b-vote-item-afd">AfD: ' + ev.afd + '</div>' +
+            cduHtml +
             '<div class="b-vote-item-others">Andere: ' + ev.others + '</div>' +
           '</div>' +
           linkHtml +
@@ -975,7 +1126,26 @@ function showCascade(index) {
       '</div>'
     );
 
-    // Layer 5: Counter-argument (collapsible)
+    // Layer 5: AfD agreed box (if present)
+    if (topic.afdAgreed && topic.afdAgreed.length) {
+      var agreedItems = topic.afdAgreed.map(function(a) {
+        var itemText = a.url
+          ? '<a href="' + a.url + '" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline; text-underline-offset: 2px;">' + a.text + ' &#8599;</a>'
+          : a.text;
+        return '<p class="b-agreed-item">&#x2713; ' + itemText + '</p>';
+      }).join('');
+
+      parts.push(
+        '<div class="b-evidence-layer">' +
+          '<div class="b-agreed-box">' +
+            '<div class="b-agreed-label">Was die AfD hier richtig macht</div>' +
+            agreedItems +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    // Layer 6: Counter-argument (collapsible)
     if (topic.counterArgument) {
       var counterSourceHtml = topic.counterArgument.url
         ? '<a href="' + topic.counterArgument.url + '" target="_blank" rel="noopener" class="b-counter-source">' +
@@ -1066,7 +1236,7 @@ function showCascade(index) {
 
   document.getElementById('cascade-content').innerHTML = parts.join('');
 
-  // Expand counter-argument on desktop by default
+  // Expand collapsibles on desktop by default
   if (window.innerWidth > 640) {
     var counterContent = document.querySelector('.b-counter-content');
     var counterArrow   = document.querySelector('.b-counter-arrow');
@@ -1075,6 +1245,14 @@ function showCascade(index) {
       counterContent.style.maxHeight = counterContent.scrollHeight + 'px';
     }
     if (counterArrow) counterArrow.classList.add('open');
+
+    var contextContent = document.querySelector('.b-context-content');
+    var contextArrow   = document.querySelector('.b-context-arrow');
+    if (contextContent) {
+      contextContent.classList.remove('collapsed');
+      contextContent.style.maxHeight = contextContent.scrollHeight + 'px';
+    }
+    if (contextArrow) contextArrow.classList.add('open');
   }
 
   document.getElementById('next-topic-wrap').style.display =
@@ -1094,6 +1272,23 @@ function toggleCounter(toggleEl) {
   } else {
     content.style.maxHeight = content.scrollHeight + 'px';
     // force reflow then collapse
+    content.getBoundingClientRect();
+    content.style.maxHeight = '0';
+    content.classList.add('collapsed');
+    arrow.classList.remove('open');
+  }
+}
+
+function toggleContext(toggleEl) {
+  var content = toggleEl.nextElementSibling;
+  var arrow   = toggleEl.querySelector('.b-context-arrow');
+  var isCollapsed = content.classList.contains('collapsed');
+  if (isCollapsed) {
+    content.classList.remove('collapsed');
+    content.style.maxHeight = content.scrollHeight + 'px';
+    arrow.classList.add('open');
+  } else {
+    content.style.maxHeight = content.scrollHeight + 'px';
     content.getBoundingClientRect();
     content.style.maxHeight = '0';
     content.classList.add('collapsed');
