@@ -1,8 +1,8 @@
 # afd-check.de — Handoff Document
 
-**Version:** 3.0 (Produktion) + light-riso Design-Exploration (2026-05-26)
+**Version:** 4.0 (Produktion: light-riso subtle, deployed 2026-05-26)
 **Date:** 2026-05-26
-**Status:** Live auf afd-check.de + VPS (v3 unverändert). light-riso Panel-Fix #1 erledigt (wertende Urteilsfelder neutralisiert, alle 3 Varianten, DOM-verifiziert). #2-#7 in Arbeit. light-riso ist nach 4 Runden eine ausgereifte Exploration: 3 helle Varianten plus Picker, Cascade mit fester 7-Beat-Erzähldramaturgie inkl. Primärquellen-Beat „Was sie selbst schreibt" (verifizierte Wahlprogramm-2025- und Grundsatzprogramm-2016-Zitate). Ein 4x5-Persona-Panel (Wähler, Bias-Red-Team, UX, Faktencheck) hat die Storyline stresstested. Befunde im Dashboard `_panel/panel-feedback.html`, priorisierter Fix-Plan in `_internal/next-session-plan.md`. Noch nicht deployed, reine Exploration auf dem Taste Shelf.
+**Status:** Live auf afd-check.de (v4, GitHub Pages, DOM-verifiziert gegen die Live-URL, 0 Console-Fehler). Die light-riso-1-subtle-Variante ist nach allen 7 Panel-Fixes zur Produktion `index.html` promoted und deployed. **VPS-Mirror (89.147.109.248:8650/guide/) noch auf v3, braucht separaten Push.** 2-medium/3-bold haben nur Fix #1, bleiben unshipped. light-riso ist nach 4 Runden eine ausgereifte Exploration: 3 helle Varianten plus Picker, Cascade mit fester 7-Beat-Erzähldramaturgie inkl. Primärquellen-Beat „Was sie selbst schreibt" (verifizierte Wahlprogramm-2025- und Grundsatzprogramm-2016-Zitate). Ein 4x5-Persona-Panel (Wähler, Bias-Red-Team, UX, Faktencheck) hat die Storyline stresstested. Befunde im Dashboard `_panel/panel-feedback.html`, priorisierter Fix-Plan in `_internal/next-session-plan.md`. Noch nicht deployed, reine Exploration auf dem Taste Shelf.
 
 ## What This Is
 
@@ -276,8 +276,39 @@ Drei Feedback-Runden auf die light-riso-Varianten, alle auf alle 3 Dateien angew
 
 ---
 
+### v4.0 — 2026-05-26 — Panel-Fixes #2-#7 + subtle als Produktion deployed
+
+**Scope:** Nur `light-riso/1-subtle.html` gehärtet (Frederiks Ansage: "do the subtle redesign"), dann zur Produktion promoted. 2-medium/3-bold haben nur Fix #1.
+
+**What changed (1-subtle):**
+- **#2 Methodik/Transparenz:** Sichtbare Sektion `#methodik` auf der Landing (Autor Frederik Metz, Stand 26.05.2026, Kontakt) plus Nav-Link „Methodik". Drei Blöcke: Auswahllogik, offengelegte Lücken (eigene AfD-Anträge unterrepräsentiert, patriotism = Gerichts-/VS-Vorgänge, Rente/Pflege-Lücken im GP 2016), Quellenlage. Subtitle entschärft (kein „Keine Meinung, nur Abstimmungen" mehr). Stats ehrlich: „8 Themen" → „10", irreführendes „0 AfD Ja-Stimmen" → „2 Programme als Primärquelle".
+- **#3 Evidenz re-tagged:** Neues optionales Feld `evidenceLabel`. patriotism überschreibt Beat-4-Label zu „Was Gerichte und der Verfassungsschutz feststellen" (die „votes" sind BGH/BfV/Correctiv, keine Abstimmungen). patriotism patternSummary auf die korrekte Gesamtpartei-Einstufung (2025, Klage anhängig) geschärft. Eigene AfD-Anträge nicht erfunden, sondern als Lücke auf der Methodik-Seite offengelegt.
+- **#5 Accessibility AA:** `--text-muted` #78716C → #665F58. Kontext-Collapsible von `div onclick` auf `<button aria-expanded>` (Tastatur-fokussierbar, Enter getestet). Desktop-Auto-Open setzt aria-expanded. Neue `toggleMore`-Buttons ebenfalls aria-korrekt.
+- **#6 Schnell-Leser:** Verdict-Beat (Beat 7) entfernt, der neutrale patternSummary führt jetzt oben als „Kurz gesagt"-tl;dr. Beat 4 zeigt 2 Belege, Rest hinter „+ N weitere Belege". Beat 3 zeigt Wahlprogramm 2025, Grundsatzprogramm 2016 hinter „mehr". Story-Arc jetzt 6 Beats.
+- **#7 Wayfinding:** Edge-Fade (mask-image) auf der Topic-Pill-Reihe. Positionsanzeige „Thema X von 10". Letztes Thema zeigt „← Zurück zur Übersicht" statt Sackgasse.
+- **#4** war schon durch #1 erledigt (Zugeständnisse werden nicht mehr sofort entkräftet).
+
+**Promotion + Deploy:**
+- `light-riso/1-subtle.html` → Produktion `index.html` (einziger Pfad-Fix: `../impressum.html` → `impressum.html`). Datei ist self-contained (inline GUIDE_DATA, keine guide-data.js-Abhängigkeit). Alt-`guide-data.js` bleibt liegen, ungenutzt.
+- Commit `828eeff` auf main, gepusht, GitHub Pages rebuild. light-riso-Quelle + _internal + _panel + program-quotes jetzt in git getrackt (vorher untracked).
+- Rollback: `git checkout 0496417 -- index.html`.
+
+**Decisions:**
+- Eigene AfD-Anträge (Panel-Wunsch in #3) NICHT erfunden, sondern als dokumentierte Lücke offengelegt. Ehrlichkeit > Vollständigkeitsschein.
+- Verdict-Beat gestrichen statt umbenannt: ein Fazit gehört für Scanner nach oben, nicht als wertender Schluss nach unten.
+- Direkt auf main committed (Deploy-Branch), da „live machen" das explizit verlangt.
+
+**Verified:**
+- Lokal (headless 430x900, serviceWorkers blockiert, NICHT CDP 9222): alle 6 Fixes greifen, 0 Console-Fehler, 0 Em-Dashes.
+- **Live gegen https://afd-check.de/ (echtes headless Chromium):** bg rgb(255,248,240), Barlow Condensed löst auf, Stats 10/30+/2, `#methodik` da, 6 Beats, tl;dr da, „Thema 1 von 10", 0 Console-Fehler. HTTP 200.
+
+**Known issues:** VPS-Mirror noch auf v3 (kein Zugriff in dieser Session). 2-medium/3-bold nur mit Fix #1. Eigene-AfD-Anträge-Balance bleibt offen (als Lücke deklariert).
+
+---
+
 ## Known Issues
 ### Active
+- **VPS-Mirror (89.147.109.248:8650/guide/) noch auf v3** — braucht separaten Push
 - Impressum-Adresse ist Platzhalter (Postflex noch nicht gebucht)
 - Keine Deep-Links pro Thema
 - Domain-Name filtert ideologische Wähler vor

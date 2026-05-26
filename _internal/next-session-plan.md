@@ -1,5 +1,10 @@
 # afd-check light-riso, Plan für die nächste Session
 
+> **ERLEDIGT 2026-05-26 (v4):** Alle 7 Fixes auf `1-subtle` gebaut, Variante als Produktion `index.html` deployed (afd-check.de, Commit `828eeff`, live verifiziert). Offene Entscheidung „welche Variante" = subtle, gelöst. Reste: VPS-Mirror auf v4 nachziehen; eigene AfD-Anträge (Fix #3) sind als Lücke offengelegt statt erfunden, könnten später mit echten Antragsdaten ergänzt werden. Details im Handoff v4.0-Abschnitt. Plan unten = historischer Kontext.
+
+---
+
+
 **Stand:** 2026-05-26. Basis: 4x5-Persona-Panel auf der light-riso-Storyline (Dashboard: `_panel/panel-feedback.html`). Produktion v3 auf afd-check.de unverändert. light-riso ist eine unshipped Exploration, 3 Varianten (1-subtle / 2-medium / 3-bold) + Picker in `light-riso/`.
 
 ## Zuerst entscheiden (blockt den Rest)
