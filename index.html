@@ -74,7 +74,7 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); col
 .screen.active { display: block; }
 .b-container { max-width: 540px; margin: 0 auto; }
 .b-nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
-.b-logo { font-family: 'Outfit', system-ui, sans-serif; font-size: 16px; font-weight: 800; color: var(--text); letter-spacing: -0.03em; }
+.b-logo { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--text); letter-spacing: 0.01em; text-transform: uppercase; line-height: 1; }
 .b-logo span { color: var(--accent-primary); }
 .b-landing { padding: 32px 20px 0; }
 .b-landing-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 12px; }
@@ -249,6 +249,31 @@ footer .b-footer-dot { margin: 0 6px; opacity: 0.4; }
 .b-methods-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
 .b-methods-block h3 { font-family: 'Outfit', system-ui, sans-serif; font-size: 13px; font-weight: 700; margin: 0 0 4px; }
 .b-methods-block p { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+/* Responsive: real tablet + desktop layout (not a stretched mobile column) */
+@media (min-width: 680px) {
+  #landing .b-container { max-width: 760px; }
+  #landing .b-card-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+}
+@media (min-width: 1024px) {
+  .b-nav { padding-left: 40px; padding-right: 40px; }
+  #landing .b-container { max-width: 1080px; padding: 0 24px; }
+  #landing .b-landing { padding-top: 24px; }
+  .b-landing h1 { font-size: clamp(48px, 6vw, 76px); }
+  #landing .b-card-list { grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 0 32px; }
+  #landing .b-stats-bar { padding: 0 0 36px; max-width: 520px; }
+  #landing .b-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: start; }
+  #landing .b-methods-title, #landing .b-methods-meta { grid-column: 1 / -1; }
+  #cascade.active { display: grid; grid-template-columns: 248px minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 36px; max-width: 1180px; margin: 0 auto; }
+  #cascade .b-nav { grid-column: 1 / -1; }
+  #cascade .b-pills-wrap { grid-column: 1; grid-row: 2; flex-direction: column; flex-wrap: nowrap; overflow-x: visible; overflow-y: auto; position: sticky; top: 68px; align-self: start; max-height: calc(100vh - 90px); background: transparent; border-bottom: none; border-right: 1px solid var(--border); -webkit-mask-image: none; mask-image: none; padding: 20px 18px 20px 24px; gap: 4px; }
+  #cascade .b-topic-pill { width: 100%; text-align: left; border-radius: 8px; }
+  #cascade .b-container { grid-column: 2; grid-row: 2; max-width: 760px; margin: 0; }
+  .b-cascade-wrap { padding: 28px 24px 0 0; }
+  .b-pair { flex-direction: row; }
+  .b-pair-side { flex: 1; }
+  .b-next-wrap { text-align: left; margin: 0; padding-left: 0; padding-right: 0; }
+}
 </style>
 </head>
 <body>
@@ -419,10 +444,6 @@ window.AFD_GUIDE_DATA = [
     ],
     afdAgreed: [
       {
-        text: "Die AfD fordert die Abschaffung des Solidaritätszuschlags. Das würde auch Normalverdiener entlasten.",
-        url: "https://www.afd.de/wahlprogramm/"
-      },
-      {
         text: "Kalte Progression ist ein echtes Problem. Die AfD hat Recht, dass Steuerklassen regelmäßig angepasst werden müssen."
       }
     ],
@@ -487,7 +508,7 @@ window.AFD_GUIDE_DATA = [
     ],
     afdAgreed: [
       {
-        text: "Die AfD hat Recht, dass Versorgungssicherheit wichtig ist. Die Frage ist nur, welche Energiequelle die günstigste liefert."
+        text: "Versorgungssicherheit ist ein echtes Argument. Die Industrie braucht Strom, der jederzeit verfügbar ist, nicht nur wenn Wind und Sonne liefern."
       },
       {
         text: "Hohe Strompreise sind ein echtes Problem für die Industrie. Das sehen auch CDU und FDP so."
@@ -627,9 +648,6 @@ window.AFD_GUIDE_DATA = [
     afdAgreed: [
       {
         text: "Die Überrepräsentation bei bestimmten Delikten ist real. Das zu benennen ist keine Hetze, das ist Verwaltungskritik."
-      },
-      {
-        text: "Das Vollzugsdefizit bei Abschiebungen krimineller Ausreisepflichtiger ist ein echtes Problem. 230.000 Ausreisepflichtige, davon viele mit Straftaten."
       }
     ],
     contextFacts: [
@@ -1369,7 +1387,7 @@ function showCascade(index) {
       var itemText = a.url ? '<a href="' + a.url + '" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline; text-underline-offset: 2px;">' + a.text + ' &#8599;</a>' : a.text;
       return '<p class="b-agreed-item">&#x2713; ' + itemText + '</p>';
     }).join('');
-    beats.push(step(5, 'Fairerweise, wo sie recht hat', '<div class="b-agreed-list">' + agreedItems + '</div>'));
+    beats.push(step(5, 'Fairerweise, woran etwas dran ist', '<div class="b-agreed-list">' + agreedItems + '</div>'));
   }
 
   // BEAT 5: IHR EINWAND UND DIE ANTWORT (counterArgument + rebuttal paired)
