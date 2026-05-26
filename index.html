@@ -284,15 +284,18 @@ footer .b-footer-dot { margin: 0 6px; opacity: 0.4; }
   .b-next-wrap { text-align: left; margin: 0; padding-left: 0; padding-right: 0; }
 }
 
-.b-logo { display: inline-flex; align-items: center; gap: 8px; }
-.b-logo-mark { width: 26px; height: 26px; border-radius: 6px; display: block; }
+.b-logo { display: inline-flex; align-items: center; }
+.b-logo-mark { width: 36px; height: 36px; border-radius: 8px; display: block; margin-right: 10px; border: 1px solid var(--border); }
+.b-hero-logo { width: 84px; height: 84px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 4px 16px rgba(0,0,0,0.08); display: block; margin-bottom: 18px; }
+@media (min-width: 1024px) { .b-hero-logo { width: 104px; height: 104px; border-radius: 24px; } }
 </style>
 </head>
 <body>
 <div id="landing" class="screen active">
-  <nav class="b-nav"><div class="b-logo"><img class="b-logo-mark" src="favicon.png" alt="" width="26" height="26"> afd-<span>check</span></div><a href="#methodik" class="b-nav-link">Methodik</a></nav>
+  <nav class="b-nav"><div class="b-logo"><img class="b-logo-mark" src="favicon.png" alt="" width="36" height="36">afd-<span>check</span></div><a href="#methodik" class="b-nav-link">Methodik</a></nav>
   <div class="b-container">
     <div class="b-landing" style="padding-bottom: 4px;">
+      <img class="b-hero-logo" src="apple-touch-icon.png" alt="afd-check Logo" width="84" height="84">
       <p class="b-landing-eyebrow">Faktencheck</p>
       <h1>Was die AfD <span>verspricht,</span> und wie sie <span>abstimmt</span></h1>
       <p class="b-landing-subtitle">Wir wollten wissen: Hält die AfD, was sie verspricht? Wir zeigen Programmzitate, Abstimmungen und Gerichtsentscheidungen, alle mit Originalquellen.</p>
@@ -313,7 +316,7 @@ footer .b-footer-dot { margin: 0 6px; opacity: 0.4; }
   </div>
 </div>
 <div id="cascade" class="screen">
-  <nav class="b-nav"><div class="b-logo"><img class="b-logo-mark" src="favicon.png" alt="" width="26" height="26"> afd-<span>check</span></div></nav>
+  <nav class="b-nav"><div class="b-logo"><img class="b-logo-mark" src="favicon.png" alt="" width="36" height="36">afd-<span>check</span></div></nav>
   <div class="b-pills-wrap" id="topic-pills"></div>
   <div class="b-container">
     <div class="b-cascade-wrap">
