@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>afd-check Panel-Review v4.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F7F4; --surface: #FFFFFF; --ink: #16161A; --muted: #5B5B66;
+    --line: #E2E2DC; --accent: #3B3B8F; --good: #1F6F4A; --warn: #9A5B12; --bad: #A12A2A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'IBM Plex Sans', system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; font-size: 15px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 28px; }
+  .kicker { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin: 6px 0 4px; }
+  .sub { color: var(--muted); font-size: 14px; }
+  h2 { font-size: 13px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 36px 0 14px; border-top: 1px solid var(--line); padding-top: 18px; }
+  .lead { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 18px; font-size: 15px; }
+  .band { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .band .cell { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+  .band .pl { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .band .sc { font-size: 14px; font-weight: 600; margin-top: 6px; }
+  .band .delta { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+  .panel h3 { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+  .panel .tally { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+  .p { padding: 9px 0; border-top: 1px solid var(--line); }
+  .p .n { font-weight: 600; }
+  .p .v { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 10px; border: 1px solid var(--line); margin-left: 6px; white-space: nowrap; }
+  .v.good { color: var(--good); border-color: var(--good); }
+  .v.warn { color: var(--warn); border-color: var(--warn); }
+  .v.bad { color: var(--bad); border-color: var(--bad); }
+  .p .r { font-size: 13px; color: var(--ink); margin-top: 3px; }
+  .p .q { font-size: 13px; color: var(--muted); font-style: normal; margin-top: 3px; padding-left: 10px; border-left: 2px solid var(--line); }
+  ol.fixes { margin: 0; padding-left: 20px; }
+  ol.fixes li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 11px 14px; margin-bottom: 8px; font-size: 14px; }
+  ol.fixes b { font-weight: 600; }
+  .tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent); }
+  ul.holds { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  ul.holds li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px; }
+  @media (max-width: 720px) { .band, .panels, ul.holds { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">afd-check Panel-Review</div>
+    <h1>v4.1, Re-Run der vier Panels</h1>
+    <p class="sub">Dieselben 4 Panels, 20 Personas, single round. Gegen die live deployte v4.1 (afd-check.de) gerendert, mobil und Desktop. Vergleich zur ersten Runde (2-medium). 2026-05-26.</p>
+  </header>
+
+  <h2>Gesamturteil</h2>
+  <div class="lead">Alle vier Top-Befunde der ersten Runde sind adressiert. Niemand im Waehler-Panel prallt mehr ab, kein Panel vergibt noch ein glattes unzulaessig, der Accessibility-P0 ist hart geloest. Der rote Faden hat sich verschoben statt verschwunden: die Wertung sitzt jetzt im Beat "Stimmt, aber" (counterArgument plus rebuttal), wo kausale Motivunterstellungen gegen die Gesamtfraktion stehen. Das ist der neue gemeinsame Top-Fix von Panel A und B.</div>
+
+  <h2>Score-Band, v4.1 gegen v1</h2>
+  <div class="band">
+    <div class="cell"><div class="pl">A Waehler</div><div class="sc">2 ueberzeugt / 3 skeptisch / 0 prallt ab</div><div class="delta">v1: 2 / 2 / 1 prallt ab</div></div>
+    <div class="cell"><div class="pl">B Bias-Red-Team</div><div class="sc">0 wasserdicht / 3 Risiko / 2 angreifbar</div><div class="delta">v1: 0 / 3 / 2, Angriff verlagert</div></div>
+    <div class="cell"><div class="pl">C UX und Design</div><div class="sc">3 geloest / 2 P2 / 0 P0 / 0 P1</div><div class="delta">v1: 1 P0 / 3 P1 / 1 P2</div></div>
+    <div class="cell"><div class="pl">D Standards</div><div class="sc">3 standardfest / 2 nachbessern / 0 unzulaessig</div><div class="delta">v1: 1 / 3 / 1 unzulaessig</div></div>
+  </div>
+
+  <h2>Die vier Panels</h2>
+  <div class="panels">
+    <div class="panel">
+      <h3>A, Zielgruppe Waehler</h3>
+      <div class="tally mono">2 ueberzeugt, 3 skeptisch, 0 prallt ab</div>
+      <div class="p"><span class="n">Sabine, 52, frueher CDU</span><span class="v good">ueberzeugt</span><div class="r">Seitenzahl, Datum, Originallink, die Quellendichte stimmt.</div></div>
+      <div class="p"><span class="n">Daniel, 34, sicherheitsorientiert</span><span class="v warn">skeptisch</span><div class="r">Nimmt die offen zugegebene Luecke an, will aber AfD-Antraege als Beleg, nicht nur Nein-Stimmen.</div></div>
+      <div class="p"><span class="n">Markus, 38, AfD aus Protest</span><span class="v warn">skeptisch</span><div class="r">Belehrton weg, aber jeder Punkt endet im "Stimmt, aber".</div></div>
+      <div class="p"><span class="n">Heike, 61, Sympathisantin</span><span class="v warn">skeptisch</span><div class="r">"Woran etwas dran ist" nimmt die Abwehr, dann kommt doch wieder das Aber.</div><div class="q">"Der erste Teil nimmt mich ernst. Dann kommt doch wieder das Aber."</div></div>
+      <div class="p"><span class="n">Tobias, 26, Nichtwaehler</span><span class="v good">ueberzeugt</span><div class="r">"Kurz gesagt" plus aufklappbare Belege, steigt nicht mehr aus.</div></div>
+    </div>
+    <div class="panel">
+      <h3>B, Bias-Red-Team</h3>
+      <div class="tally mono">0 wasserdicht, 3 Risiko, 2 angreifbar</div>
+      <div class="p"><span class="n">AfD-Fraktionssprecher</span><span class="v bad">angreifbar</span><div class="r">Eigene Antraege erscheinen jetzt, aber nur im Frame "chancenlos", nicht als gleichwertiger Beleg.</div></div>
+      <div class="p"><span class="n">Social-Media-Aktivist</span><span class="v warn">Risiko</span><div class="r">Banner und Suggestivfragen weg, aber "Dein Anliegen" direkt neben der Abrechnung bleibt screenshotbar.</div></div>
+      <div class="p"><span class="n">Kritische Journalistin</span><span class="v warn">Risiko</span><div class="r">Wahlempfehlung raus, aber Beat 6 bleibt der Ort, wo aus Befund ein Kommentar wird.</div></div>
+      <div class="p"><span class="n">Medienanwalt</span><span class="v bad">angreifbar</span><div class="r">"weil die AfD keine Kompromisse eingeht" ist Motivzuschreibung gegen die Gesamtfraktion, justiziabel.</div></div>
+      <div class="p"><span class="n">Fairness-Beobachter</span><span class="v warn">Risiko</span><div class="r">Echte faire Punkte, aber jeder wird in Beat 6 sofort wieder eingefangen.</div></div>
+    </div>
+    <div class="panel">
+      <h3>C, UX und Design</h3>
+      <div class="tally mono">3 geloest, 2 P2, kein P0 oder P1</div>
+      <div class="p"><span class="n">Accessibility</span><span class="v good">geloest</span><div class="r">Echte button aria-expanded, Fokusring, Muted-Text 5.96:1 auf Creme, AA erfuellt.</div></div>
+      <div class="p"><span class="n">Information Architecture</span><span class="v good">geloest</span><div class="r">"Thema X von 10", aktive Rail, "Zurueck zur Uebersicht" am Ende.</div></div>
+      <div class="p"><span class="n">Interaction Design</span><span class="v warn">P2</span><div class="r">Edge-Fade als Scroll-Hinweis da, aber "Naechstes Thema" bleibt einseitig ohne Vor/Zurueck.</div></div>
+      <div class="p"><span class="n">Readability</span><span class="v good">geloest</span><div class="r">"Kurz gesagt"-Einzeiler, Zusatzbelege hinter "mehr", Mass ~690px lesbar.</div></div>
+      <div class="p"><span class="n">Visual Hierarchy</span><span class="v warn">P2</span><div class="r">Logo und Hero stark, Desktop genuin responsiv; Emoji-Icons brechen die Typo-Linie.</div></div>
+    </div>
+    <div class="panel">
+      <h3>D, Faktencheck-Standards</h3>
+      <div class="tally mono">3 standardfest, 2 nachbessern, 0 unzulaessig</div>
+      <div class="p"><span class="n">Quellen-Pruefer</span><span class="v good">standardfest</span><div class="r">Alle 10 Themen verbatim mit Seite und PDF, 62 Quellenverweise.</div></div>
+      <div class="p"><span class="n">Methodik-Pruefer</span><span class="v warn">nachbessern</span><div class="r">Auswahlkriterium offengelegt, aber zu vage fuer Reproduzierbarkeit.</div></div>
+      <div class="p"><span class="n">Framing-Pruefer</span><span class="v good">standardfest</span><div class="r">Urteil-Beat weg, "Kurz gesagt" rein faktisch, patriotism korrekt umgetaggt.</div></div>
+      <div class="p"><span class="n">Kontext-Pruefer</span><span class="v warn">nachbessern</span><div class="r">Gegenzahlen weiter nur bei 2 von 10 Themen.</div></div>
+      <div class="p"><span class="n">Transparenz-Pruefer</span><span class="v good">standardfest</span><div class="r">Vollstaendige Methodik-Sektion mit Autor, Stand, Auswahllogik, offenen Luecken.</div></div>
+    </div>
+  </div>
+
+  <h2>Was traegt</h2>
+  <ul class="holds">
+    <li>Quellenrigor: 62 Verweise, verbatim mit Seite und offiziellem PDF. Standardfest.</li>
+    <li>Sichtbare Methodik- und Transparenz-Seite hebt Transparenz von unzulaessig auf standardfest.</li>
+    <li>Neutralisiertes Framing: kein Urteil-Beat mehr, "Kurz gesagt" faktisch.</li>
+    <li>Kontrast-Mechanik Programm gegen Abstimmung ueberzeugt Sabine und Daniel.</li>
+    <li>Responsive Desktop und Accessibility AA, beide P0 und P1 abgeraeumt.</li>
+    <li>Kein Belehrton mehr, niemand im Waehler-Panel prallt ab.</li>
+  </ul>
+
+  <h2>Was zu fixen ist, nach Panel-Haeufigkeit</h2>
+  <ol class="fixes">
+    <li><b>Beat 6 "Stimmt, aber" entwerten.</b> <span class="tag">A, B, hoechster Hebel</span> Kausal- und Motivsaetze ("weil die AfD keine Kompromisse eingeht", "das Chaos, ueber das die AfD dann klagt") auf belegte Verhaltensbeschreibung herunterstufen. Justiziabel laut Medienanwalt, liest sich als Schlusswort wie Gegenrede fuer Markus und Heike.</li>
+    <li><b>Eigene AfD-Antraege als gleichwertige Belege.</b> <span class="tag">A Daniel, B Fraktionssprecher</span> Nicht nur als "chancenlos" rahmen, sonst bleibt der Cherry-Picking-Vorwurf.</li>
+    <li><b>Kontext-Zahlen ausweiten.</b> <span class="tag">D Kontext</span> Gegenzahlen nur bei 2 von 10 Themen, die selbst eingeraeumte Schlagseite bleibt sonst unkompensiert.</li>
+    <li><b>Auswahlkriterium pro Thema spezifizieren.</b> <span class="tag">D Methodik</span> "direkt betreffen" ist deklariert, aber nicht reproduzierbar.</li>
+    <li><b>EU-Reflexionsfrage pruefen.</b> <span class="tag">D</span> Frage nach "Auslandszahlungen an Abgeordnete" liest sich wie die Korruptions-Frage, Platzierung pruefen.</li>
+    <li><b>"Naechstes Thema" zu Vor/Zurueck-Paar.</b> <span class="tag">C Interaction</span> Wayfinding sonst nur einseitig.</li>
+    <li><b>Emoji-Icons.</b> <span class="tag">C Visual</span> Brechen die strenge Typo-Linie, bekannte bewusste Ausnahme.</li>
+  </ol>
+
+  <h2>Cross-Panel-Muster</h2>
+  <div class="lead">A und B konvergieren auf dieselbe Wurzel wie in Runde 1, nur eine Ebene tiefer: die Wertung ist aus den geloeschten Urteilsfeldern in den "Stimmt, aber"-Beat gewandert. C und D sind weitgehend gruen, ihre Restpunkte sind Politur (Vor/Zurueck, Emoji) und Vollstaendigkeit (Kontext-Zahlen, Kriteriumsschaerfe). Ein einziger Eingriff, Beat 6 auf Verhaltensbeschreibung umstellen, entschaerft erneut zwei Panels gleichzeitig.</div>
+</div>
+</body>
+</html>

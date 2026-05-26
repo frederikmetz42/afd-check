@@ -1,8 +1,8 @@
 # afd-check.de — Handoff Document
 
-**Version:** 4.0 (Produktion: light-riso subtle, deployed 2026-05-26)
+**Version:** 4.1 (Produktion: subtle, responsive Desktop, deployed 2026-05-26)
 **Date:** 2026-05-26
-**Status:** Live auf afd-check.de (v4, GitHub Pages, DOM-verifiziert gegen die Live-URL, 0 Console-Fehler). Die light-riso-1-subtle-Variante ist nach allen 7 Panel-Fixes zur Produktion `index.html` promoted und deployed. **VPS-Mirror (89.147.109.248:8650/guide/) noch auf v3, braucht separaten Push.** 2-medium/3-bold haben nur Fix #1, bleiben unshipped. light-riso ist nach 4 Runden eine ausgereifte Exploration: 3 helle Varianten plus Picker, Cascade mit fester 7-Beat-Erzähldramaturgie inkl. Primärquellen-Beat „Was sie selbst schreibt" (verifizierte Wahlprogramm-2025- und Grundsatzprogramm-2016-Zitate). Ein 4x5-Persona-Panel (Wähler, Bias-Red-Team, UX, Faktencheck) hat die Storyline stresstested. Befunde im Dashboard `_panel/panel-feedback.html`, priorisierter Fix-Plan in `_internal/next-session-plan.md`. Noch nicht deployed, reine Exploration auf dem Taste Shelf.
+**Status:** Live auf afd-check.de (v4.1, GitHub Pages, DOM-verifiziert gegen die Live-URL bei 430 und 1280, 0 Console-Fehler). Panel-Re-Run (4x5) auf v4.1 gemacht, Dashboard `_panel/panel-feedback-v4.html`. Die light-riso-1-subtle-Variante ist nach allen 7 Panel-Fixes zur Produktion `index.html` promoted und deployed. **VPS-Mirror (89.147.109.248:8650/guide/) noch auf v3, braucht separaten Push.** 2-medium/3-bold haben nur Fix #1, bleiben unshipped. light-riso ist nach 4 Runden eine ausgereifte Exploration: 3 helle Varianten plus Picker, Cascade mit fester 7-Beat-Erzähldramaturgie inkl. Primärquellen-Beat „Was sie selbst schreibt" (verifizierte Wahlprogramm-2025- und Grundsatzprogramm-2016-Zitate). Ein 4x5-Persona-Panel (Wähler, Bias-Red-Team, UX, Faktencheck) hat die Storyline stresstested. Befunde im Dashboard `_panel/panel-feedback.html`, priorisierter Fix-Plan in `_internal/next-session-plan.md`. Noch nicht deployed, reine Exploration auf dem Taste Shelf.
 
 ## What This Is
 
@@ -306,8 +306,26 @@ Drei Feedback-Runden auf die light-riso-Varianten, alle auf alle 3 Dateien angew
 
 ---
 
+### v4.1 — 2026-05-26 — Responsive Desktop, Logo, Fairerweise geschärft, Panel-Re-Run
+
+**What changed (index.html, gespiegelt nach light-riso/1-subtle.html):**
+- **Logo:** Nav `.b-logo` von Outfit auf `var(--font-display)` Barlow Condensed (uppercase, 900), wie der Hero-Titel. Zweifarbig (afd ink, check Akzent).
+- **Voll responsives Desktop-Layout** (vorher nur gestrecktes 540px-Mobile). Neue Media-Queries: ab 680px Landing-Cards 2-spaltig; ab 1024px Landing-Container 1080px + 3-spaltiges Card-Grid + 3-spaltige Methodik, Hero größer; Cascade wird `#cascade.active{display:grid}` mit 248px sticky vertikaler Themen-Rail (Pills column) + Content-Spalte max 760px, `.b-pair` side-by-side, `.b-next-wrap` linksbündig. Wichtig: Grid auf `#cascade.active` (id+class) gescopt, sonst überschreibt `#cascade` das `.screen{display:none}`-Toggle. Mobile unverändert.
+- **Fairerweise-Beat:** Label "wo sie recht hat" → "woran etwas dran ist" (ehrlicher Sammelbegriff, überzieht nicht). Gestrichen: establishment#1 (Soli "entlastet Normalverdiener", faktisch falsch, Soli trifft seit 2021 nur Top-Einkommen) und security#2 ("230.000, davon viele mit Straftaten", unbelegt, AfD-Framing). energy#1 von Selbst-Entkräftung gelöst (steht jetzt als eigenständiges Argument). corruption#1 (eigener Lobbyregister-Entwurf) gegen BT-Drs 20/1322 verifiziert, bleibt mit Quelle.
+
+**Verified:** lokal 430+1280 (Logo Barlow, Card-Grid 3-spaltig, Cascade grid + Pills column, Pair row, agreed-Items korrekt gestrichen, 0 Console-Fehler, 0 Em-Dashes) und live gegen afd-check.de (Logo Barlow, 3-spaltig, Cascade grid, Pills column, 0 Fehler). Commits `6cbff14` (+ docs `f517ce6`).
+
+**Panel-Re-Run (4x5, dieselben Panels, gegen Live-v4.1):** Dashboard `_panel/panel-feedback-v4.html`. Alle vier v1-Top-Befunde adressiert: A 2/3/0 (niemand prallt mehr ab, vorher 1 Abprall), B 0/3/2 (Angriff verlagert), C 3 gelöst/2 P2 (A11y-P0 hart gelöst, Desktop genuin responsiv), D 3 standardfest/2 nachbessern/0 unzulässig (Transparenz von unzulässig auf standardfest). **Roter Faden verlagert, nicht weg:** die Wertung sitzt jetzt im "Stimmt, aber"-Beat (rebuttal), wo kausale Motivunterstellungen gegen die Gesamtfraktion stehen ("weil die AfD keine Kompromisse eingeht"). Das ist der neue gemeinsame Top-Fix (A, B).
+
+---
+
 ## Known Issues
 ### Active
+- **Panel v4.1, höchster Hebel:** Beat 6 "Stimmt, aber" (rebuttal) enthält kausale Motivunterstellungen gegen die Gesamtfraktion, justiziabel laut Medienanwalt-Persona, liest sich als Schlusswort wie Gegenrede. Auf belegte Verhaltensbeschreibung umstellen.
+- Panel v4.1: eigene AfD-Anträge nur als "chancenlos" gerahmt, nicht als gleichwertiger Beleg (Cherry-Picking-Vorwurf bleibt)
+- Panel v4.1: Kontext-Gegenzahlen nur bei 2 von 10 Themen; Auswahlkriterium deklariert aber zu vage
+- Panel v4.1: EU-Reflexionsfrage ("Auslandszahlungen an Abgeordnete") liest sich wie die Korruptions-Frage, Platzierung prüfen
+- Panel v4.1: "Nächstes Thema" einseitig, kein Vor/Zurück-Paar (C, P2)
 - **VPS-Mirror (89.147.109.248:8650/guide/) noch auf v3** — braucht separaten Push
 - Impressum-Adresse ist Platzhalter (Postflex noch nicht gebucht)
 - Keine Deep-Links pro Thema
