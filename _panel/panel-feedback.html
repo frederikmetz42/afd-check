@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!--
+  BUILD-GUARD SPEC
+  Artefact: afd-check light-riso, 4x5 persona panel review dashboard
+  Rules: light cream-free off-white canvas, ONE accent (indigo), hairline cards no grey fill,
+         Geist + Geist Mono, tabular-nums, no emoji, no italic, no serif, zero em dashes
+         (incl comments), single self-contained file, fonts via CDN.
+  Content: 4 panels (Waehler, Bias-Red-Team, UX, Faktencheck), 20 personas, single round, 2026-05-26.
+  Do not remove: verdict strip, score band, per-panel cards, strengths, open items (freq-sorted),
+         ranked recommendations, cross-panel agreement matrix.
+-->
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>afd-check, Panel-Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canvas: #FAFAF8;
+    --surface: #FFFFFF;
+    --ink: #1A1A1C;
+    --muted: #5E5C57;
+    --faint: #8A8881;
+    --hair: #E6E5E1;
+    --accent: #5E6AD2;
+    --accent-soft: rgba(94,106,210,0.10);
+    --green: #1A7A4A;
+    --green-bg: rgba(26,122,74,0.08);
+    --amber: #B45309;
+    --amber-bg: rgba(180,83,9,0.08);
+    --red: #C2300C;
+    --red-bg: rgba(194,48,12,0.07);
+    --radius: 10px;
+  }
+  * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Geist', system-ui, sans-serif;
+    background: var(--canvas);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px 80px; }
+  .label { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+
+  /* topbar */
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--hair); margin-bottom: 32px; }
+  .brand { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+  .brand span { color: var(--accent); }
+  .tag { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--muted); border: 1px solid var(--hair); border-radius: 999px; padding: 4px 10px; }
+
+  /* title */
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 10px; }
+  .sub { color: var(--muted); font-size: 15px; max-width: 70ch; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; }
+  .meta-row .label span { color: var(--ink); font-weight: 600; }
+
+  section { margin-top: 44px; }
+  h2 { font-size: 13px; font-family: 'Geist Mono', monospace; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--hair); }
+
+  /* verdict strip */
+  .verdict { background: var(--surface); border: 1px solid var(--hair); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 22px 24px; }
+  .verdict .badge { display: inline-block; font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 4px 11px; margin-bottom: 12px; }
+  .verdict .head { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; margin-bottom: 12px; }
+  .verdict p { color: var(--muted); margin-bottom: 10px; }
+  .verdict p:last-child { margin-bottom: 0; }
+  .verdict b { color: var(--ink); font-weight: 600; }
+
+  /* score band */
+  .band { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 16px; }
+  .stat .n { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+  .stat .l { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.35; }
+  .stat .l b { color: var(--ink); }
+
+  /* panel cards */
+  .panels { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .panel { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 20px; }
+  .panel h3 { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 2px; }
+  .panel .pmeta { font-size: 12px; color: var(--faint); margin-bottom: 14px; }
+  .persona { display: flex; gap: 10px; align-items: baseline; padding: 9px 0; border-top: 1px solid var(--hair); font-size: 13.5px; }
+  .persona:first-of-type { border-top: none; }
+  .persona .who { font-weight: 600; min-width: 0; flex: 1; }
+  .persona .who small { display: block; color: var(--muted); font-weight: 400; font-size: 12.5px; margin-top: 2px; line-height: 1.4; }
+  .pill { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 999px; padding: 3px 8px; white-space: nowrap; }
+  .pill.g { color: var(--green); background: var(--green-bg); }
+  .pill.a { color: var(--amber); background: var(--amber-bg); }
+  .pill.r { color: var(--red); background: var(--red-bg); }
+  .quote { margin-top: 14px; padding: 12px 14px; background: var(--canvas); border-radius: 8px; font-size: 13px; color: var(--ink); line-height: 1.5; }
+  .quote .label { display: block; margin-bottom: 5px; }
+
+  /* finding lists */
+  .cards { display: flex; flex-direction: column; gap: 10px; }
+  .card { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 15px 18px; }
+  .card.good { border-left: 3px solid var(--green); }
+  .card.open { border-left: 3px solid var(--amber); }
+  .card .ct { font-weight: 600; font-size: 14.5px; margin-bottom: 4px; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .card .cb { color: var(--muted); font-size: 13.5px; }
+  .freq { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.04em; color: var(--faint); white-space: nowrap; }
+
+  /* recommendations */
+  ol.recs { list-style: none; counter-reset: r; display: flex; flex-direction: column; gap: 10px; }
+  ol.recs li { counter-increment: r; background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 15px 18px 15px 52px; position: relative; }
+  ol.recs li::before { content: counter(r); position: absolute; left: 16px; top: 15px; width: 24px; height: 24px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); font-family: 'Geist Mono', monospace; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  ol.recs .rt { font-weight: 600; font-size: 14.5px; margin-bottom: 3px; }
+  ol.recs .rb { color: var(--muted); font-size: 13.5px; }
+  ol.recs .src { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.04em; color: var(--accent); }
+
+  /* matrix */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); overflow: hidden; }
+  th, td { text-align: left; padding: 11px 13px; border-bottom: 1px solid var(--hair); }
+  th { font-family: 'Geist Mono', monospace; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+  td:first-child { font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; }
+  .dot.on { background: var(--accent); }
+  .dot.off { background: var(--hair); }
+
+  footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair); font-size: 12px; color: var(--faint); }
+
+  @media (max-width: 720px) {
+    .band { grid-template-columns: repeat(2, 1fr); }
+    .panels { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">afd<span>-check</span> Panel-Review</div>
+    <div class="tag">light-riso, 2-medium</div>
+  </div>
+
+  <h1>Vier Panels, 20 Personas, ein roter Faden</h1>
+  <p class="sub">Stresstest der neuen 7-Beat-Storyline: ist sie klar, ueberzeugend, fair und glaubwuerdig fuer skeptische Waehler, und haelt sie Voreingenommenheits-Vorwuerfen stand. Single round, 2026-05-26.</p>
+  <div class="meta-row">
+    <div class="label">Panels <span>4</span></div>
+    <div class="label">Personas <span>20</span></div>
+    <div class="label">Runde <span>1</span></div>
+    <div class="label">Variante <span>2-medium</span></div>
+  </div>
+
+  <section>
+    <div class="verdict">
+      <span class="badge">Gesamturteil</span>
+      <div class="head">Starke Quellenarbeit und ein klarer Erzaehlbogen, aber das Tool bricht sein eigenes Versprechen "Keine Meinung".</div>
+      <p>Die Mechanik (Programmzitat gegen Abstimmung, verbatim belegt, mit Seitenangabe und PDF-Link) ueberzeugt die faktenorientierten, schon wechselbereiten Waehler und besteht die Quellenpruefung. Der Bogen Anliegen, Versprechen, Programm, Realitaet, Fairness, Einwand, Urteil liest sich als eine Geschichte.</p>
+      <p><b>Drei von vier Panels zeigen aber auf dieselbe Wurzel:</b> die wertenden Felder <b>pattern, consequence, question</b> verkaufen Meinung als Fakt unter einem Label, das mit "Keine Meinung, nur Abstimmungen" wirbt. Das verliert genau die Protest- und Sympathisanten-Waehler (Panel A), liefert dem Gegner den Linkspropaganda-Screenshot (Panel B) und besteht keinen journalistischen Standards-Review (Panel D, einziges glattes "unzulaessig" bei Transparenz).</p>
+      <p><b>Die gute Nachricht:</b> ein einziger Eingriff entschaerft drei Panels gleichzeitig. Urteilsfelder neutralisieren plus eine sichtbare Methodik- und Transparenzseite, dann besteht das Tool sowohl den Waehler- als auch den Bias- und Standards-Test.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Score-Band</h2>
+    <div class="band">
+      <div class="stat"><div class="n">4 / 4</div><div class="l">Panels finden <b>denselben Top-Fix</b> in den Urteilsfeldern (A, B, D direkt; C ueber den Ton)</div></div>
+      <div class="stat"><div class="n">0</div><div class="l">Personas im Red-Team bewerten das Tool als <b>wasserdicht</b></div></div>
+      <div class="stat"><div class="n">2 / 10</div><div class="l">Themen haben <b>contextFacts</b> mit Gegenzahlen (Migration, Sicherheit)</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">glattes <b>unzulaessig</b>: Transparenz (kein Autor, kein Datum, keine Methodik)</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Die vier Panels</h2>
+    <div class="panels">
+
+      <div class="panel">
+        <h3>A, Zielgruppe Waehler</h3>
+        <div class="pmeta">2 ueberzeugt, 2 skeptisch, 1 prallt ab</div>
+        <div class="persona"><span class="who">Sabine, 52, frueher CDU<small>Originalzitate mit Seitenzahl plus CDU-Spalte, genau die Belegdichte die ich vermisst habe.</small></span><span class="pill g">ueberzeugt</span></div>
+        <div class="persona"><span class="who">Daniel, 34, sicherheitsorientiert<small>Versprechen aus dem Programm gegen die echte Abstimmung, mit Quelle und sogar Gegenargument. Kein Cherry-Picking.</small></span><span class="pill g">ueberzeugt</span></div>
+        <div class="persona"><span class="who">Markus, 38, AfD aus Protest<small>Beat 1 holt mich ab, aber bei "gesichert rechtsextrem" riecht es nach Erziehungsversuch, da klappe ich zu.</small></span><span class="pill a">skeptisch</span></div>
+        <div class="persona"><span class="who">Heike, 61, Sympathisantin<small>"Fairerweise" nimmt mir die Abwehr, dann fuehle ich mich bei "Angst mobilisiert Stimmen" wieder hingestellt.</small></span><span class="pill a">skeptisch</span></div>
+        <div class="persona"><span class="who">Tobias, 26, Nichtwaehler<small>Sieben Schritte, Schachtelsaetze, nach Beat 3 bin ich weg und weiss nicht "was bringt mir das".</small></span><span class="pill r">prallt ab</span></div>
+        <div class="quote"><span class="label">Panel-Zitat, Heike</span>"Bis ihr zugebt dass das Abschiebeproblem echt ist, hattet ihr mich, und dann lest ihr mir mit 'Angst mobilisiert Stimmen' doch wieder die Leviten."</div>
+      </div>
+
+      <div class="panel">
+        <h3>B, Bias-Red-Team</h3>
+        <div class="pmeta">2 angreifbar, 3 haltbar mit Risiko, 0 wasserdicht</div>
+        <div class="persona"><span class="who">AfD-Fraktionssprecher<small>Selektive Abstimmungsauswahl, eigene AfD-Antraege werden nicht als gleichwertige Belege gezeigt.</small></span><span class="pill r">angreifbar</span></div>
+        <div class="persona"><span class="who">Social-Media-Aktivist<small>"Keine Meinung" oben, drei Klicks weiter Suggestivfragen. Haltungsjournalismus mit Quellen-Deko.</small></span><span class="pill r">angreifbar</span></div>
+        <div class="persona"><span class="who">Kritische Journalistin<small>Belege sauber, aber Beat 7 und die Fragen kippen vom Befund in die Wahlempfehlung.</small></span><span class="pill a">Risiko</span></div>
+        <div class="persona"><span class="who">Medienanwalt<small>Motivunterstellung gegen die Gesamtfraktion ist eine justiziable Wertung. Zitattreue dagegen stark.</small></span><span class="pill a">Risiko</span></div>
+        <div class="persona"><span class="who">Fairness-Beobachter<small>"Fairerweise" ist echt, aber jedes Zugestaendnis wird sofort zurueckgenommen. Das Spiel steht fest.</small></span><span class="pill a">Risiko</span></div>
+        <div class="quote"><span class="label">Feindliches Zitat</span>"Die schreiben gross 'KEINE MEINUNG' und drei Klicks weiter fragen sie dich, ob du auf ein Deutschland mit SA-Parolen stolz bist. Staatsfunk-Sprech im Faktencheck-Kostuem."</div>
+      </div>
+
+      <div class="panel">
+        <h3>C, UX und Design</h3>
+        <div class="pmeta">1 P0, 3 P1, 1 P2</div>
+        <div class="persona"><span class="who">Accessibility<small>Collapsibles als div onclick, keyboard- und screenreader-unsichtbar. Muted-Text ~4.0:1, unter AA.</small></span><span class="pill r">P0</span></div>
+        <div class="persona"><span class="who">Information Architecture<small>Spine liest sich als eine Geschichte, aber Wayfinding duenn: wo bin ich in 8 Themen.</small></span><span class="pill a">P1</span></div>
+        <div class="persona"><span class="who">Interaction Design<small>Pill-Reihe scrollt ohne sichtbaren Hinweis, "Naechstes Thema" verschwindet am Ende. Sackgasse.</small></span><span class="pill a">P1</span></div>
+        <div class="persona"><span class="who">Readability<small>Beat 3 (zwei lange Zitate) und Beat 4 (vier Vote-Karten) werden zu Textwaenden.</small></span><span class="pill a">P1</span></div>
+        <div class="persona"><span class="who">Visual Hierarchy<small>Ein Akzent, zweifarbiger Titel, Spine. Starke Signature-Moves, nur Politur noetig.</small></span><span class="pill g">P2</span></div>
+        <div class="quote"><span class="label">Cross-Domain-Muster</span>Drei Domaenen flaggen dieselbe Wurzel, naemlich State der existiert aber versteckt ist: off-screen Pills, verschwindender Button, stumme Collapsibles.</div>
+      </div>
+
+      <div class="panel">
+        <h3>D, Faktencheck-Standards</h3>
+        <div class="pmeta">1 standardfest, 3 nachbesserungsbeduerftig, 1 unzulaessig</div>
+        <div class="persona"><span class="who">Quellen-Pruefer<small>Verbatim, mit Seite, Abschnitt und offiziellem PDF. Besser als viele NGO-Checks.</small></span><span class="pill g">standardfest</span></div>
+        <div class="persona"><span class="who">Methodik-Pruefer<small>3 bis 4 handverlesene Abstimmungen tragen kein Pauschalurteil, Auswahlkriterien nicht offengelegt.</small></span><span class="pill a">nachbessern</span></div>
+        <div class="persona"><span class="who">Framing-Pruefer<small>Steelman ernsthaft, aber "Urteil" verkauft Wertung als Fakt ("Haerte ohne System loest nichts").</small></span><span class="pill a">nachbessern</span></div>
+        <div class="persona"><span class="who">Kontext-Pruefer<small>Gegenzahlen nur bei 2 von 10 Themen, bei Rente, Pflege, Energie fehlt entlastender Kontext.</small></span><span class="pill a">nachbessern</span></div>
+        <div class="persona"><span class="who">Transparenz-Pruefer<small>Kein Autor, kein Aktualisierungsdatum, keine Methodik-Seite, 2016-Luecke nur im Datenfile.</small></span><span class="pill r">unzulaessig</span></div>
+        <div class="quote"><span class="label">Panel-Zitat, aus dem Artefakt</span>"Die AfD stimmt fuer Verschaerfung, aber gegen Ordnung. Haerte ohne System loest nichts." Eine politische Bewertung unter dem Label "Urteil", auf einer Seite die mit "Keine Meinung" wirbt.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Was traegt</h2>
+    <div class="cards">
+      <div class="card good"><div class="ct">Quellenrigorositaet<span class="freq">A, D</span></div><div class="cb">Programmzitate verbatim mit Seite und offiziellem afd.de-PDF, Abstimmungen auf Bundestag und abgeordnetenwatch verlinkt, echte Primaerquellen (ZEW, Fraunhofer, BKA). Der Quellen-Pruefer nennt es "besser als viele NGO-Checks".</div></div>
+      <div class="card good"><div class="ct">Die Kontrast-Mechanik Programm gegen Abstimmung<span class="freq">A</span></div><div class="cb">Versprechen aus dem Programm direkt gegen die echte Abstimmung gestellt, mit Quelle zum Nachklicken, ueberzeugt Sabine und Daniel sofort. Das ist der Kern, der funktioniert.</div></div>
+      <div class="card good"><div class="ct">Erzaehlbogen und Signature-Design<span class="freq">C</span></div><div class="cb">Die nummerierte Spine, ein Akzent und der zweifarbige Barlow-Condensed-Titel geben dem Tool Charakter, die Story-Reihenfolge ist stimmig. "A confident, disciplined build."</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Was zu fixen ist, nach Panel-Haeufigkeit</h2>
+    <div class="cards">
+      <div class="card open"><div class="ct">Wertende Urteilsfelder widersprechen "Keine Meinung"<span class="freq">A, B, C, D</span></div><div class="cb">pattern, consequence und question ("Angst mobilisiert Stimmen", "Die Entlastung fliesst nach oben. Immer.", Suggestivfragen) verkaufen Meinung als Fakt. Verliert Protestwaehler, liefert den Bias-Screenshot, faellt im Standards-Review durch.</div></div>
+      <div class="card open"><div class="ct">Keine sichtbare Methodik und Transparenz<span class="freq">B, D</span></div><div class="cb">Kein Autor oder Impressum prominent, kein Aktualisierungsdatum, keine Auswahlkriterien der Abstimmungen, die dokumentierte 2016-Luecke (Rente, Pflege) steht nur im Datenfile, nicht fuer den Leser.</div></div>
+      <div class="card open"><div class="ct">Selektive und teils falsch kategorisierte Evidenz<span class="freq">B, D</span></div><div class="cb">Beat 4 zeigt fast nur Nein-Stimmen, eigene AfD-Antraege nicht als gleichwertige Belege. Bei "patriotism" sind die "votes" gar keine Abstimmungen, sondern Gerichts- und Verfassungsschutz-Vorgaenge.</div></div>
+      <div class="card open"><div class="ct">"Fairerweise" wirkt unecht<span class="freq">A, B</span></div><div class="cb">Beat 5 nennt reale Zugestaendnisse, aber Beat 6 und 7 entkraften sie sofort. Kein Thema endet offen, der Waehler merkt, dass das Spiel feststeht.</div></div>
+      <div class="card open"><div class="ct">Accessibility unter AA<span class="freq">C</span></div><div class="cb">Collapsibles als div onclick ohne role, tabindex, aria-expanded, also keyboard- und screenreader-unsichtbar. Muted-Text rund 4.0:1 auf Creme.</div></div>
+      <div class="card open"><div class="ct">Textwaende verlieren Schnell-Leser<span class="freq">A, C</span></div><div class="cb">Beat 3 (zwei lange Zitate) und Beat 4 (vier Vote-Karten) dominieren, Tobias steigt nach Beat 3 aus. Kein TL;DR fuer Scanner.</div></div>
+      <div class="card open"><div class="ct">Wayfinding und Sackgasse<span class="freq">C</span></div><div class="cb">Off-screen Pills ohne Scroll-Hinweis, keine Positionsanzeige (Thema 1 von 10), "Naechstes Thema" verschwindet am letzten Thema ohne Rueckweg.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Empfehlungen, nach Wirkung</h2>
+    <ol class="recs">
+      <li><div class="rt">Urteilsfelder neutralisieren <span class="src">A, B, D</span></div><div class="rb">pattern, consequence und question entweder streichen oder strikt auf belegte Verhaltensbeschreibung umstellen: kein Motiv, keine Suggestivfrage, keine wertenden Adjektive. Hoechste Hebelwirkung, trifft Ueberzeugung, Bias und Standards in einem.</div></li>
+      <li><div class="rt">Sichtbare Methodik- und Transparenzseite <span class="src">D, B</span></div><div class="rb">Autor und Impressum prominent, Aktualisierungsdatum, Auswahlkriterien der Abstimmungen, explizite Lueckenkennzeichnung fuer den Leser (z. B. "Grundsatzprogramm 2016 enthaelt kein Rentenkonzept"). Macht Auswahl und Wertung deklariert statt kaschiert.</div></li>
+      <li><div class="rt">Evidenz ausbalancieren und sauber kategorisieren <span class="src">B, D</span></div><div class="rb">Eigene AfD-Gegenantraege als gleichwertige Belege in Beat 4 zeigen, nicht nur Nein-Stimmen. Beim Thema patriotism die "votes" umtaggen, Gerichtsurteile und Verfassungsschutz sind keine Abstimmungen.</div></li>
+      <li><div class="rt">"Fairerweise" wirklich offen lassen <span class="src">A, B</span></div><div class="rb">Nicht jedes Zugestaendnis im selben Atemzug zuruecknehmen. Mindestens einige Themen ohne abschliessende Abwertung enden lassen, sonst entwertet sich die Fairness-Geste selbst.</div></li>
+      <li><div class="rt">Accessibility auf AA bringen <span class="src">C</span></div><div class="rb">Collapsibles auf button mit aria-expanded umstellen, --text-muted auf rund #665F58 abdunkeln (etwa 4.6:1).</div></li>
+      <li><div class="rt">Schnell-Leser bedienen <span class="src">A, C</span></div><div class="rb">Beat 3 und 4 straffen (Zusatz-Votes und zweites Programmzitat hinter ein "mehr" klappen), ein einzeiliges Fazit pro Thema fuer Scanner wie Tobias an den Anfang.</div></li>
+      <li><div class="rt">Wayfinding schliessen <span class="src">C</span></div><div class="rb">Scroll-Hinweis an der Pill-Reihe, Positionsanzeige (Thema X von 10), am letzten Thema ein Rueckweg statt Sackgasse.</div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Cross-Panel-Matrix</h2>
+    <table>
+      <thead><tr><th>Befund</th><th>A Waehler</th><th>B Red-Team</th><th>C UX</th><th>D Faktencheck</th></tr></thead>
+      <tbody>
+        <tr><td>Wertende Urteilsfelder</td><td><span class="dot on"></span></td><td><span class="dot on"></span></td><td><span class="dot on"></span></td><td><span class="dot on"></span></td></tr>
+        <tr><td>Methodik und Transparenz fehlt</td><td><span class="dot off"></span></td><td><span class="dot on"></span></td><td><span class="dot off"></span></td><td><span class="dot on"></span></td></tr>
+        <tr><td>Selektive Evidenz</td><td><span class="dot off"></span></td><td><span class="dot on"></span></td><td><span class="dot off"></span></td><td><span class="dot on"></span></td></tr>
+        <tr><td>Fairerweise unecht</td><td><span class="dot on"></span></td><td><span class="dot on"></span></td><td><span class="dot off"></span></td><td><span class="dot off"></span></td></tr>
+        <tr><td>Laenge, Textwaende</td><td><span class="dot on"></span></td><td><span class="dot off"></span></td><td><span class="dot on"></span></td><td><span class="dot off"></span></td></tr>
+        <tr><td>Accessibility und Wayfinding</td><td><span class="dot off"></span></td><td><span class="dot off"></span></td><td><span class="dot on"></span></td><td><span class="dot off"></span></td></tr>
+        <tr><td>Quellenarbeit stark</td><td><span class="dot on"></span></td><td><span class="dot on"></span></td><td><span class="dot off"></span></td><td><span class="dot on"></span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    afd-check, Panel-Review, light-riso 2-medium, 4 Panels x 5 Personas, single round, 2026-05-26. Quelle der Artefakte: 01-projects/personal/boldclaim/afd-check/light-riso/.
+  </footer>
+
+</div>
+</body>
+</html>

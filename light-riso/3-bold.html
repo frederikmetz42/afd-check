@@ -2,35 +2,35 @@
 <!--
   BUILD-GUARD SPEC BLOCK
   =====================================================================
-  Component : afd-check LIGHT RISO, variant 1 of 3 (subtle)
+  Component : afd-check LIGHT RISO, variant 3 of 3 (bold)
   Version   : 1.0.0
   Base      : ../index.html (production afd-check), preserved verbatim:
               540px mobile-first layout, full content, all interactive
               screens and JS, cream canvas (--bg #FFF8F0), white rounded
               cards (radius 20px) with hairline border plus 3px left
               accent border, DM Sans body, single warm accent.
-  Added     : ONLY the hero title swapped to Barlow Condensed, uppercase,
-              weight 900, two-tone (ink plus terracotta accent).
-              Everything else exactly as production. Minimal riso.
-  Palette   : paper #FFF8F0, ink #1C1917, single accent terracotta #C2410C.
+  Added     : Full light-riso energy. Larger two-tone condensed title,
+              bordered rotated kicker stamp, hero dot-grain, condensed
+              uppercase labels throughout, a few hard-edged bordered
+              accents (logo box, stat tiles, pills). Still light cream
+              paper, still readable, still ONE accent. Accent is the
+              brighter riso red rather than terracotta.
+  Palette   : paper #FFF8F0, ink #1C1917, single accent riso red #FF3B30.
               LIGHT mode only, never dark.
   Fonts     : Barlow Condensed (display title) plus DM Sans (body) plus
               Outfit (existing UI numerals), all via Google Fonts CDN.
-  Narrative: a one-line "Kurz gesagt" tl;dr (neutral patternSummary), then a
-              fixed 6-beat story arc on a numbered spine, then a demoted appendix:
+  Narrative: cascade follows a fixed 6-beat story arc on a numbered
+              spine, then a demoted appendix:
               1 Dein Anliegen (hook), 2 Das Versprechen (statement+promise),
-              3 Was sie selbst schreibt (Programmzitate; 2016 hinter "mehr"),
-              4 Die Realitaet/Belege (evidence; ab dem 3. hinter "mehr";
-                evidenceLabel ueberschreibt das Label bei Nicht-Abstimmungen wie patriotism),
-              5 Fairerweise wo sie recht hat (afdAgreed),
-              6 Ihr Einwand und die Antwort (counterArgument + rebuttal paired).
-              Verdict-Beat entfernt, patternSummary fuehrt oben (Panel-Fix #6).
-              Appendix: Die Zahlen im Kontext (button aria-expanded), Quellen,
+              3 Die Realitaet so stimmt sie ab (evidence votes),
+              4 Fairerweise wo sie recht hat (afdAgreed),
+              5 Ihr Einwand und die Antwort (counterArgument + rebuttal paired),
+              6 Zusammengefasst (neutraler patternSummary, ein Satz; pattern/consequence/Urteils-Wertung entfernt, Panel-Fix #1).
+              Appendix: Die Zahlen im Kontext (collapsible), Quellen,
               Frag dich selbst. Missing fields skip their beat gracefully.
-              Landing hat Methodik-Sektion (Autor/Stand/Auswahl/Luecken, Panel-Fix #2).
   Rules enforced:
     - LIGHT cream paper only, never dark or ink background canvas
-    - Exactly ONE accent (terracotta) on chrome
+    - Exactly ONE accent (riso red #FF3B30) on chrome
     - Topic icons use the original emoji per Frederik's explicit
       override (landing cards plus cascade pills). All OTHER chrome is
       emoji-free.
@@ -55,9 +55,9 @@
   --bg: #FFF8F0;
   --surface: #FFFFFF;
   --text: #1C1917;
-  --text-muted: #665F58;
+  --text-muted: #78716C;
   --border: #FDDCB5;
-  --accent-primary: #C2410C;
+  --accent-primary: #FF3B30;
   --accent-secondary: #166534;
   --accent-quote: #9A3412;
   --accent-vote-yes: #065F46;
@@ -75,10 +75,13 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); col
 .b-container { max-width: 540px; margin: 0 auto; }
 .b-nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
 .b-logo { font-family: 'Outfit', system-ui, sans-serif; font-size: 16px; font-weight: 800; color: var(--text); letter-spacing: -0.03em; }
-.b-logo span { color: var(--accent-primary); }
+.b-logo span { color: #FFFFFF; background: var(--accent-primary); padding: 1px 5px; }
 .b-landing { padding: 32px 20px 0; }
-.b-landing-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 12px; }
-.b-landing h1 { font-family: var(--font-display); font-size: clamp(36px, 11vw, 60px); font-weight: 900; line-height: 0.95; letter-spacing: -0.01em; text-transform: uppercase; color: var(--text); margin-bottom: 14px; }
+.b-landing { position: relative; overflow: hidden; }
+.b-landing::before { content: ''; position: absolute; inset: -24px 0 0 0; z-index: 0; pointer-events: none; background-image: radial-gradient(circle, rgba(255,59,48,0.22) 1.2px, transparent 1.2px); background-size: 12px 12px; -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%); }
+.b-landing > * { position: relative; z-index: 1; }
+.b-kicker { display: inline-block; font-family: var(--font-display); font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #FFFFFF; background: var(--accent-primary); border: 1.5px solid var(--accent-primary); padding: 3px 10px; margin-bottom: 18px; transform: rotate(-1.5deg); }
+.b-landing h1 { font-family: var(--font-display); font-size: clamp(44px, 14vw, 76px); font-weight: 900; line-height: 0.9; letter-spacing: -0.015em; text-transform: uppercase; color: var(--text); margin-bottom: 16px; }
 .b-landing h1 span { color: var(--accent-primary); }
 .b-landing-subtitle { font-size: 15px; font-weight: 400; color: var(--text-muted); line-height: 1.55; margin-bottom: 28px; }
 .b-card-list { padding: 0 16px 32px; display: flex; flex-direction: column; gap: 12px; }
@@ -89,26 +92,26 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); col
 .b-chevron { color: var(--accent-primary); font-size: 18px; font-weight: 700; opacity: 0.6; transition: opacity 0.15s; flex-shrink: 0; }
 .b-statement-card:hover .b-chevron { opacity: 1; }
 .b-stats-bar { padding: 0 16px 36px; display: flex; gap: 10px; }
-.b-stat-item { flex: 1; background: var(--surface); border-radius: 12px; padding: 12px 10px; border: 1px solid var(--border); text-align: center; }
-.b-stat-num { font-family: 'Outfit', system-ui, sans-serif; font-size: 20px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 3px; }
-.b-stat-label { font-size: 10px; color: var(--text-muted); font-weight: 500; }
+.b-stat-item { flex: 1; background: var(--surface); border-radius: 0; padding: 12px 10px; border: 2px solid var(--text); text-align: center; }
+.b-stat-num { font-family: var(--font-display); font-size: 30px; font-weight: 900; letter-spacing: -0.02em; line-height: 1; margin-bottom: 3px; }
+.b-stat-label { font-family: var(--font-display); font-size: 11px; color: var(--text-muted); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .b-pills-wrap { display: flex; gap: 8px; overflow-x: auto; padding: 12px 16px 10px; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; background: var(--surface); border-bottom: 1px solid var(--border); }
 .b-pills-wrap::-webkit-scrollbar { display: none; }
-.b-topic-pill { flex-shrink: 0; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.15s, color 0.15s; border: 1px solid var(--border); font-family: 'DM Sans', system-ui, sans-serif; }
-.b-topic-pill.active { background: var(--accent-primary); color: #FFFFFF; border-color: var(--accent-primary); }
+.b-topic-pill { flex-shrink: 0; padding: 6px 12px; border-radius: 0; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background 0.15s, color 0.15s; border: 1.5px solid var(--text); font-family: 'DM Sans', system-ui, sans-serif; }
+.b-topic-pill.active { background: var(--accent-primary); color: #FFFFFF; border-color: var(--text); }
 .b-topic-pill:not(.active) { background: var(--surface); color: var(--text-muted); }
 .b-topic-pill:not(.active):hover { border-color: var(--accent-primary); color: var(--accent-primary); }
 .b-pill-emoji { margin-right: 6px; font-size: 13px; }
 .b-cascade-wrap { padding: 20px 16px 0; }
 .b-back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--accent-primary); cursor: pointer; margin-bottom: 16px; background: none; border: none; font-family: 'DM Sans', system-ui, sans-serif; padding: 0; }
 .b-back-btn:hover { text-decoration: underline; }
-.b-cascade-header { background: var(--accent-primary); border-radius: 16px; padding: 20px 20px 24px; }
-.b-cascade-header-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 10px; }
+.b-cascade-header { background: var(--accent-primary); border-radius: 0; padding: 20px 20px 24px; }
+.b-cascade-header-label { font-family: var(--font-display); font-size: 13px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-bottom: 10px; }
 .b-speech-bubble { font-family: 'Outfit', system-ui, sans-serif; background: rgba(255,255,255,0.15); border-radius: 12px 12px 12px 4px; padding: 14px 16px; font-size: 15px; font-weight: 700; color: #FFFFFF; line-height: 1.4; position: relative; }
 .b-speech-bubble::after { content: ''; position: absolute; bottom: -10px; left: 16px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 4px solid transparent; border-top: 10px solid rgba(255,255,255,0.15); }
 .b-evidence-stack { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; margin-bottom: 24px; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.b-evidence-layer { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); animation: fadeUp 0.2s ease-out both; }
+.b-evidence-layer { background: var(--surface); border: 2px solid var(--text); border-radius: 0; padding: 20px; animation: fadeUp 0.2s ease-out both; }
 .b-evidence-layer:last-child { }
 .b-evidence-layer:nth-child(1) { animation-delay: 0.00s; }
 .b-evidence-layer:nth-child(2) { animation-delay: 0.05s; }
@@ -118,20 +121,20 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); col
 .b-evidence-layer:nth-child(6) { animation-delay: 0.25s; }
 .b-layer-label { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
 .b-layer-icon { min-width: 28px; height: 28px; border-radius: 6px; background: var(--accent-pattern); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 11px; font-weight: 800; letter-spacing: 0.04em; color: var(--accent-primary); padding: 0 7px; text-transform: uppercase; }
-.b-layer-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.b-layer-tag { font-family: var(--font-display); font-size: 15px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
 .tag-promise { color: var(--accent-primary); }
 .tag-pattern { color: var(--accent-secondary); }
 .b-layer-body { font-size: 14px; color: var(--text); line-height: 1.55; }
 .b-pattern-box { background: var(--accent-pattern); border-radius: 10px; padding: 12px 14px; font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.55; }
 .b-fragmal-bubble { background: var(--accent-fragmal); border-left: 3px solid var(--accent-primary); border-radius: 12px; padding: 16px 18px 20px; position: relative; margin-top: 4px; }
 .b-fragmal-bubble::after { content: ''; position: absolute; bottom: -10px; left: 20px; width: 0; height: 0; border-left: 10px solid var(--accent-fragmal); border-right: 4px solid transparent; border-top: 10px solid var(--accent-fragmal); }
-.b-fragmal-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 8px; }
+.b-fragmal-tag { font-family: var(--font-display); font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 8px; }
 .b-fragmal-text { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.5; }
-.b-hook-layer { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px 22px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04); animation: fadeUp 0.2s ease-out both; }
+.b-hook-layer { background: var(--surface); border: 2px solid var(--text); border-radius: 0; padding: 24px 22px; text-align: center; animation: fadeUp 0.2s ease-out both; }
 .b-hook-text { font-family: 'Outfit', system-ui, sans-serif; font-size: 19px; font-weight: 600; color: var(--text-muted); line-height: 1.45; letter-spacing: -0.01em; }
-.b-evidence-layer.layer-betrayal { background: rgba(185,28,28,0.045); border: 1px solid var(--border); border-left: 4px solid var(--accent-vote-no); border-radius: 16px; padding: 20px; }
-.b-pattern-summary { background: rgba(194,65,12,0.07); border-left: 3px solid var(--accent-primary); border-radius: 0 10px 10px 0; padding: 12px 16px; font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.45; }
-.b-vote-item { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px 16px; position: relative; }
+.b-evidence-layer.layer-betrayal { background: rgba(185,28,28,0.045); border: 2px solid var(--text); border-left: 5px solid var(--accent-vote-no); border-radius: 0; padding: 20px; }
+.b-pattern-summary { background: rgba(255,59,48,0.07); border-left: 3px solid var(--accent-primary); border-radius: 0 10px 10px 0; padding: 12px 16px; font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.45; }
+.b-vote-item { background: var(--bg); border: 1.5px solid var(--text); border-radius: 0; padding: 16px 16px; position: relative; }
 .b-vote-item + .b-vote-item { margin-top: 14px; }
 .b-vote-item-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
 .b-vote-num { width: 22px; height: 22px; min-width: 22px; border-radius: 50%; background: var(--accent-vote-no); color: #FFFFFF; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
@@ -144,7 +147,7 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); col
 .b-vote-cdu { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
 .b-vote-divergent { color: var(--accent-secondary); font-weight: 600; }
 .b-agreed-box { background: var(--accent-fragmal); border-left: 3px solid var(--accent-secondary); border-radius: 10px; padding: 12px 14px; }
-.b-agreed-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-secondary); margin-bottom: 8px; }
+.b-agreed-label { font-family: var(--font-display); font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-secondary); margin-bottom: 8px; }
 .b-agreed-item { font-size: 13px; color: var(--text); line-height: 1.55; }
 .b-agreed-item + .b-agreed-item { margin-top: 6px; }
 .b-context-toggle { display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; font-size: 13px; font-weight: 700; color: var(--text); padding: 4px 0; }
@@ -178,101 +181,71 @@ a.b-source:hover { opacity: 0.75; }
 footer { text-align: center; font-size: 12px; font-weight: 500; color: var(--text-muted); padding: 24px 20px; border-top: 1px solid var(--border); background: var(--surface); }
 footer .b-footer-dot { margin: 0 6px; opacity: 0.4; }
 
-/* ============ NARRATIVE ARC: numbered story spine + appendix ============ */
+/* ============ NARRATIVE ARC (bold variant: hard-edged) ============ */
 .b-story { display: flex; flex-direction: column; gap: 0; margin-top: 16px; }
-.b-story-step { position: relative; display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding-bottom: 22px; }
+.b-story-step { position: relative; display: grid; grid-template-columns: 36px 1fr; gap: 12px; padding-bottom: 22px; }
 .b-story-step:last-child { padding-bottom: 0; }
-/* connecting vertical spine down the markers */
-.b-story-step::before { content: ''; position: absolute; left: 16px; top: 30px; bottom: -4px; width: 2px; background: var(--border); z-index: 0; }
+.b-story-step::before { content: ''; position: absolute; left: 17px; top: 34px; bottom: -4px; width: 2px; background: var(--text); z-index: 0; }
 .b-story-step:last-child::before { display: none; }
 .b-step-marker { position: relative; z-index: 1; display: flex; justify-content: center; }
-.b-step-num { width: 34px; height: 34px; border-radius: 50%; background: var(--accent-primary); color: #FFFFFF; font-family: var(--font-display); font-size: 18px; font-weight: 900; display: flex; align-items: center; justify-content: center; line-height: 1; box-shadow: 0 0 0 4px var(--bg); }
-.b-step-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); animation: fadeUp 0.2s ease-out both; }
-.b-step-label { font-family: var(--font-display); font-size: 14px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 12px; }
+.b-step-num { width: 36px; height: 36px; border-radius: 0; background: var(--accent-primary); color: #FFFFFF; font-family: var(--font-display); font-size: 20px; font-weight: 900; display: flex; align-items: center; justify-content: center; line-height: 1; box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--text); }
+.b-step-card { background: var(--surface); border: 2px solid var(--text); border-radius: 0; padding: 18px 18px; animation: fadeUp 0.2s ease-out both; }
+.b-step-label { font-family: var(--font-display); font-size: 16px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 12px; }
 .b-step-lead { font-family: 'Outfit', system-ui, sans-serif; font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.4; letter-spacing: -0.01em; }
 .b-step-claim { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.45; margin-bottom: 10px; }
 .b-step-body { font-size: 14px; color: var(--text); line-height: 1.55; }
 .b-votes-wrap { display: flex; flex-direction: column; gap: 14px; }
-/* step 3 votes accent: left rule on the card */
-.b-story-step:nth-child(4) .b-step-card { border-left: 4px solid var(--accent-vote-no); }
+.b-story-step:nth-child(4) .b-step-card { border-left: 5px solid var(--accent-vote-no); }
 .b-story-step:nth-child(4) .b-step-label { color: var(--accent-vote-no); }
 .b-agreed-list { display: flex; flex-direction: column; gap: 8px; }
-/* step 5 claim/answer pair */
 .b-pair { display: flex; flex-direction: column; gap: 12px; }
-.b-pair-side { border-radius: 10px; padding: 12px 14px; }
+.b-pair-side { border-radius: 0; padding: 12px 14px; border: 1.5px solid var(--text); }
 .b-pair-claim { background: #F5F3EE; }
-.b-pair-answer { background: var(--accent-pattern); border-left: 3px solid var(--accent-primary); }
-.b-pair-tag { font-family: var(--font-display); font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+.b-pair-answer { background: var(--accent-pattern); border-left: 5px solid var(--accent-primary); }
+.b-pair-tag { font-family: var(--font-display); font-size: 12px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
 .b-pair-answer .b-pair-tag { color: var(--accent-primary); }
 .b-pair-text { font-size: 13px; color: var(--text); line-height: 1.55; }
-/* step 6 verdict */
 .b-verdict-lead { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.45; margin-bottom: 10px; }
-.b-verdict-consequence { margin-top: 12px; background: var(--accent-pattern); border-radius: 10px; padding: 12px 14px; font-size: 14px; color: var(--text); line-height: 1.55; }
-.b-verdict-conseq-tag { display: block; font-family: var(--font-display); font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 6px; }
-/* APPENDIX (demoted) */
+.b-verdict-consequence { margin-top: 12px; background: var(--accent-pattern); border: 1.5px solid var(--text); border-radius: 0; padding: 12px 14px; font-size: 14px; color: var(--text); line-height: 1.55; }
+.b-verdict-conseq-tag { display: block; font-family: var(--font-display); font-size: 12px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 6px; }
 .b-appendix { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
 .b-appendix-divider { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
-.b-appendix-divider::before, .b-appendix-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-.b-appendix-divider span { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); }
-.b-appendix-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
-.b-appendix-label { font-family: var(--font-display); font-size: 13px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.b-appendix-divider::before, .b-appendix-divider::after { content: ''; flex: 1; height: 2px; background: var(--text); }
+.b-appendix-divider span { font-family: var(--font-display); font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); }
+.b-appendix-card { background: var(--surface); border: 2px solid var(--text); border-radius: 0; padding: 14px 16px; }
+.b-appendix-label { font-family: var(--font-display); font-size: 13px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
 .b-reflect-text { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.5; }
 
 
-/* ---- Beat 3: Was sie selbst schreibt (primary-source programme quotes) ---- */
-.b-prog-doc { margin-top: 14px; }
+/* ---- Beat 3: Was sie selbst schreibt (bold: hard-edged) ---- */
+.b-prog-doc { margin-top: 16px; }
 .b-prog-doc:first-child { margin-top: 0; }
-.b-prog-doclabel { display: flex; align-items: baseline; gap: 8px; font-family: var(--font-display); font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--accent-primary); }
-.b-prog-docyear { font-size: 12px; font-weight: 700; color: #FFFFFF; background: var(--accent-primary); padding: 1px 7px; border-radius: 9999px; letter-spacing: 0.04em; }
-.b-prog-quote { background: var(--accent-pattern); border-radius: 10px; padding: 12px 14px; margin: 0 0 10px; }
+.b-prog-doclabel { display: flex; align-items: baseline; gap: 8px; font-family: var(--font-display); font-size: 14px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 3px solid var(--accent-primary); }
+.b-prog-docyear { font-size: 12px; font-weight: 800; color: #FFFFFF; background: var(--accent-primary); padding: 1px 8px; border-radius: 0; letter-spacing: 0.04em; }
+.b-prog-quote { background: var(--accent-pattern); border: 1.5px solid var(--text); border-radius: 0; padding: 12px 14px; margin: 0 0 10px; }
 .b-prog-quote:last-child { margin-bottom: 0; }
 .b-prog-text { font-size: 13.5px; font-weight: 500; color: var(--text); line-height: 1.6; margin: 0; }
-.b-prog-ref { font-size: 11px; font-weight: 600; color: var(--text-muted); margin-top: 8px; line-height: 1.4; }
-.b-prog-source { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--accent-primary); text-decoration: underline; text-underline-offset: 2px; }
+.b-prog-ref { font-size: 11px; font-weight: 700; color: var(--text-muted); margin-top: 8px; line-height: 1.4; }
+.b-prog-source { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 700; color: var(--accent-primary); text-decoration: underline; text-underline-offset: 2px; }
 .b-prog-source:hover { opacity: 0.75; }
 
-
-/* Panel fixes #2,#5,#6,#7 */
-.b-nav-link { font-size: 13px; font-weight: 600; color: var(--accent-primary); text-decoration: none; font-family: 'DM Sans', system-ui, sans-serif; }
-.b-nav-link:hover { text-decoration: underline; }
-.b-pills-wrap { -webkit-mask-image: linear-gradient(to right, transparent 0, #000 18px, #000 calc(100% - 28px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 18px, #000 calc(100% - 28px), transparent 100%); }
-.b-context-toggle { background: none; border: none; width: 100%; font-family: 'DM Sans', system-ui, sans-serif; }
-.b-tldr { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent-primary); border-radius: 0 10px 10px 0; padding: 12px 16px; margin-bottom: 18px; font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.5; }
-.b-tldr-tag { display: block; font-family: 'Outfit', system-ui, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 4px; }
-.b-more-content { overflow: hidden; transition: max-height 0.3s ease; display: flex; flex-direction: column; gap: 14px; }
-.b-more-content.collapsed { max-height: 0; }
-.b-more-btn { -webkit-appearance: none; appearance: none; background: none; border: none; padding: 6px 0 0; font-family: 'Outfit', system-ui, sans-serif; font-size: 13px; font-weight: 600; color: var(--accent-primary); cursor: pointer; text-align: left; }
-.b-more-btn:hover { text-decoration: underline; }
-.b-methods { margin: 28px 0 8px; padding-top: 20px; border-top: 1px solid var(--border); }
-.b-methods-title { font-family: 'Outfit', system-ui, sans-serif; font-size: 17px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 4px; }
-.b-methods-meta { font-size: 12px; color: var(--text-muted); margin: 0 0 14px; }
-.b-methods-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
-.b-methods-block h3 { font-family: 'Outfit', system-ui, sans-serif; font-size: 13px; font-weight: 700; margin: 0 0 4px; }
-.b-methods-block p { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin: 0; }
 </style>
 </head>
 <body>
 <div id="landing" class="screen active">
-  <nav class="b-nav"><div class="b-logo">afd-<span>check</span></div><a href="#methodik" class="b-nav-link">Methodik</a></nav>
+  <nav class="b-nav"><div class="b-logo">afd-<span>check</span></div></nav>
   <div class="b-container">
     <div class="b-landing" style="padding-bottom: 4px;">
-      <p class="b-landing-eyebrow">Faktencheck</p>
+      <span class="b-kicker">Faktencheck. Kein Tracking. Quellen verlinkt.</span>
       <h1>Was die AfD <span>verspricht,</span> und wie sie <span>abstimmt</span></h1>
-      <p class="b-landing-subtitle">Wir wollten wissen: Hält die AfD, was sie verspricht? Wir zeigen Programmzitate, Abstimmungen und Gerichtsentscheidungen, alle mit Originalquellen.</p>
+      <p class="b-landing-subtitle">Wir wollten wissen: Haelt die AfD, was sie verspricht? Keine Meinung, nur Abstimmungen und Originalquellen.</p>
     </div>
     <div class="b-card-list" id="card-grid" role="list"></div>
     <div class="b-stats-bar">
-      <div class="b-stat-item"><div class="b-stat-num" style="color: var(--accent-primary);">10</div><div class="b-stat-label">Themen</div></div>
+      <div class="b-stat-item"><div class="b-stat-num" style="color: var(--accent-primary);">8</div><div class="b-stat-label">Themen</div></div>
       <div class="b-stat-item"><div class="b-stat-num" style="color: var(--accent-secondary);">30+</div><div class="b-stat-label">Quellen</div></div>
-      <div class="b-stat-item"><div class="b-stat-num" style="color: var(--accent-primary);">2</div><div class="b-stat-label">Programme als Primärquelle</div></div>
+      <div class="b-stat-item"><div class="b-stat-num" style="color: var(--accent-vote-no);">0</div><div class="b-stat-label">AfD Ja-Stimmen</div></div>
     </div>
-    <section class="b-methods" id="methodik">
-      <h2 class="b-methods-title">Methodik und Transparenz</h2>
-      <p class="b-methods-meta">Autor: Frederik Metz &middot; Stand: 26. Mai 2026 &middot; Kontakt: frederikmetz@gmail.com</p>
-      <div class="b-methods-block"><h3>Wie wir auswählen</h3><p>Pro Thema zeigen wir verifizierte Zitate aus den beiden offiziellen AfD-Programmen, dazu namentliche Bundestags-Abstimmungen und, wo relevant, Gerichts- und Verfassungsschutz-Entscheidungen. Ausgewählt wurden Vorgänge, die das jeweilige Versprechen direkt betreffen. Wir bilden nicht jede Abstimmung ab.</p></div>
-      <div class="b-methods-block"><h3>Was wir offenlegen</h3><p>Die Auswahl ist nicht vollständig und kann den Eindruck der gezeigten Beispiele verstärken. Eigene AfD-Anträge sind bislang unterrepräsentiert. Beim Thema Patriotismus sind die Belege Gerichts- und Verfassungsschutz-Vorgänge, keine Abstimmungen. Im Grundsatzprogramm 2016 fehlt ein Rentenkonzept, Pflege ist dort nur als Familienpflege behandelt.</p></div>
-      <div class="b-methods-block"><h3>Quellenlage</h3><p>Alle Programmzitate sind wörtlich aus den offiziellen PDFs auf afd.de übernommen, mit Seitenangabe. Abstimmungs- und Faktenquellen sind pro Thema verlinkt. Kein Tracking, keine Cookies.</p></div>
-    </section>
   </div>
 </div>
 <div id="cascade" class="screen">
@@ -284,11 +257,11 @@ footer .b-footer-dot { margin: 0 6px; opacity: 0.4; }
       <div class="b-cascade-header"><p class="b-cascade-header-label" id="cascade-topic-label"></p><div class="b-speech-bubble" id="cascade-statement"></div></div>
       <div class="b-evidence-stack" id="cascade-content"></div>
     </div>
-    <div class="b-next-wrap" id="next-topic-wrap"></div>
+    <div class="b-next-wrap" id="next-topic-wrap"><button class="b-next-btn" onclick="showNextTopic()">Naechstes Thema &rarr;</button></div>
   </div>
 </div>
 <footer id="site-footer">
-  <span>Alle Quellen verlinkt</span><span class="b-footer-dot">&#183;</span><span>Kein Tracking</span><span class="b-footer-dot">&#183;</span><span>Kein Cookie</span><span class="b-footer-dot">&#183;</span><a href="impressum.html" style="color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px;">Impressum</a>
+  <span>Alle Quellen verlinkt</span><span class="b-footer-dot">&#183;</span><span>Kein Tracking</span><span class="b-footer-dot">&#183;</span><span>Kein Cookie</span><span class="b-footer-dot">&#183;</span><a href="../impressum.html" style="color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px;">Impressum</a>
 </footer>
 <script>
 window.AFD_GUIDE_DATA = [
@@ -667,8 +640,7 @@ window.AFD_GUIDE_DATA = [
     icon: "🇩🇪",
     hook: "Du willst stolz auf dein Land sein. Ohne dass jemand dich gleich Nazi nennt. Kann man verstehen.",
     promise: "Die AfD sagt: Wir sind die echten Patrioten. Alle anderen schämen sich für Deutschland.",
-    patternSummary: "Die gesamte AfD wurde 2025 vom Verfassungsschutz als gesichert rechtsextrem eingestuft (die Partei klagt dagegen); ein Parteiführer wurde wegen einer SA-Parole verurteilt.",
-    evidenceLabel: "Was Gerichte und der Verfassungsschutz feststellen",
+    patternSummary: "Ein AfD-Landesverband ist vom Verfassungsschutz als gesichert rechtsextrem eingestuft; ein Parteiführer wurde wegen einer SA-Parole verurteilt.",
     evidence: [
       {
         vote: "Höcke: SA-Parole (BGH-Urteil)",
@@ -1278,7 +1250,7 @@ function showCascade(index) {
   document.getElementById('landing').classList.remove('active');
   document.getElementById('cascade').classList.add('active');
   document.getElementById('site-footer').style.display = 'none';
-  document.getElementById('cascade-topic-label').textContent = 'Thema ' + (index + 1) + ' von ' + GUIDE_DATA.length + ': ' + topic.shortLabel;
+  document.getElementById('cascade-topic-label').textContent = 'Thema: ' + topic.shortLabel;
   document.getElementById('cascade-statement').textContent = '„' + topic.statement + '“';
   document.getElementById('topic-pills').innerHTML = GUIDE_DATA.map(function(t, i) {
     var cls = i === index ? 'b-topic-pill active' : 'b-topic-pill';
@@ -1330,21 +1302,15 @@ function showCascade(index) {
         items +
       '</div>';
     }
-    var manifestoHtml = quoteBlock('Wahlprogramm', '2025', topic.manifesto);
-    var platformHtml = quoteBlock('Grundsatzprogramm', '2016', topic.platform);
-    var progBody = manifestoHtml;
-    if (platformHtml) {
-      progBody += manifestoHtml
-        ? '<div class="b-more-content collapsed">' + platformHtml + '</div><button type="button" class="b-more-btn" aria-expanded="false" onclick="toggleMore(this)">Auch im Grundsatzprogramm 2016 &#9658;</button>'
-        : platformHtml;
-    }
+    var progBody =
+      quoteBlock('Wahlprogramm', '2025', topic.manifesto) +
+      quoteBlock('Grundsatzprogramm', '2016', topic.platform);
     if (progBody) { beats.push(step(3, 'Was sie selbst schreibt', progBody)); }
   }
 
-  // BEAT 4: DIE REALITAET / BELEGE (evidence votes, court/VS items, or legacy betrayal)
-  var evidenceLabel = topic.evidenceLabel || 'Die Realität, so stimmt sie ab';
+  // BEAT 4: DIE REALITAET, SO STIMMT SIE AB (evidence votes, or legacy betrayal)
   if (topic.evidence && topic.evidence.length) {
-    var evidenceArr = topic.evidence.map(function(ev, i) {
+    var evidenceItems = topic.evidence.map(function(ev, i) {
       var linkHtml = ev.url ? '<a href="' + ev.url + '" target="_blank" rel="noopener" class="b-vote-item-link">Quelle &#8599;</a>' : '';
       var cduHtml = '';
       if (ev.cdu) {
@@ -1354,13 +1320,10 @@ function showCascade(index) {
         cduHtml = '<div class="b-vote-cdu' + (isDivergent ? ' b-vote-divergent' : '') + '">' + (isDivergent ? '&#x21D4; ' : '') + ev.cdu + '</div>';
       }
       return '<div class="b-vote-item"><div class="b-vote-item-header"><div class="b-vote-num">' + (i + 1) + '</div><div class="b-vote-item-title">' + ev.vote + '</div><div class="b-vote-item-year">' + ev.year + '</div></div><p class="b-vote-item-desc">' + ev.description + '</p><div class="b-vote-item-result"><div class="b-vote-item-afd">AfD: ' + ev.afd + '</div>' + cduHtml + '<div class="b-vote-item-others">Andere: ' + ev.others + '</div></div>' + linkHtml + '</div>';
-    });
-    var evHead = evidenceArr.slice(0, 2).join('');
-    var evRest = evidenceArr.slice(2).join('');
-    var evMore = evRest ? '<div class="b-more-content collapsed">' + evRest + '</div><button type="button" class="b-more-btn" aria-expanded="false" onclick="toggleMore(this)">+ ' + (evidenceArr.length - 2) + ' weitere Belege</button>' : '';
-    beats.push(step(4, evidenceLabel, '<div class="b-votes-wrap">' + evHead + evMore + '</div>'));
+    }).join('');
+    beats.push(step(4, 'Die Realität, so stimmt sie ab', '<div class="b-votes-wrap">' + evidenceItems + '</div>'));
   } else if (topic.betrayal) {
-    beats.push(step(4, evidenceLabel, '<p class="b-step-body">' + topic.betrayal + '</p>'));
+    beats.push(step(4, 'Die Realität, so stimmt sie ab', '<p class="b-step-body">' + topic.betrayal + '</p>'));
   }
 
   // BEAT 4: FAIRERWEISE, WO SIE RECHT HAT (afdAgreed)
@@ -1392,7 +1355,12 @@ function showCascade(index) {
     beats.push(step(6, 'Ihr Einwand und die Antwort', pairBody));
   }
 
-  // (Verdict beat removed; neutral patternSummary now leads as a "Kurz gesagt" tl;dr at the top, Panel-Fix #6.)
+  // BEAT 6: DAS URTEIL (patternSummary + pattern + consequence)
+  var verdictBody = '';
+  if (topic.patternSummary) { verdictBody += '<p class="b-verdict-lead">' + topic.patternSummary + '</p>'; }
+  if (topic.pattern) { verdictBody += '<p class="b-step-body">' + topic.pattern + '</p>'; }
+  if (topic.consequence) { verdictBody += '<div class="b-verdict-consequence"><span class="b-verdict-conseq-tag">Für dich</span>' + topic.consequence + '</div>'; }
+  if (verdictBody) { beats.push(step(7, 'Zusammengefasst', verdictBody)); }
 
   // ---- APPENDIX (visually demoted, after the story) ----
   var appendix = [];
@@ -1402,7 +1370,7 @@ function showCascade(index) {
     var factRows = topic.contextFacts.map(function(f) {
       return '<div class="b-context-row"><div class="b-context-label">' + f.label + '</div><div class="b-context-value">' + f.value + '</div>' + (f.context ? '<div class="b-context-detail">' + f.context + '</div>' : '') + '</div>';
     }).join('');
-    appendix.push('<div class="b-appendix-card"><div class="b-context-section"><button type="button" class="b-context-toggle" aria-expanded="false" onclick="toggleContext(this)">Die Zahlen im Kontext<span class="b-context-arrow" aria-hidden="true">&#9658;</span></button><div class="b-context-content collapsed" style="margin-top:0;"><div style="background: rgba(255,248,240,0.7); border-radius: 8px; padding: 2px 0; margin-top: 8px;">' + factRows + '</div></div></div></div>');
+    appendix.push('<div class="b-appendix-card"><div class="b-context-section"><div class="b-context-toggle" onclick="toggleContext(this)">Die Zahlen im Kontext<span class="b-context-arrow" aria-hidden="true">&#9658;</span></div><div class="b-context-content collapsed" style="margin-top:0;"><div style="background: rgba(255,248,240,0.7); border-radius: 8px; padding: 2px 0; margin-top: 8px;">' + factRows + '</div></div></div></div>');
   }
 
   // Quellen
@@ -1418,8 +1386,7 @@ function showCascade(index) {
     appendix.push('<div class="b-appendix-card b-reflect-card"><div class="b-appendix-label">Frag dich selbst</div><p class="b-reflect-text">' + topic.question + '</p></div>');
   }
 
-  var tldr = topic.patternSummary ? '<div class="b-tldr"><span class="b-tldr-tag">Kurz gesagt</span>' + topic.patternSummary + '</div>' : '';
-  var html = tldr + '<div class="b-story">' + beats.join('') + '</div>';
+  var html = '<div class="b-story">' + beats.join('') + '</div>';
   if (appendix.length) {
     html += '<div class="b-appendix"><div class="b-appendix-divider"><span>Hintergrund</span></div>' + appendix.join('') + '</div>';
   }
@@ -1428,14 +1395,10 @@ function showCascade(index) {
   if (window.innerWidth > 640) {
     var contextContent = document.querySelector('.b-context-content');
     var contextArrow = document.querySelector('.b-context-arrow');
-    var contextToggle = document.querySelector('.b-context-toggle');
     if (contextContent) { contextContent.classList.remove('collapsed'); contextContent.style.maxHeight = contextContent.scrollHeight + 'px'; }
     if (contextArrow) contextArrow.classList.add('open');
-    if (contextToggle) contextToggle.setAttribute('aria-expanded', 'true');
   }
-  document.getElementById('next-topic-wrap').innerHTML = index < GUIDE_DATA.length - 1
-    ? '<button class="b-next-btn" onclick="showNextTopic()">Nächstes Thema &rarr;</button>'
-    : '<button class="b-next-btn" onclick="showLanding()">&larr; Zurück zur Übersicht</button>';
+  document.getElementById('next-topic-wrap').style.display = index < GUIDE_DATA.length - 1 ? '' : 'none';
   window.scrollTo(0, 0);
 }
 function toggleCounter(toggleEl) {
@@ -1449,16 +1412,8 @@ function toggleContext(toggleEl) {
   var content = toggleEl.nextElementSibling;
   var arrow = toggleEl.querySelector('.b-context-arrow');
   var isCollapsed = content.classList.contains('collapsed');
-  toggleEl.setAttribute('aria-expanded', isCollapsed ? 'true' : 'false');
   if (isCollapsed) { content.classList.remove('collapsed'); content.style.maxHeight = content.scrollHeight + 'px'; arrow.classList.add('open'); }
   else { content.style.maxHeight = content.scrollHeight + 'px'; content.getBoundingClientRect(); content.style.maxHeight = '0'; content.classList.add('collapsed'); arrow.classList.remove('open'); }
-}
-function toggleMore(btn) {
-  var content = btn.previousElementSibling;
-  var isCollapsed = content.classList.contains('collapsed');
-  btn.setAttribute('aria-expanded', isCollapsed ? 'true' : 'false');
-  if (isCollapsed) { content.classList.remove('collapsed'); content.style.maxHeight = content.scrollHeight + 'px'; btn.classList.add('open'); }
-  else { content.style.maxHeight = content.scrollHeight + 'px'; content.getBoundingClientRect(); content.style.maxHeight = '0'; content.classList.add('collapsed'); btn.classList.remove('open'); }
 }
 function showNextTopic() { if (currentIndex < GUIDE_DATA.length - 1) { showCascade(currentIndex + 1); } }
 renderLanding();

@@ -1,0 +1,275 @@
+{
+  "_meta": {
+    "description": "Verbatim quotes from the AfD's own official federal programmes, keyed by afd-check topic id. Every quote was located and copied directly from the official PDF on afd.de, with native German umlauts (ü ö ä Ü Ö Ä ß) exactly as printed. Hyphenation introduced by PDF line-breaks has been rejoined; no wording was changed, added, or paraphrased.",
+    "sources": {
+      "manifesto": {
+        "title": "Programm der Alternative für Deutschland für die Wahl zum 21. Deutschen Bundestag (Bundestagswahlprogramm 2025)",
+        "edition": "Beschlossen auf dem 16. Bundesparteitag in Riesa, 11.–12. Januar 2025",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      },
+      "platform": {
+        "title": "Programm für Deutschland. Das Grundsatzprogramm der Alternative für Deutschland",
+        "edition": "Beschlossen auf dem Bundesparteitag in Stuttgart, 30. April – 1. Mai 2016",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      }
+    }
+  },
+  "migration": {
+    "manifesto": [
+      {
+        "quote": "Die AfD wird eine deutliche Kehrtwende in der bisherigen Migrationspolitik einleiten und die Staatsgrenzen wieder kontrollieren. Die Freizügigkeitsregelungen innerhalb der EU bleiben davon unberührt. Einreisen darf künftig nur noch, wem dies erlaubt ist. [...] Wer kein Bleiberecht besitzt und sich illegal in Deutschland aufhält, wird abgeschoben.",
+        "page": "S. 100, Kapitel „Asyl- und Migrationspolitik“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      },
+      {
+        "quote": "Unser Maßnahmenkatalog zur Umkehr dieses migrationspolitischen Staatsversagens heißt Remigration und umfasst folgende Maßnahmen, die bereits heute der geltenden Rechtslage entsprechen oder sich jedenfalls mittels verfassungskonformer Gesetzesänderungen umsetzen lassen: Wir werden vollziehbar ausreisepflichtige Personen konsequent abschieben und bestehende Fehlanreize (Bürgergeld, Bleiberechte für Ausreisepflichtige, Turboeinbürgerung) abstellen.",
+        "page": "S. 101, Kapitel „Asyl- und Migrationspolitik“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      }
+    ],
+    "platform": [
+      {
+        "quote": "Die aktuelle deutsche und europäische Asyl- und Flüchtlingspolitik kann deshalb so nicht weitergeführt werden. Die unzutreffende Bezeichnung „Flüchtling“ für fast alle Menschen, die irregulär nach Deutschland einreisen, um hier dauerhaft zu bleiben, ist Ausdruck dieser verfehlten Politik.",
+        "page": "S. 59, Abschnitt 9.1.1 „Asylzuwanderung - für einen Paradigmenwechsel“",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      }
+    ],
+    "notes": "Migration is a core, extensively developed topic in both programmes. The 2025 manifesto introduces the term 'Remigration' as a named policy programme (S. 101); the 2016 platform frames it as a demanded 'Paradigmenwechsel' in asylum policy (Kapitel 9)."
+  },
+  "establishment": {
+    "manifesto": [
+      {
+        "quote": "Die AfD will die derzeit zur Erhebung ausgesetzte Vermögensteuer sowie die Erbschaftssteuer abschaffen. Beide sind Substanzsteuern, d. h. sie werden unabhängig von der wirtschaftlichen Leistungsfähigkeit des Steuerbürgers erhoben.",
+        "page": "S. 60, Kapitel „Finanzen und Steuern“, Abschnitt „Vermögen- und Erbschaftsteuer abschaffen“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      }
+    ],
+    "platform": [
+      {
+        "quote": "Es hat sich eine politische Klasse von Berufspolitikern herausgebildet, deren vordringliches Interesse ihrer Macht, ihrem Status und ihrem materiellen Wohlergehen gilt. Es handelt sich um ein politisches Kartell, das die Schalthebel der staatlichen Macht, soweit diese nicht an die EU übertragen worden ist, die gesamte politische Bildung und große Teile der Versorgung der Bevölkerung mit politischen Informationen in Händen hat.",
+        "page": "S. 8, Kapitel „Demokratie und Grundwerte“",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      },
+      {
+        "quote": "Die AfD will die derzeit zur Erhebung ausgesetzte Vermögensteuer und die Erbschaftsteuer abschaffen. Beide sind Substanzsteuern, d.h. sie werden unabhängig von der wirtschaftlichen Leistungsfähigkeit des Steuerbürgers erhoben.",
+        "page": "S. 75, Abschnitt 11.4 „Vermögen- und Erbschaftsteuer abschaffen, Gewerbesteuer überprüfen“",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      }
+    ],
+    "notes": "The anti-elite framing ('politische Klasse', 'politisches Kartell') is verbatim in the 2016 platform (S. 8). The Erbschaftsteuer-abolition pledge appears in BOTH documents almost identically (2016 S. 75 / 2025 S. 60), directly matching the Bundestag-vote evidence the tool cites."
+  },
+  "energy": {
+    "manifesto": [
+      {
+        "quote": "Der von allen etablierten Parteien betriebene Ausstieg aus der Kern- und Kohleenergie hat diese Situation verschärft. [...] Keine der sogenannten erneuerbaren Energien oder der angestrebten neuen Anwendungen wie Wärmepumpen oder Elektromobilität können ohne Subventionen am Markt bestehen",
+        "page": "S. 40, Kapitel „Energiepolitik“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      },
+      {
+        "quote": "Den geplanten Ausstieg aus der Braunkohleverstromung wird es mit der AfD nicht geben. Neben dem kurzfristig notwendigen Ausbau von Kohlekraftwerken planen wir den Wiedereinstieg in die Kernenergie.",
+        "page": "S. 41, Kapitel „Energiepolitik“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      }
+    ],
+    "platform": [
+      {
+        "quote": "Das Klima wandelt sich, solange die Erde existiert. Die Klimaschutzpolitik beruht auf hypothetischen Klima-Modellen basierend auf computergestützten Simulationen des IPCC („Weltklimarat“). [...] Kohlendioxid (CO2) ist kein Schadstoff, sondern ein unverzichtbarer Bestandteil allen Lebens.",
+        "page": "S. 79, Abschnitt 12.1 „Klimaschutzpolitik: Irrweg beenden, Umwelt schützen“",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      },
+      {
+        "quote": "Das EEG und die Energiewende gefährden die Stromversorgung. Sie treiben technisch bedingt den Strompreis hoch.",
+        "page": "S. 80, Abschnitt 12.2 „Das Erneuerbare-Energien-Gesetz ist nicht reformierbar“",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      }
+    ],
+    "notes": "Both programmes reject the energy transition. 2025 calls explicitly for re-entry into nuclear and lignite power (S. 41); 2016 denies CO2 is a pollutant and demands the EEG be abolished without replacement (Kapitel 12)."
+  },
+  "corruption": {
+    "manifesto": [
+      {
+        "quote": "Die ungebrochene Tendenz zum Berufspolitikertum hat der Monopolisierung der Macht Vorschub geleistet und die unübersehbare Kluft zwischen Wählern und Gewählten stetig vergrößert. Vetternwirtschaft, Filz, korruptionsfördernde Strukturen und Lobbyismus sind die Folge.",
+        "page": "S. 137, Kapitel „Demokratie und Rechtsstaat“, Abschnitt „Berufspolitikertum: Mandats- und Amtszeiten begrenzen“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      },
+      {
+        "quote": "Alle Entscheidungen in eigener Sache sind der unbeschränkten Kontrolle der Rechnungshöfe zu unterstellen. Öffentlichkeit ist herzustellen. Unabdingbar ist auch eine restriktive und Korruption vermeidende Neuordnung der Spendenregelungen.",
+        "page": "S. 136, Abschnitt „Die Selbstbedienung der Parteien beenden“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      }
+    ],
+    "platform": [
+      {
+        "quote": "Heimlicher Souverän ist eine kleine, machtvolle politische Führungsgruppe innerhalb der Parteien. Sie hat die Fehlentwicklungen der letzten Jahrzehnte zu verantworten.",
+        "page": "S. 8, Kapitel „Demokratie und Grundwerte“",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      }
+    ],
+    "notes": "Both programmes attack the other parties as a self-serving cartel. 2016 uses 'Heimlicher Souverän / politisches Kartell' (S. 8); 2025 names 'Vetternwirtschaft, Filz, korruptionsfördernde Strukturen und Lobbyismus' and proposes term limits and Rechnungshof oversight (S. 136-137). Note: there is overlap with the 'establishment' topic; the establishment quotes lean on taxes/'kleiner Mann', these lean on cronyism/lobbyism."
+  },
+  "security": {
+    "manifesto": [
+      {
+        "quote": "Eine der Grundvoraussetzungen für die innere Sicherheit in Deutschland sind kontrollierbare Grenzen. [...] Linksradikale Gewaltexzesse wie von der Antifa sowie zunehmende Gewaltkriminalität durch Clans, Banden und ausländische Mafia haben die innere Sicherheit erodieren lassen.",
+        "page": "S. 116, Kapitel „Innere Sicherheit“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      },
+      {
+        "quote": "Mit den Änderungen des Waffengesetzes aus dem Oktober 2024 werden nun alle Bürger kriminalisiert, die z. B. ein kleines Obst- oder Taschenmesser mitführen. [...] Statt Legalwaffenbesitzer und Bürger unter Generalverdacht zu stellen, ist dem illegalen Waffenbesitz und -handel ein Riegel vorzuschieben.",
+        "page": "S. 120, Abschnitt „Waffenrecht überarbeiten“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      }
+    ],
+    "platform": [
+      {
+        "quote": "Der immer mehr um sich greifenden Aggressivität gegen Amtspersonen im weiteren Sinne (Polizeibeamte, Feuerwehrangehörige und sonstige Rettungskräfte) ist dadurch zu begegnen, dass tätliche Angriffe auf diesen Personenkreis mit einer Freiheitsstrafe von mindestens drei Monaten zu ahnden sind.",
+        "page": "S. 26, Abschnitt 3.3 „Angriffe auf Amtspersonen härter bestrafen“",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      }
+    ],
+    "notes": "Both demand harder enforcement. 2016 calls for minimum prison terms for attacks on officials (3.3). Note the tension the tool can highlight: the 2025 manifesto criticises the Oct-2024 Waffengesetz (knife rules) as criminalising ordinary citizens (S. 120), consistent with the AfD vote against the post-Solingen Sicherheitspaket."
+  },
+  "patriotism": {
+    "manifesto": [
+      {
+        "quote": "Die deutsche Leitkultur beschreibt unseren Wertekonsens, der für unser Volk identitätsbildend ist und uns von anderen unterscheidet. [...] Die gemeinschaftsstiftende Wirkung der deutschen Kultur ist Fundament unseres Grundgesetzes und kann nicht durch einen Verfassungspatriotismus ersetzt werden.",
+        "page": "S. 170, Kapitel „Kultur und Medienpolitik“, Abschnitt „Deutsche Leitkultur statt Multikulturalismus“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      },
+      {
+        "quote": "Jede Zensur von Meinungsäußerungen stellt einen Angriff auf das Grundrecht der Meinungsfreiheit dar. [...] Selbst ernannte „Faktenprüfer“ und Meinungswächter dürfen keine staatliche Finanzierung erhalten.",
+        "page": "S. 131, Abschnitt „Grundrecht der Meinungsfreiheit – keine Zensur in der öffentlichen Debatte“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      }
+    ],
+    "platform": [
+      {
+        "quote": "Die AfD fordert daher das selbstverständliche Recht auf freie Rede für freie Bürger wieder ein. Niemand darf Angst haben, seine Meinung zur Einwanderungs- und Asylpolitik zu sagen.",
+        "page": "S. 58, Kapitel 9 „Einwanderung, Integration und Asyl“ (Einleitung)",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      },
+      {
+        "quote": "Als zentrales Element deutscher Identität muss die deutsche Sprache dem Vorbild vieler anderer Länder folgend als Staatssprache im Grundgesetz festgeschrieben werden.",
+        "page": "S. 47, Abschnitt 7.3 „Die deutsche Sprache als Zentrum unserer Identität“",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      }
+    ],
+    "notes": "The 'Patriot in die rechte Ecke gestellt' claim maps to two AfD themes: (a) German Leitkultur/identity (2025 S. 170, 2016 7.x), and (b) free speech / being silenced (2025 S. 131, 2016 S. 58). The 2016 free-speech sentence is from the asylum chapter intro and was cut at a column break, the 2016 free-speech quote is taken verbatim in full from the asylum chapter introduction."
+  },
+  "eu": {
+    "manifesto": [
+      {
+        "quote": "Die EU und die sie tragenden Eliten haben sich jedoch mit den Verträgen von Maastricht und Lissabon von dieser Ursprungsidee verabschiedet. [...] Wir erleben inzwischen eine von Brüssel ausgehende illegitime Entdemokratisierung, Zentralisierung, Überregulierung und Planwirtschaft.",
+        "page": "S. 139, Kapitel „Von der EU zu einem Bund europäischer Nationen“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      }
+    ],
+    "platform": [
+      {
+        "quote": "Wir fordern im Gegenteil das Subsidiaritätsprinzip konsequent beizubehalten und Kompetenzen an die Nationalstaaten zurückzugeben. Die Vision eines europäischen Großstaates läuft zwangsläufig darauf hinaus, dass die EU-Einzelstaaten, mit den sie tragenden Völkern, ihre nationale Souveränität verlieren.",
+        "page": "S. 17, Abschnitt 2.1 „Ein Europa der Vaterländer“",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      }
+    ],
+    "notes": "Both programmes share the 'Europa der Vaterländer' framing and demand competences be returned to nation states. 2025 escalates to accusing Brüssel of 'illegitime Entdemokratisierung' (S. 139); 2016 invokes the Subsidiaritätsprinzip (2.1)."
+  },
+  "gender": {
+    "manifesto": [
+      {
+        "quote": "Durch Trans-Gender-Hype, Frühsexualisierung und ein als Kinderrechte-Aufklärung getarntes Ausspielen der Jugendlichen und Kinder gegen ihre Eltern wird der Zusammenhalt in den Familien gefährdet.",
+        "page": "S. 145, Kapitel „Familie und Demografie“, Abschnitt „Starke Familien für eine starke Gesellschaft“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      },
+      {
+        "quote": "Es darf keine Indoktrination von Kindern und Jugendlichen durch Trans-Kult, Frühsexualisierung und Genderideologie geben. Jede staatliche Förderung dafür muss eingestellt werden. [...] Das Selbstbestimmungsgesetz, welches am 01. November 2024 das Transsexuellengesetz von 1980 abgelöst hat, ist vollumfänglich zurückzunehmen.",
+        "page": "S. 151, Kapitel „Familie und Demografie“, „Forderungen der AfD“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      }
+    ],
+    "platform": [
+      {
+        "quote": "Viele der im Bereich des „Gender-Mainstreamings” vertretenen Ansichten widersprechen den Ergebnissen der Naturwissenschaft, der Entwicklungspsychologie und der Lebenserfahrung. Wir wenden uns daher gegen jede staatliche Förderung von „Gender-Studies“.",
+        "page": "S. 55, Abschnitt 8.3 „Nein zu „Gender-Mainstreaming“ und Frühsexualisierung“ (Kapitel „Schule, Hochschule und Forschung“)",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      },
+      {
+        "quote": "Das klassische Rollenverständnis von Mann und Frau soll durch staatlich geförderte Umerziehungsprogramme in Kindergärten und Schulen systematisch „korrigiert“ werden. Die AfD lehnt diese Geschlechterpädagogik als Eingriff in die natürliche Entwicklung unserer Kinder und in das vom Grundgesetz garantierte Elternrecht auf Erziehung ab.",
+        "page": "S. 55, Abschnitt 8.3 (Kapitel „Schule, Hochschule und Forschung“)",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      }
+    ],
+    "notes": "Both programmes oppose 'Gender-Ideologie'. 2016 rejects state funding for Gender-Studies and 'Geschlechterpädagogik' (Abschnitt 8.3, S. 55); 2025 escalates with demands to ban puberty blockers for minors and fully repeal the Selbstbestimmungsgesetz (S. 151). Both 2016 quotes are taken verbatim in full to their sentence boundaries."
+  },
+  "rente": {
+    "manifesto": [
+      {
+        "quote": "Das deutsche Rentenniveau ist mit nur 53 % des letzten Nettogehalts nach Eurostat eines der niedrigsten in Westeuropa. Dieses Niveau bedeutet für einen großen Teil der Rentner bittere Altersarmut.",
+        "page": "S. 18, Kapitel „Soziale Marktwirtschaft und Gesundheit“, Abschnitt „Die desolate Situation im deutschen Rentensystem“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      },
+      {
+        "quote": "Wir wollen der Rentenversicherung mehr Beitragszahler zuführen, die Verrentung flexibler und gerechter gestalten und Anreize für eine freiwillige Verlängerung der Lebensarbeitszeit setzen, indem wir: [...] Politiker in die gesetzliche Rentenversicherung einbeziehen, ein flexibles Renteneintrittsalter, abschlagsfrei nach 45 beitragsberechtigten Arbeitsjahren, ermöglichen,",
+        "page": "S. 18, Abschnitt „Unser Rentenkonzept gegen Altersarmut“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      }
+    ],
+    "platform": [
+      {
+        "quote": "Wer durch die Erziehung von Kindern im Beruf zurückstecken musste, ist im Alter bei der Rente benachteiligt. Wir wollen daher die Kinderzahl und die Erziehungsleistung stärker als bisher bei der Rente berücksichtigen.",
+        "page": "S. 37, Abschnitt 5.4.3 „Kinder und Erziehungsleistung bei der Rente berücksichtigen“",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      }
+    ],
+    "notes": "GAP / asymmetry: The 2025 manifesto contains a full pension chapter (Österreich-comparison, including Beamte/Politiker into the system, flexible retirement, 'Junior-Spardepot', S. 18-20). The 2016 Grundsatzprogramm has NO comprehensive old-age pension reform concept; 'Rente' appears only narrowly: crediting child-rearing toward pensions (5.4.3, S. 37) and reforming MPs' pension privileges (1.6.1, S. 14). This is a genuine programmatic gap in the 2016 platform worth flagging. (The 2016 quote is a margin pull-quote on S. 37; verb 'zurückstecken' verified against the PDF.)"
+  },
+  "pflege": {
+    "manifesto": [
+      {
+        "quote": "In Deutschland sind die Beiträge für die Kranken- und Pflegeversicherung mit insgesamt 21,1 bis 21,7 % etwa doppelt so hoch wie in Österreich oder der Schweiz, ohne dass dies durch entsprechende höhere Leistungen gerechtfertigt wäre.",
+        "page": "S. 21, Abschnitt „Unser Konzept einer zukunftssicheren Kranken- und Pflegeversicherung“",
+        "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+        "date": "2025"
+      }
+    ],
+    "platform": [
+      {
+        "quote": "Die AfD will Familienarbeit in der Pflege als Beitrag für das Gemeinwohl gesellschaftlich anerkennen. Die individuelle häusliche Pflege muss zu einem Hauptbestandteil der sozialen Sicherungssysteme werden.",
+        "page": "S. 38, Abschnitt 5.4.4 „Pflege durch Angehörige aufwerten“",
+        "url": "https://www.afd.de/wp-content/uploads/2017/01/2016-06-27_afd-grundsatzprogramm_web-version.pdf",
+        "date": "2016"
+      }
+    ],
+    "notes": "Partial coverage in 2016. The 2025 manifesto proposes merging Kranken- and Pflegeversicherung and cites concrete contribution rates (S. 21-22). The 2016 platform addresses Pflege only via home/family care ('Pflege durch Angehörige', 5.4.4, S. 38); it has no broad health-system or hospital-financing concept. The afd-check 'Pflege' statement ('Im Gesundheitssystem läuft alles schief') is best matched by the 2025 health chapter; the 2016 platform is thin on the wider Gesundheitssystem."
+  }
+}

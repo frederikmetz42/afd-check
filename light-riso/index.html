@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+  Style Picker shell (reusable template)
+  A "CMS-like" visualiser: switch one piece of content between several design directions,
+  each a standalone HTML file loaded in an iframe (so styles never bleed across).
+
+  TO USE: edit the CONFIG block in the <script> below.
+  - STYLES: one entry per direction { name, desc, file }. 2 to 9 entries.
+  - ENABLE_THEMES: true adds a global Light/Dark switch that appends ?theme=light|dark
+    to the iframe URL (each style file must read that param). false hides it.
+  Keyboard: 1-9 switch style, D toggles theme (when enabled).
+  No em dashes anywhere. No external dependencies.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style Picker</title>
+<style>
+  :root { --bar:#fff; --line:#e6e6e9; --ink:#1a1a1f; --muted:#6b6b76; --hover:#f3f3f5; --active:#111114; --active-ink:#fff; --radius:8px; --dot:#C2410C; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:#d9d9dd; }
+  body { font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; display:flex; flex-direction:column; height:100vh; color:var(--ink); }
+  header { background:var(--bar); border-bottom:1px solid var(--line); padding:10px 16px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; flex:none; }
+  .brand { font-weight:700; font-size:14px; letter-spacing:-0.01em; display:flex; align-items:center; gap:8px; white-space:nowrap; }
+  .brand .dot { width:9px; height:9px; border-radius:999px; background:var(--dot); }
+  .brand small { font-weight:500; color:var(--muted); }
+  nav { display:flex; gap:6px; flex-wrap:wrap; flex:1; }
+  .tab { appearance:none; border:1px solid var(--line); background:var(--bar); border-radius:var(--radius); padding:7px 12px; cursor:pointer; text-align:left; line-height:1.2; color:var(--ink); transition:background .14s,border-color .14s,color .14s; }
+  .tab:hover { background:var(--hover); }
+  .tab .t-name { display:block; font-size:13px; font-weight:600; }
+  .tab .t-desc { display:block; font-size:11px; color:var(--muted); margin-top:1px; }
+  .tab[aria-selected="true"] { background:var(--active); border-color:var(--active); }
+  .tab[aria-selected="true"] .t-name { color:var(--active-ink); }
+  .tab[aria-selected="true"] .t-desc { color:rgba(255,255,255,.65); }
+  .tab .k { display:inline-block; font-size:10px; font-weight:700; color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:0 4px; margin-right:6px; vertical-align:1px; }
+  .tab[aria-selected="true"] .k { color:rgba(255,255,255,.75); border-color:rgba(255,255,255,.3); }
+  .theme { display:flex; align-items:center; gap:8px; white-space:nowrap; }
+  .theme[hidden] { display:none; }
+  .theme .lbl { font-size:11px; color:var(--muted); }
+  .switch { appearance:none; border:1px solid var(--line); background:var(--bar); border-radius:999px; padding:6px 12px; font-size:12px; font-weight:600; color:var(--ink); cursor:pointer; }
+  .switch:hover { background:var(--hover); }
+  .open { font-size:12px; font-weight:600; color:var(--muted); text-decoration:none; white-space:nowrap; padding:7px 10px; border:1px solid var(--line); border-radius:var(--radius); }
+  .open:hover { background:var(--hover); color:var(--ink); }
+  .stage { flex:1; position:relative; min-height:0; }
+  iframe { position:absolute; inset:0; width:100%; height:100%; border:0; background:#fff; }
+</style>
+</head>
+<body>
+  <header>
+    <span class="brand"><span class="dot"></span><span id="brandName">Style Picker</span> <small id="brandSub"></small></span>
+    <nav role="tablist" aria-label="Design styles" id="nav"></nav>
+    <span class="theme" id="themeWrap" hidden>
+      <span class="lbl" id="themeLbl">Light</span>
+      <button class="switch" id="themeBtn">Switch to Dark</button>
+    </span>
+    <a class="open" id="openBtn" href="#" target="_blank" rel="noopener">Open &#8599;</a>
+  </header>
+  <div class="stage"><iframe id="frame" title="Selected style preview"></iframe></div>
+<script>
+  /* ===================== CONFIG: edit this ===================== */
+  const TITLE = "afd-check, light riso";  // shown top-left
+  const SUBTITLE = "3 light variants, one terracotta or red accent each";
+  const ENABLE_THEMES = false;            // all variants are light, no theme switch
+  const STYLES = [
+    { name: "Subtle", desc: "Production page, Barlow Condensed two-tone hero only", file: "1-subtle.html" },
+    { name: "Medium", desc: "Adds rotated kicker stamp, hero dot-grain, condensed labels", file: "2-medium.html" },
+    { name: "Bold", desc: "Full light-riso, larger title, hard-edged accents, riso red", file: "3-bold.html" }
+  ];
+  /* =========================================================== */
+
+  let theme = "light", current = 0;
+  document.getElementById("brandName").textContent = TITLE;
+  document.getElementById("brandSub").textContent = SUBTITLE;
+  const nav = document.getElementById("nav");
+  const frame = document.getElementById("frame");
+  const openBtn = document.getElementById("openBtn");
+  const themeWrap = document.getElementById("themeWrap");
+  const themeBtn = document.getElementById("themeBtn");
+  const themeLbl = document.getElementById("themeLbl");
+
+  // Build tabs with safe DOM methods (no innerHTML).
+  STYLES.forEach((s, i) => {
+    const b = document.createElement("button");
+    b.className = "tab"; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", String(i === 0));
+    const name = document.createElement("span"); name.className = "t-name";
+    const k = document.createElement("span"); k.className = "k"; k.textContent = String(i + 1);
+    name.appendChild(k); name.appendChild(document.createTextNode(s.name));
+    const desc = document.createElement("span"); desc.className = "t-desc"; desc.textContent = s.desc;
+    b.appendChild(name); b.appendChild(desc);
+    b.addEventListener("click", () => select(i));
+    nav.appendChild(b);
+  });
+
+  function url(i) { return STYLES[i].file + (ENABLE_THEMES ? ("?theme=" + theme) : ""); }
+  function render() {
+    [...nav.children].forEach((b, i) => b.setAttribute("aria-selected", String(i === current)));
+    frame.src = url(current); openBtn.href = url(current);
+    if (ENABLE_THEMES) { themeLbl.textContent = theme[0].toUpperCase() + theme.slice(1); themeBtn.textContent = "Switch to " + (theme === "light" ? "Dark" : "Light"); }
+  }
+  function select(i) { current = i; render(); }
+  if (ENABLE_THEMES) { themeWrap.hidden = false; themeBtn.addEventListener("click", () => { theme = theme === "light" ? "dark" : "light"; render(); }); }
+  document.addEventListener("keydown", e => {
+    if (e.target && /input|textarea/i.test(e.target.tagName)) return;
+    const n = parseInt(e.key, 10);
+    if (n >= 1 && n <= STYLES.length) select(n - 1);
+    if (ENABLE_THEMES && e.key.toLowerCase() === "d") { theme = theme === "light" ? "dark" : "light"; render(); }
+  });
+  render();
+</script>
+</body>
+</html>

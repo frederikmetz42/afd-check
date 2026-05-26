@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>afd-check — Logo-Konzepte (Widerlegen)</title>
+<style>
+  :root{
+    --ink:#1C1917;
+    --accent:#FF3B30;      /* Riso-Rot */
+    --creme:#FFF8F0;
+    --muted:#665F58;
+    --line:#E7DDD2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--creme);color:var(--ink);font-family:"DM Sans",-apple-system,system-ui,sans-serif;padding:48px 40px 80px}
+  h1{font-family:"Barlow Condensed","DM Sans",sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:.01em;font-size:34px;line-height:1;margin-bottom:6px}
+  h1 .a{color:var(--accent)}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:40px;max-width:640px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1080px}
+  .card{border:1px solid var(--line);border-radius:14px;background:#fff;padding:26px 24px 22px;display:flex;flex-direction:column;gap:18px}
+  .stage{height:120px;display:flex;align-items:center;justify-content:center}
+  .scales{display:flex;align-items:center;gap:20px;border-top:1px solid var(--line);padding-top:16px}
+  .scales .s32,.scales .s16{display:flex;align-items:center;gap:8px}
+  .scales small{color:var(--muted);font-size:11px}
+  .meta{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+  .name{font-family:"Barlow Condensed",sans-serif;font-weight:800;text-transform:uppercase;font-size:17px}
+  .idea{color:var(--muted);font-size:12px;line-height:1.45}
+  .wordmark{display:flex;align-items:center;gap:10px;margin-top:6px}
+  .wordmark .wm{font-family:"Barlow Condensed",sans-serif;font-weight:900;text-transform:uppercase;font-size:22px;letter-spacing:.01em}
+  .wordmark .wm .a{color:var(--accent)}
+  svg{display:block}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>afd-<span class="a">check</span> — Widerlegen, nicht abhaken</h1>
+  <p class="sub">Sechs Marken, die das Zerlegen einer Behauptung zeigen, nicht das Abhaken. Die Behauptung ist die Sprechblase, die Aktenlage zerstört sie. Ein Akzent (Riso-Rot #FF3B30), Tinte plus Akzent, kein Verlauf, kein Emoji. Jede Karte zeigt die echte 32px- und 16px-Darstellung.</p>
+
+  <div class="grid">
+
+    <!-- 1 Widerlegt: bubble + slash -->
+    <div class="card">
+      <div class="stage">
+        <svg width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/>
+          <path d="M52 13 L14 49" stroke="var(--accent)" stroke-width="7" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M52 13 L14 49" stroke="var(--accent)" stroke-width="7" stroke-linecap="round"/></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M52 13 L14 49" stroke="var(--accent)" stroke-width="7" stroke-linecap="round"/></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">1 · Widerlegt</span></div>
+      <p class="idea">Die Behauptung (Sprechblase) wird von einem roten Strich durchschlagen. Sofort als "Aussage widerlegt" lesbar, robust bis 16px.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M52 13 L14 49" stroke="var(--accent)" stroke-width="7" stroke-linecap="round"/></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+    <!-- 2 Zerbrochen: bubble + fracture -->
+    <div class="card">
+      <div class="stage">
+        <svg width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/>
+          <path d="M33 11 L26 24 L37 30 L28 45" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M33 11 L26 24 L37 30 L28 45" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M33 11 L26 24 L37 30 L28 45" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">2 · Zerbrochen</span></div>
+      <p class="idea">Ein roter Riss zieht durch die Behauptung. Das Argument bricht. Etwas filigraner bei 16px als der Strich.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M33 11 L26 24 L37 30 L28 45" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+    <!-- 3 Zertrümmert: bubble split into two offset halves -->
+    <div class="card">
+      <div class="stage">
+        <svg width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <g transform="translate(-3.5 -2.5)">
+            <path d="M12 12 H32 V44 H17 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/>
+          </g>
+          <g transform="translate(3.5 2.5)">
+            <path d="M32 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H32 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/>
+          </g>
+          <path d="M30 8 L26 22 L34 30 L28 44 L33 56" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><g transform="translate(-3.5 -2.5)"><path d="M12 12 H32 V44 H17 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/></g><g transform="translate(3.5 2.5)"><path d="M32 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H32 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/></g><path d="M30 8 L26 22 L34 30 L28 44 L33 56" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><g transform="translate(-3.5 -2.5)"><path d="M12 12 H32 V44 H17 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/></g><g transform="translate(3.5 2.5)"><path d="M32 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H32 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/></g><path d="M30 8 L26 22 L34 30 L28 44 L33 56" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">3 · Zertrümmert</span></div>
+      <p class="idea">Die Sprechblase ist entlang eines roten Bruchs in zwei versetzte Hälften gesprengt. Am stärksten "zerstört", aber das komplexeste bei 16px.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><g transform="translate(-3.5 -2.5)"><path d="M12 12 H32 V44 H17 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/></g><g transform="translate(3.5 2.5)"><path d="M32 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H32 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/></g><path d="M30 8 L26 22 L34 30 L28 44 L33 56" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+    <!-- 4 Aktenlage: dashed promise cut by solid red record -->
+    <div class="card">
+      <div class="stage">
+        <svg width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <path d="M9 45 L46 16" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.5 7"/>
+          <circle cx="9" cy="45" r="3.6" fill="var(--ink)"/>
+          <path d="M46 11 L20 53" stroke="var(--accent)" stroke-width="6.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M9 45 L46 16" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.5 7"/><circle cx="9" cy="45" r="3.6" fill="var(--ink)"/><path d="M46 11 L20 53" stroke="var(--accent)" stroke-width="6.5" stroke-linecap="round"/></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><path d="M9 45 L46 16" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.5 7"/><circle cx="9" cy="45" r="3.6" fill="var(--ink)"/><path d="M46 11 L20 53" stroke="var(--accent)" stroke-width="6.5" stroke-linecap="round"/></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">4 · Aktenlage</span></div>
+      <p class="idea">Die gestrichelte Linie ist das Versprechen, die rote Vollkante die Abstimmung, die quer durchschlägt. Die Aktenlage zerschneidet die Behauptung. Eigenständigste Idee, am abstraktesten.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><path d="M9 45 L46 16" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.5 7"/><circle cx="9" cy="45" r="3.6" fill="var(--ink)"/><path d="M46 11 L20 53" stroke="var(--accent)" stroke-width="6.5" stroke-linecap="round"/></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+    <!-- 5 Gebrochen: snapped bar -->
+    <div class="card">
+      <div class="stage">
+        <svg width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <path d="M9 37 L27 34" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M37 30 L55 27" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M27 34 L33 22 L31 30 L37 30" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M9 37 L27 34" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/><path d="M37 30 L55 27" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/><path d="M27 34 L33 22 L31 30 L37 30" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><path d="M9 37 L27 34" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/><path d="M37 30 L55 27" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/><path d="M27 34 L33 22 L31 30 L37 30" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">5 · Gebrochen</span></div>
+      <p class="idea">Ein massiver Balken (das Argument) wird an einer roten Bruchkante durchgebrochen, die Hälften versetzt. Kraftvoll, aber abstrakt.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><path d="M9 37 L27 34" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/><path d="M37 30 L55 27" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/><path d="M27 34 L33 22 L31 30 L37 30" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+    <!-- 6 Durchgestrichen: bubble + strike + record line -->
+    <div class="card">
+      <div class="stage">
+        <svg width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/>
+          <path d="M14 22 H40" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+          <path d="M14 32 H34" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+          <path d="M9 27 H55" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M14 22 H40" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" opacity="0.35"/><path d="M14 32 H34" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" opacity="0.35"/><path d="M9 27 H55" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M9 27 H55" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">6 · Durchgestrichen</span></div>
+      <p class="idea">Eine Behauptung mit Text, glatt von einer roten Linie durchgestrichen. Wie ein Lektor, der die Lüge streicht. Sehr ruhig und seriös.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><path d="M12 12 H52 A6 6 0 0 1 58 18 V38 A6 6 0 0 1 52 44 H28 L17 54 V44 H12 A6 6 0 0 1 6 38 V18 A6 6 0 0 1 12 12 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M14 22 H40" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" opacity="0.35"/><path d="M14 32 H34" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" opacity="0.35"/><path d="M9 27 H55" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+  </div>
+</body>
+</html>

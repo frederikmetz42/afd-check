@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>afd-check — Logo-Konzepte</title>
+<style>
+  :root{
+    --ink:#1C1917;
+    --accent:#C2410C;      /* Terracotta, production */
+    --creme:#FFF8F0;
+    --muted:#665F58;
+    --line:#E7DDD2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--creme);
+    color:var(--ink);
+    font-family:"DM Sans",-apple-system,system-ui,sans-serif;
+    padding:48px 40px 80px;
+  }
+  h1{
+    font-family:"Barlow Condensed","DM Sans",sans-serif;
+    font-weight:900;text-transform:uppercase;letter-spacing:.01em;
+    font-size:34px;line-height:1;margin-bottom:6px;
+  }
+  h1 .a{color:var(--accent)}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:40px;max-width:620px}
+  .grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1080px;
+  }
+  .card{
+    border:1px solid var(--line);border-radius:14px;background:#fff;
+    padding:26px 24px 22px;display:flex;flex-direction:column;gap:18px;
+  }
+  .stage{height:120px;display:flex;align-items:center;justify-content:center}
+  .scales{display:flex;align-items:center;gap:20px;border-top:1px solid var(--line);padding-top:16px}
+  .scales .s32,.scales .s16{display:flex;align-items:center;gap:8px}
+  .scales small{color:var(--muted);font-size:11px}
+  .meta{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+  .name{font-family:"Barlow Condensed",sans-serif;font-weight:800;text-transform:uppercase;font-size:17px}
+  .idea{color:var(--muted);font-size:12px;line-height:1.4;margin-top:2px}
+  .wordmark{display:flex;align-items:center;gap:10px;margin-top:6px}
+  .wordmark .wm{font-family:"Barlow Condensed",sans-serif;font-weight:900;text-transform:uppercase;font-size:22px;letter-spacing:.01em}
+  .wordmark .wm .a{color:var(--accent)}
+  svg{display:block}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>afd-<span class="a">check</span> — Logo-Konzepte</h1>
+  <p class="sub">Sechs handgezeichnete geometrische Marken. Ein Akzent (Terracotta), kein Verlauf, kein 3D, kein Emoji. Jede Karte zeigt die Marke gross plus die echte 32px- und 16px-Darstellung (Favicon-Test) und einen Wordmark-Vorschlag.</p>
+
+  <div class="grid">
+
+    <!-- 1 — Ballot break -->
+    <div class="card">
+      <div class="stage">
+        <svg id="c1" width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <rect x="9" y="13" width="42" height="42" rx="9" stroke="var(--ink)" stroke-width="3.2"/>
+          <path d="M18 33 L28 44 L55 9" stroke="var(--accent)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect x="9" y="13" width="42" height="42" rx="9" stroke="var(--ink)" stroke-width="3.2"/><path d="M18 33 L28 44 L55 9" stroke="var(--accent)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><rect x="9" y="13" width="42" height="42" rx="9" stroke="var(--ink)" stroke-width="3.2"/><path d="M18 33 L28 44 L55 9" stroke="var(--accent)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">1 · Stimmzettel</span></div>
+      <p class="idea">Checkbox mit Haken, dessen langer Arm den Rahmen durchbricht: prüfen, was über die Behauptung hinausgeht. Sofort lesbar, robust bis 16px.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><rect x="9" y="13" width="42" height="42" rx="9" stroke="var(--ink)" stroke-width="3.2"/><path d="M18 33 L28 44 L55 9" stroke="var(--accent)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+    <!-- 2 — Divergence (promise vs vote) -->
+    <div class="card">
+      <div class="stage">
+        <svg id="c2" width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <path d="M12 32 L52 16" stroke="var(--ink)" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0.5 7"/>
+          <path d="M12 32 L52 50" stroke="var(--accent)" stroke-width="5.5" stroke-linecap="round"/>
+          <circle cx="12" cy="32" r="4" fill="var(--ink)"/>
+          <circle cx="52" cy="16" r="3.2" fill="var(--ink)"/>
+          <circle cx="52" cy="50" r="4.5" fill="var(--accent)"/>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M12 32 L52 16" stroke="var(--ink)" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0.5 7"/><path d="M12 32 L52 50" stroke="var(--accent)" stroke-width="5.5" stroke-linecap="round"/><circle cx="12" cy="32" r="4" fill="var(--ink)"/><circle cx="52" cy="50" r="4.5" fill="var(--accent)"/></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><path d="M12 32 L52 16" stroke="var(--ink)" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0.5 7"/><path d="M12 32 L52 50" stroke="var(--accent)" stroke-width="5.5" stroke-linecap="round"/><circle cx="12" cy="32" r="4" fill="var(--ink)"/><circle cx="52" cy="50" r="4.5" fill="var(--accent)"/></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">2 · Die Schere</span></div>
+      <p class="idea">Zwei Linien aus einem Punkt: gestrichelt nach oben das Versprechen, durchgezogen nach unten die Abstimmung. Der Spalt ist die Kernaussage der Seite. Eigenständigste Idee.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><path d="M12 32 L52 16" stroke="var(--ink)" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0.5 7"/><path d="M12 32 L52 50" stroke="var(--accent)" stroke-width="5.5" stroke-linecap="round"/><circle cx="12" cy="32" r="4" fill="var(--ink)"/><circle cx="52" cy="50" r="4.5" fill="var(--accent)"/></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+    <!-- 3 — Magnifier check -->
+    <div class="card">
+      <div class="stage">
+        <svg id="c3" width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <circle cx="27" cy="27" r="16" stroke="var(--ink)" stroke-width="3.2"/>
+          <path d="M39 39 L54 54" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/>
+          <path d="M19 28 L25 34 L37 19" stroke="var(--accent)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><circle cx="27" cy="27" r="16" stroke="var(--ink)" stroke-width="3.2"/><path d="M39 39 L54 54" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path d="M19 28 L25 34 L37 19" stroke="var(--accent)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><circle cx="27" cy="27" r="16" stroke="var(--ink)" stroke-width="3.2"/><path d="M39 39 L54 54" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path d="M19 28 L25 34 L37 19" stroke="var(--accent)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">3 · Lupe</span></div>
+      <p class="idea">Lupe mit Haken im Glas: nachprüfen plus bestätigt. Vertraut und seriös, aber das generischste der sechs.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><circle cx="27" cy="27" r="16" stroke="var(--ink)" stroke-width="3.2"/><path d="M39 39 L54 54" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path d="M19 28 L25 34 L37 19" stroke="var(--accent)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+    <!-- 4 — Two-tone check (brand title echo) -->
+    <div class="card">
+      <div class="stage">
+        <svg id="c4" width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <path d="M11 34 L26 49" stroke="var(--ink)" stroke-width="8" stroke-linecap="round"/>
+          <path d="M26 49 L56 11" stroke="var(--accent)" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M11 34 L26 49" stroke="var(--ink)" stroke-width="8" stroke-linecap="round"/><path d="M26 49 L56 11" stroke="var(--accent)" stroke-width="8" stroke-linecap="round"/></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><path d="M11 34 L26 49" stroke="var(--ink)" stroke-width="8" stroke-linecap="round"/><path d="M26 49 L56 11" stroke="var(--accent)" stroke-width="8" stroke-linecap="round"/></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">4 · Zweiton-Haken</span></div>
+      <p class="idea">Reiner Haken, kurzer Arm Tinte, langer Arm Akzent. Greift exakt das zweifarbige Titel-Treatment der Seite auf (Ink plus Terracotta). Am stärksten bei 16px.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><path d="M11 34 L26 49" stroke="var(--ink)" stroke-width="8" stroke-linecap="round"/><path d="M26 49 L56 11" stroke="var(--accent)" stroke-width="8" stroke-linecap="round"/></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+    <!-- 5 — Speech / conversation check -->
+    <div class="card">
+      <div class="stage">
+        <svg id="c5" width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <path d="M12 13 H52 A6 6 0 0 1 58 19 V41 A6 6 0 0 1 52 47 H30 L18 57 V47 H12 A6 6 0 0 1 6 41 V19 A6 6 0 0 1 12 13 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/>
+          <path d="M18 30 L27 39 L46 19" stroke="var(--accent)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M12 13 H52 A6 6 0 0 1 58 19 V41 A6 6 0 0 1 52 47 H30 L18 57 V47 H12 A6 6 0 0 1 6 41 V19 A6 6 0 0 1 12 13 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M18 30 L27 39 L46 19" stroke="var(--accent)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><path d="M12 13 H52 A6 6 0 0 1 58 19 V41 A6 6 0 0 1 52 47 H30 L18 57 V47 H12 A6 6 0 0 1 6 41 V19 A6 6 0 0 1 12 13 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M18 30 L27 39 L46 19" stroke="var(--accent)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">5 · Gespräch</span></div>
+      <p class="idea">Sprechblase mit Haken: es ist ein Gesprächsleitfaden, kein Urteil. Betont die Haltung der Seite. Etwas voller bei 16px.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><path d="M12 13 H52 A6 6 0 0 1 58 19 V41 A6 6 0 0 1 52 47 H30 L18 57 V47 H12 A6 6 0 0 1 6 41 V19 A6 6 0 0 1 12 13 Z" stroke="var(--ink)" stroke-width="3.2" stroke-linejoin="round"/><path d="M18 30 L27 39 L46 19" stroke="var(--accent)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+    <!-- 6 — Stamp check (riso motif) -->
+    <div class="card">
+      <div class="stage">
+        <svg id="c6" width="96" height="96" viewBox="0 0 64 64" fill="none">
+          <g transform="rotate(-8 32 32)">
+            <rect x="11" y="11" width="42" height="42" rx="3" stroke="var(--ink)" stroke-width="3.2"/>
+            <path d="M20 33 L29 43 L46 20" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
+      </div>
+      <div class="scales">
+        <span class="s32"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><g transform="rotate(-8 32 32)"><rect x="11" y="11" width="42" height="42" rx="3" stroke="var(--ink)" stroke-width="3.2"/><path d="M20 33 L29 43 L46 20" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></svg><small>32</small></span>
+        <span class="s16"><svg width="16" height="16" viewBox="0 0 64 64" fill="none"><g transform="rotate(-8 32 32)"><rect x="11" y="11" width="42" height="42" rx="3" stroke="var(--ink)" stroke-width="3.2"/><path d="M20 33 L29 43 L46 20" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></svg><small>16</small></span>
+      </div>
+      <div class="meta"><span class="name">6 · Stempel</span></div>
+      <p class="idea">Geprüft-Stempel, leicht gedreht: greift das Riso-Stempel-Motiv der bold-Variante auf. Hartkantig, aktivistisch. Passt zur 3-bold-Linie.</p>
+      <div class="wordmark"><svg width="34" height="34" viewBox="0 0 64 64" fill="none"><g transform="rotate(-8 32 32)"><rect x="11" y="11" width="42" height="42" rx="3" stroke="var(--ink)" stroke-width="3.2"/><path d="M20 33 L29 43 L46 20" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></svg><span class="wm">afd-<span class="a">check</span></span></div>
+    </div>
+
+  </div>
+</body>
+</html>
