@@ -1,8 +1,8 @@
 # afd-check.de — Handoff Document
 
-**Version:** 4.1 (Produktion: subtle, responsive Desktop, deployed 2026-05-26)
+**Version:** 4.2 (Produktion: subtle, responsive, Brand-Icon, deployed 2026-05-26)
 **Date:** 2026-05-26
-**Status:** Live auf afd-check.de (v4.1, GitHub Pages, DOM-verifiziert gegen die Live-URL bei 430 und 1280, 0 Console-Fehler). Panel-Re-Run (4x5) auf v4.1 gemacht, Dashboard `_panel/panel-feedback-v4.html`. Die light-riso-1-subtle-Variante ist nach allen 7 Panel-Fixes zur Produktion `index.html` promoted und deployed. **VPS-Mirror (89.147.109.248:8650/guide/) noch auf v3, braucht separaten Push.** 2-medium/3-bold haben nur Fix #1, bleiben unshipped. light-riso ist nach 4 Runden eine ausgereifte Exploration: 3 helle Varianten plus Picker, Cascade mit fester 7-Beat-Erzähldramaturgie inkl. Primärquellen-Beat „Was sie selbst schreibt" (verifizierte Wahlprogramm-2025- und Grundsatzprogramm-2016-Zitate). Ein 4x5-Persona-Panel (Wähler, Bias-Red-Team, UX, Faktencheck) hat die Storyline stresstested. Befunde im Dashboard `_panel/panel-feedback.html`, priorisierter Fix-Plan in `_internal/next-session-plan.md`. Noch nicht deployed, reine Exploration auf dem Taste Shelf.
+**Status:** Live auf afd-check.de (v4.2, GitHub Pages, inkl. Brand-Icon). Zusätzlich auf **Cloudflare Pages** deployed: `afd-check.pages.dev` (Projekt `afd-check`, direkter wrangler-Upload, nur 5 öffentliche Dateien). **Custom Domain afd-check.de zeigt weiterhin auf GitHub Pages**, Cutover auf CF Pages offen (Entscheidung). Panel-Re-Run (4x5) auf v4.1 im Dashboard `_panel/panel-feedback-v4.html`. Die light-riso-1-subtle-Variante ist nach allen 7 Panel-Fixes zur Produktion `index.html` promoted und deployed. **VPS-Mirror (89.147.109.248:8650/guide/) noch auf v3, braucht separaten Push.** 2-medium/3-bold haben nur Fix #1, bleiben unshipped. light-riso ist nach 4 Runden eine ausgereifte Exploration: 3 helle Varianten plus Picker, Cascade mit fester 7-Beat-Erzähldramaturgie inkl. Primärquellen-Beat „Was sie selbst schreibt" (verifizierte Wahlprogramm-2025- und Grundsatzprogramm-2016-Zitate). Ein 4x5-Persona-Panel (Wähler, Bias-Red-Team, UX, Faktencheck) hat die Storyline stresstested. Befunde im Dashboard `_panel/panel-feedback.html`, priorisierter Fix-Plan in `_internal/next-session-plan.md`. Noch nicht deployed, reine Exploration auf dem Taste Shelf.
 
 ## What This Is
 
@@ -319,8 +319,21 @@ Drei Feedback-Runden auf die light-riso-Varianten, alle auf alle 3 Dateien angew
 
 ---
 
+### v4.2 — 2026-05-26 — Brand-Icon + Cloudflare-Pages-Deploy
+
+**What changed:**
+- `_internal/logo/icon.png` (1024², zerborstenes AfD-Blau-Logo mit Faktencheck-Pinnnadel) als Marke implementiert: nach Root kopiert, `favicon.png` (64) und `apple-touch-icon.png` (180) per `sips` erzeugt. index.html-Head: Platzhalter-Lupe-Favicon ersetzt, OG/Twitter-Image (`https://afd-check.de/icon.png`), apple-touch, theme-color #C2410C. Marke als 26px-Bild in beide Navs vor dem Wortmark (`.b-logo` jetzt inline-flex). Gespiegelt nach light-riso/1-subtle.html (Asset-Pfade mit `../`).
+- Verifiziert: alle Assets 200, Nav-Marke rendert (naturalWidth 64), 0 Console-Fehler. Commit `bb9893a`, auf GitHub Pages live.
+
+**Cloudflare Pages:**
+- Projekt `afd-check` erstellt, sauberes Publish-Verzeichnis (`/tmp/afd_pages`, nur index.html, impressum.html, icon.png, favicon.png, apple-touch-icon.png) per `wrangler pages deploy` hochgeladen. Live: `afd-check.pages.dev`. Interne Ordner NICHT exponiert (unbekannte Pfade fallen auf index.html zurück, kein echtes _internal/_panel/light-riso). `/impressum` Clean-URL funktioniert.
+- **Offen:** Custom-Domain-Cutover afd-check.de von GitHub Pages auf CF Pages. wrangler hat kein `pages domain`-Kommando, geht nur per Dashboard oder CF-API (POST .../pages/projects/afd-check/domains). Bewusst nicht unilateral gemacht (Live-Domain, politisch sensibel).
+
+---
+
 ## Known Issues
 ### Active
+- **Hosting doppelt:** afd-check.de auf GitHub Pages, parallel CF Pages auf `afd-check.pages.dev`. Domain-Cutover-Entscheidung offen.
 - **Panel v4.1, höchster Hebel:** Beat 6 "Stimmt, aber" (rebuttal) enthält kausale Motivunterstellungen gegen die Gesamtfraktion, justiziabel laut Medienanwalt-Persona, liest sich als Schlusswort wie Gegenrede. Auf belegte Verhaltensbeschreibung umstellen.
 - Panel v4.1: eigene AfD-Anträge nur als "chancenlos" gerahmt, nicht als gleichwertiger Beleg (Cherry-Picking-Vorwurf bleibt)
 - Panel v4.1: Kontext-Gegenzahlen nur bei 2 von 10 Themen; Auswahlkriterium deklariert aber zu vage
