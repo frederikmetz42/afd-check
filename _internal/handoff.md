@@ -322,7 +322,7 @@ Drei Feedback-Runden auf die light-riso-Varianten, alle auf alle 3 Dateien angew
 ### v4.2 — 2026-05-26 — Brand-Icon + Cloudflare-Pages-Deploy
 
 **What changed:**
-- `_internal/logo/icon.png` (1024², zerborstenes AfD-Blau-Logo mit Faktencheck-Pinnnadel) als Marke implementiert: nach Root kopiert, `favicon.png` (64) und `apple-touch-icon.png` (180) per `sips` erzeugt. index.html-Head: Platzhalter-Lupe-Favicon ersetzt, OG/Twitter-Image (`https://afd-check.de/icon.png`), apple-touch, theme-color #C2410C. Marke als 26px-Bild in beide Navs vor dem Wortmark (`.b-logo` jetzt inline-flex). Gespiegelt nach light-riso/1-subtle.html (Asset-Pfade mit `../`).
+- `_internal/logo/icon.png` (1024², zerborstenes AfD-Blau-Logo mit Faktencheck-Pinnnadel) als Marke implementiert: nach Root kopiert, `favicon.png` (64) und `apple-touch-icon.png` (180) per `sips` erzeugt. index.html-Head: Platzhalter-Lupe-Favicon ersetzt, OG/Twitter-Image (`https://afd-check.de/icon.png`), apple-touch, theme-color #C2410C. Marke als 36px-Bild (hairline) in beide Navs vor dem Wortmark plus prominentes 84px/104px-App-Icon-Badge im Landing-Hero. `.b-logo` ist inline-flex; das anfängliche `gap:8px` (das "AFD- CHECK" auseinanderzog) wurde durch `margin-right` auf der Marke ersetzt. Gespiegelt nach light-riso/1-subtle.html (Asset-Pfade mit `../`).
 - Verifiziert: alle Assets 200, Nav-Marke rendert (naturalWidth 64), 0 Console-Fehler. Commit `bb9893a`, auf GitHub Pages live.
 
 **Cloudflare Pages:**
