@@ -184,6 +184,9 @@ a.b-source:hover { opacity: 0.75; }
 .b-next-wrap { max-width: 540px; margin: 0 auto; padding: 8px 16px 48px; text-align: center; }
 .b-next-btn { background: var(--accent-primary); color: #FFFFFF; font-size: 14px; font-weight: 700; padding: 13px 32px; border-radius: 9999px; border: none; cursor: pointer; transition: opacity 0.15s; font-family: 'DM Sans', system-ui, sans-serif; }
 .b-next-btn:hover { opacity: 0.85; }
+.b-nav-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.b-nav-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+.b-nav-secondary:hover { border-color: var(--accent-primary); color: var(--accent-primary); opacity: 1; }
 footer { text-align: center; font-size: 12px; font-weight: 500; color: var(--text-muted); padding: 24px 20px; border-top: 1px solid var(--border); background: var(--surface); }
 footer .b-footer-dot { margin: 0 6px; opacity: 0.4; }
 
@@ -282,6 +285,7 @@ footer .b-footer-dot { margin: 0 6px; opacity: 0.4; }
   .b-pair { flex-direction: row; }
   .b-pair-side { flex: 1; }
   .b-next-wrap { text-align: left; margin: 0; padding-left: 0; padding-right: 0; }
+  .b-nav-row { justify-content: flex-start; }
 }
 
 .b-logo { display: inline-flex; align-items: center; }
@@ -1476,9 +1480,13 @@ function showCascade(index) {
     if (contextArrow) contextArrow.classList.add('open');
     if (contextToggle) contextToggle.setAttribute('aria-expanded', 'true');
   }
-  document.getElementById('next-topic-wrap').innerHTML = index < GUIDE_DATA.length - 1
+  var prevBtn = index > 0
+    ? '<button class="b-next-btn b-nav-secondary" onclick="showPrevTopic()">&larr; Vorheriges Thema</button>'
+    : '<button class="b-next-btn b-nav-secondary" onclick="showLanding()">&larr; Übersicht</button>';
+  var fwdBtn = index < GUIDE_DATA.length - 1
     ? '<button class="b-next-btn" onclick="showNextTopic()">Nächstes Thema &rarr;</button>'
-    : '<button class="b-next-btn" onclick="showLanding()">&larr; Zurück zur Übersicht</button>';
+    : '<button class="b-next-btn" onclick="showLanding()">Zur Übersicht &rarr;</button>';
+  document.getElementById('next-topic-wrap').innerHTML = '<div class="b-nav-row">' + prevBtn + fwdBtn + '</div>';
   window.scrollTo(0, 0);
 }
 function toggleCounter(toggleEl) {
@@ -1504,6 +1512,7 @@ function toggleMore(btn) {
   else { content.style.maxHeight = content.scrollHeight + 'px'; content.getBoundingClientRect(); content.style.maxHeight = '0'; content.classList.add('collapsed'); btn.classList.remove('open'); }
 }
 function showNextTopic() { if (currentIndex < GUIDE_DATA.length - 1) { showCascade(currentIndex + 1); } }
+function showPrevTopic() { if (currentIndex > 0) { showCascade(currentIndex - 1); } }
 renderLanding();
 </script>
 </body>
