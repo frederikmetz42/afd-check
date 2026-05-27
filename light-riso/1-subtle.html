@@ -309,7 +309,7 @@ footer .b-footer-dot { margin: 0 6px; opacity: 0.4; }
     <section class="b-methods" id="methodik">
       <h2 class="b-methods-title">Methodik und Transparenz</h2>
       <p class="b-methods-meta">Autor: Frederik Metz &middot; Stand: 26. Mai 2026 &middot; Kontakt: frederikmetz@gmail.com</p>
-      <div class="b-methods-block"><h3>Wie wir auswählen</h3><p>Pro Thema zeigen wir verifizierte Zitate aus den beiden offiziellen AfD-Programmen, dazu namentliche Bundestags-Abstimmungen und, wo relevant, Gerichts- und Verfassungsschutz-Entscheidungen. Ausgewählt wurden Vorgänge, die das jeweilige Versprechen direkt betreffen. Wir bilden nicht jede Abstimmung ab.</p></div>
+      <div class="b-methods-block"><h3>Wie wir auswählen</h3><p>Pro Thema zeigen wir verifizierte Zitate aus den beiden offiziellen AfD-Programmen, dazu namentliche Bundestags-Abstimmungen und, wo relevant, Gerichts- und Verfassungsschutz-Entscheidungen. Ausgewählt wurden Vorgänge, die das jeweilige Versprechen direkt betreffen. Wir bilden nicht jede Abstimmung ab. Kontextzahlen ("Die Zahlen im Kontext") ergänzen wir dort, wo eine einzelne Abstimmung ohne amtliche Bezugsgröße in die Irre führen würde (Migration, Sicherheit). Themen ohne solche Verzerrungsgefahr führen keine Kontextzahlen.</p></div>
       <div class="b-methods-block"><h3>Was wir offenlegen</h3><p>Die Auswahl ist nicht vollständig und kann den Eindruck der gezeigten Beispiele verstärken. Eigene AfD-Anträge sind bislang unterrepräsentiert. Beim Thema Patriotismus sind die Belege Gerichts- und Verfassungsschutz-Vorgänge, keine Abstimmungen. Im Grundsatzprogramm 2016 fehlt ein Rentenkonzept, Pflege ist dort nur als Familienpflege behandelt.</p></div>
       <div class="b-methods-block"><h3>Quellenlage</h3><p>Alle Programmzitate sind wörtlich aus den offiziellen PDFs auf afd.de übernommen, mit Seitenangabe. Abstimmungs- und Faktenquellen sind pro Thema verlinkt. Kein Tracking, keine Cookies.</p></div>
     </section>
@@ -462,6 +462,10 @@ window.AFD_GUIDE_DATA = [
         text: "Kalte Progression ist ein echtes Problem. Die AfD hat Recht, dass Steuerklassen regelmäßig angepasst werden müssen."
       }
     ],
+    contextFacts: [
+      {label: "Soli seit 2021", value: "nur Top-3,5%", context: "Seit 2021 zahlen nur die höchsten Einkommen den Solidaritätszuschlag."},
+      {label: "Erbschaften unter Freibetrag", value: "~90%", context: "Rund neun von zehn Erbschaften bleiben unter dem Freibetrag und damit steuerfrei."}
+    ],
     counterArgument: {
       text: "Die Mindestlohnkommission soll über den Mindestlohn entscheiden, nicht der Koalitionsvertrag. Die Erbschaftsteuer bedroht Familienbesitz durch gestiegene Immobilienpreise.",
       source: "AfD-Fraktion, Bundestag 2022",
@@ -528,6 +532,9 @@ window.AFD_GUIDE_DATA = [
       {
         text: "Hohe Strompreise sind ein echtes Problem für die Industrie. Das sehen auch CDU und FDP so."
       }
+    ],
+    contextFacts: [
+      {label: "Stromgestehungskosten Solar", value: "4 bis 5 ct/kWh", context: "Laut Fraunhofer ISE. Kohle: 11 bis 15, neue Kernkraft: 10 bis 18 ct/kWh."}
     ],
     counterArgument: {
       text: "Erneuerbare haben trotz Subventionen keine Wettbewerbsfähigkeit erreicht. Die Energiewende ist gescheitert. Deutschland braucht Grundlastkraftwerke für sichere Versorgung.",
@@ -939,6 +946,9 @@ window.AFD_GUIDE_DATA = [
       {
         text: "Eine kapitalgedeckte Zusatzrente nach schwedischem Vorbild ist kein schlechter Vorschlag. Auch die FDP fordert das."
       }
+    ],
+    contextFacts: [
+      {label: "Rentenniveau 2025", value: "~48%", context: "Das gesetzliche Sicherungsniveau vor Steuern, gemessen an einem Durchschnittsverdienst."}
     ],
     counterArgument: {
       text: "Die Grundrente ist nicht zielgenau, zu teuer und weitgehend wirkungslos. Die Mindestlohnkommission, nicht der Koalitionsvertrag, soll über solche Fragen entscheiden.",
