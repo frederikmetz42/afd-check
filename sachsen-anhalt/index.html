@@ -1,0 +1,551 @@
+<!doctype html>
+<!--
+  DESIGN DECISIONS
+
+  Direction: editorial Aktenzeichen. A documentary case-file register for a claim-versus-record
+  fact card: a TikTok-era persona claim on one side, the parliamentary or judicial record on the
+  other, joined by an archival stamp carrying the Drucksache or Aktenzeichen.
+
+  Signature move: the archival stamp on the divider rule. A boxed mono tag (Drs. 8/xxxx,
+  Az. LVG 20/22, or AKTENLAGE when no case number exists in the source text) sits on a hairline
+  rule between the claim and the record. It is the card's one deliberate flourish; everything
+  else stays restrained: hairline borders, no fills, no shadows, radius zero.
+
+  Faces: Archivo (500/600/700) for display and body, IBM Plex Mono (400/500) for kickers, labels,
+  the stamp, and the source line. No Inter, no serif, no italic, no emoji.
+
+  Accent and why: brief specified #C8442A. Measured contrast against canvas #F7F8F6 comes out to
+  4.567:1, a pass of WCAG AA's 4.5:1 floor by a margin of 0.067, too thin to trust across
+  renderers and sub-pixel hinting for small mono labels (the AKTENLAGE label and the stamp both
+  render accent text directly on canvas). Darkened to #B23A22 per the brief's own fallback
+  instruction; #B23A22 on #F7F8F6 measures 5.598:1. Full numbers are repeated as a comment next
+  to the token below.
+
+  Canvas: #F7F8F6, light mode only, one accent, zero additional colour.
+
+  Risk: Signature.
+-->
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Sachsen-Anhalt: Was die AfD verspricht, und wie sie abstimmt | afd-check</title>
+<link rel="canonical" href="https://afd-check.de/sachsen-anhalt/">
+<meta name="description" content="Landtagswahl Sachsen-Anhalt 2026: Was AfD-Politiker öffentlich sagen, und wie sie im Landtag abstimmen. Belege mit Originalquellen.">
+<meta property="og:title" content="Sachsen-Anhalt: Was die AfD verspricht, und wie sie abstimmt">
+<meta property="og:description" content="Belege mit Originalquellen: öffentliche Aussagen gegen Abstimmungen und Gerichtsentscheidungen.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://afd-check.de/sachsen-anhalt/">
+<meta property="og:image" content="https://afd-check.de/sachsen-anhalt/og.png">
+<link rel="icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Tokens. Do not deviate from the brief's five colours plus radius. */
+  :root {
+    --canvas: #F7F8F6;
+    --ink: #14161A;
+    --muted: #6B7076;
+    --hairline: #DCDFDA;
+    /* Accent contrast check (WCAG relative luminance), computed exactly, not eyeballed:
+       #C8442A on #F7F8F6 = 4.567:1 (passes AA's 4.5:1 floor by 0.067, too thin to trust).
+       #B23A22 on #F7F8F6 = 5.598:1 (comfortable pass). Using the darkened value. */
+    --accent: #B23A22;
+    --radius: 0;
+
+    --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --claim-ink: color-mix(in srgb, var(--ink) 76%, var(--muted) 24%);
+
+    --card-w: 1080px;
+    --card-h: 1350px;
+  }
+  :root[data-ar="9x16"] { --card-h: 1920px; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  p, h1, h2 { margin: 0; }
+
+  #app { max-width: 1440px; margin-inline: auto; padding: 0 clamp(20px, 5vw, 64px) 96px; }
+
+  .banner {
+    padding: 14px 0;
+    margin-bottom: 40px;
+    border-top: 3px solid var(--accent);
+    border-bottom: 1px solid var(--hairline);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .gallery-head { margin-bottom: 32px; max-width: 68ch; }
+  .gallery-head h1 { font-size: clamp(28px, 1.6vw + 22px, 38px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+  .gallery-head h1 .sep { color: var(--muted); padding-inline: 0.3em; }
+  .gallery-intro { margin-top: 14px; font-size: 17px; font-weight: 500; color: var(--muted); line-height: 1.55; }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--hairline); }
+  .controls__group { display: flex; gap: 8px; }
+  .toggle-btn, .filter-btn {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    color: var(--muted);
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .toggle-btn[aria-pressed="true"], .filter-btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) {
+    .toggle-btn:hover, .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .toggle-btn[aria-pressed="true"]:hover, .filter-btn[aria-pressed="true"]:hover { border-color: var(--accent); color: var(--accent); }
+  }
+  .toggle-btn:focus-visible, .filter-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* Gallery grid: a responsive preview frame per card. The frame clips a scaled-down copy of
+     the true fixed-pixel card; see .card-frame .card below. Print mode never uses this frame,
+     it renders .card elements directly at native size (see #print-stack). */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: clamp(20px, 3vw, 40px); }
+  .card-frame { position: relative; overflow: hidden; aspect-ratio: 4 / 5; border: 1px solid var(--hairline); background: var(--canvas); }
+  :root[data-ar="9x16"] .card-frame { aspect-ratio: 9 / 16; }
+  .card-frame .card { position: absolute; top: 0; left: 0; transform-origin: top left; transform: scale(var(--card-scale, 1)); visibility: hidden; }
+  .card-frame.is-scaled .card { visibility: visible; }
+
+  .card-grid.is-ready .card-frame { animation: reveal .6s cubic-bezier(.16,1,.3,1) both; animation-delay: calc(var(--i, 0) * 40ms); }
+  @keyframes reveal { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .card-grid.is-ready .card-frame { animation: none; }
+  }
+
+  /* ---- Card component: a fixed-pixel box (1080x1350 or 1080x1920), never responsive
+     internally. Everything below is sized in true design-space pixels. ---- */
+  .card {
+    width: var(--card-w);
+    height: var(--card-h);
+    background: var(--canvas);
+    color: var(--ink);
+    padding: 80px 76px 64px;
+    display: grid;
+    grid-template-rows: auto 0.85fr auto 1.15fr auto;
+    row-gap: 40px;
+    font-family: var(--font-display);
+  }
+  .card--single { grid-template-rows: auto auto 1fr auto; }
+
+  .card__kicker { font-family: var(--font-mono); font-size: 22px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; }
+  .card__person { font-size: 46px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; margin-bottom: 8px; }
+  .card__role { font-family: var(--font-mono); font-size: 23px; font-weight: 400; color: var(--muted); }
+
+  .card__block { display: flex; flex-direction: column; gap: 16px; min-height: 0; }
+  .card__label { font-family: var(--font-mono); font-size: 22px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); flex-shrink: 0; }
+  .card__label--accent { color: var(--accent); }
+
+  /* Font sizes below are the fit-to-fill starting max; fitText() in the script shrinks them
+     down (never truncates, never adds an ellipsis) until the text clears its own box. */
+  .card__claim-text { flex: 1 1 auto; min-height: 0; overflow: hidden; margin: 0; font-weight: 600; line-height: 1.34; letter-spacing: -0.005em; color: var(--claim-ink); font-size: 46px; }
+  .card__record-text { flex: 1 1 auto; min-height: 0; overflow: hidden; margin: 0; font-weight: 700; line-height: 1.26; letter-spacing: -0.01em; color: var(--ink); font-size: 52px; }
+
+  .card__stamp-row { display: flex; align-items: center; gap: 16px; }
+  .card__stamp-lead { width: 48px; height: 1px; background: var(--hairline); flex-shrink: 0; }
+  .card__stamp-tail { flex: 1 1 auto; height: 1px; background: var(--hairline); }
+  .card__stamp { font-family: var(--font-mono); font-size: 21px; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); border: 1.5px solid var(--accent); border-radius: var(--radius); padding: 9px 16px; white-space: nowrap; flex-shrink: 0; }
+
+  .card__foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+  .card__source { font-family: var(--font-mono); font-size: 20px; font-weight: 400; line-height: 1.55; color: var(--muted); flex: 1 1 auto; min-width: 0; margin: 0; }
+  .card__source-kicker { color: var(--ink); font-weight: 500; margin-right: 0.4em; }
+  .card__source-date { margin-left: 0.6em; }
+  .card__verified { display: block; margin-top: 8px; font-family: var(--font-mono); font-size: 17px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .card__wordmark { font-family: var(--font-mono); font-size: 20px; font-weight: 500; letter-spacing: 0.08em; color: var(--muted); flex-shrink: 0; margin: 0; }
+
+  .withheld { margin-top: 72px; padding-top: 32px; border-top: 1px solid var(--hairline); max-width: 84ch; }
+  .withheld h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .withheld__meta { font-family: var(--font-mono); font-size: 14px; font-weight: 400; letter-spacing: 0.02em; color: var(--muted); margin-left: 10px; }
+  .withheld__list { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .withheld__list li { display: flex; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--hairline); padding-bottom: 12px; }
+  .withheld__person { font-weight: 600; flex-shrink: 0; }
+  .withheld__desc { font-family: var(--font-mono); font-size: 14px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+
+  .state { max-width: 60ch; padding: 48px 0; }
+  .state__label { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .state__detail, .state__hint { font-family: var(--font-mono); font-size: 15px; color: var(--muted); line-height: 1.6; }
+  .state--error { border-left: 3px solid var(--accent); padding-left: 24px; }
+  .state--error .state__detail { color: var(--ink); margin-bottom: 8px; }
+
+  #print-stack .card { margin-bottom: 40px; }
+  #print-stack .card:last-child { margin-bottom: 0; }
+  .site-foot { max-width: 84ch; margin: 64px auto 0; padding: 28px clamp(20px,5vw,64px) 72px; border-top: 1px solid var(--hairline); font-family: var(--font-mono); font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .site-foot a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  .site-foot__note { margin-top: 12px; }
+</style>
+</head>
+<body>
+<noscript>This page needs JavaScript to fetch and render the fact cards from receipts-db.json. Please enable JavaScript and reload.</noscript>
+<div id="app" role="main"></div>
+<footer class="site-foot" lang="de">
+  <p><a href="/">afd-check.de</a> · Sachsen-Anhalt · Autor: Frederik Metz · Stand: 17. Juli 2026 · <a href="/impressum.html">Impressum</a></p>
+  <p class="site-foot__note">Gezeigt werden nur belegte Vorgänge (öffentliche Aussage plus Abstimmung, Gerichts- oder Verfassungsschutz-Entscheidung), jeweils mit Originalquelle und Datum. Vorwürfe ohne abgeschlossene Prüfung werden nicht veröffentlicht.</p>
+</footer>
+<script type="module">
+  const AR_DEFAULT = '4x5';
+  const params = new URLSearchParams(location.search);
+  const isPrint = params.has('print');
+  document.documentElement.dataset.ar = params.get('ar') === '9x16' ? '9x16' : AR_DEFAULT;
+
+  const app = document.getElementById('app');
+  app.appendChild(buildStateNode('loading'));
+
+  function nextFrame() {
+    return new Promise((resolve) => requestAnimationFrame(resolve));
+  }
+
+  function buildStateNode(kind, { detail } = {}) {
+    const box = document.createElement('div');
+    box.className = 'state state--' + kind;
+    box.lang = 'en';
+    if (kind === 'loading') {
+      box.innerHTML = '<p class="state__label">Loading fact cards…</p>';
+    } else if (kind === 'error') {
+      box.innerHTML = `
+        <p class="state__label">Couldn't load the data</p>
+        <p class="state__detail"></p>
+        <p class="state__hint">Check that receipts-db.json sits next to cards.html in this folder, then reload.</p>
+      `;
+      box.querySelector('.state__detail').textContent = detail || 'Unknown error.';
+    } else if (kind === 'empty') {
+      box.innerHTML = `
+        <p class="state__label">No FAKT-classified receipts yet</p>
+        <p class="state__hint">Rows are still pending verification or sit in a different classification. Check back once records clear review.</p>
+      `;
+    }
+    return box;
+  }
+
+  // Shrinks or grows el's font-size so its text fills its own box: never truncated, never
+  // clipped, never left swimming in dead space. Starts at max. If max already overflows, steps
+  // down to min. If max leaves room to spare (short text in a tall flexible row, e.g. the
+  // single-block card or a short claim), steps up past max toward ceiling until the next size
+  // would overflow, then backs off one step. Either way the result is the largest size that
+  // still fits.
+  function fitText(el, { min, max, ceiling, step = 1 } = {}) {
+    if (!el) return;
+    ceiling = ceiling || max;
+    let size = max;
+    el.style.fontSize = size + 'px';
+    if (el.scrollHeight > el.clientHeight + 1) {
+      while (size > min && el.scrollHeight > el.clientHeight + 1) {
+        size -= step;
+        el.style.fontSize = size + 'px';
+      }
+    } else {
+      while (size < ceiling) {
+        const next = size + step;
+        el.style.fontSize = next + 'px';
+        if (el.scrollHeight > el.clientHeight + 1) {
+          el.style.fontSize = size + 'px';
+          break;
+        }
+        size = next;
+      }
+    }
+  }
+
+  function fitCardText(cardEl) {
+    fitText(cardEl.querySelector('.card__claim-text'), { max: 46, min: 24, ceiling: 62 });
+    fitText(cardEl.querySelector('.card__record-text'), { max: 52, min: 26, ceiling: 80 });
+  }
+
+  // Pulls a Drucksache or Aktenzeichen citation out of the record fields. Returns null when no
+  // case number is present, so the divider renders as a plain rule instead of repeating the
+  // AKTENLAGE record-block label that sits directly below it.
+  function parseStamp(receipt) {
+    const haystack = `${receipt.beleg_dagegen || ''} ${receipt.quelle_primaer || ''}`;
+    const match = haystack.match(/Drs\.\s*\d+\/\d+|Az\.\s*[A-Za-zÄÖÜäöü]+\s*\d+\/\d+/);
+    return match ? match[0].replace(/\s+/g, ' ').trim() : null;
+  }
+
+  function renderCard(receipt) {
+    // Some rows are single standalone facts with no persona/claim pairing (persona_claim is
+    // literally "n/a ..." in the source data, e.g. bilge-volksverhetzung). Those render without
+    // a claim block at all rather than showing a fabricated or empty "BEHAUPTUNG".
+    const isPaired = !String(receipt.persona_claim || '').trim().toLowerCase().startsWith('n/a');
+
+    const card = document.createElement('article');
+    card.className = 'card' + (isPaired ? '' : ' card--single');
+    card.dataset.card = receipt.id;
+    card.dataset.frame = receipt.frame || '';
+
+    const head = document.createElement('header');
+    head.className = 'card__head';
+    const kicker = document.createElement('p');
+    kicker.className = 'card__kicker';
+    kicker.textContent = 'Beleg';
+    const person = document.createElement('h2');
+    person.className = 'card__person';
+    person.textContent = receipt.person || '';
+    const role = document.createElement('p');
+    role.className = 'card__role';
+    role.textContent = receipt.rolle || '';
+    head.append(kicker, person, role);
+    card.appendChild(head);
+
+    if (isPaired) {
+      const claimBlock = document.createElement('div');
+      claimBlock.className = 'card__block card__block--claim';
+      const claimLabel = document.createElement('p');
+      claimLabel.className = 'card__label';
+      claimLabel.textContent = 'Behauptung';
+      const claimText = document.createElement('p');
+      claimText.className = 'card__claim-text';
+      claimText.textContent = receipt.persona_claim || '';
+      claimBlock.append(claimLabel, claimText);
+      card.appendChild(claimBlock);
+    }
+
+    const stampVal = parseStamp(receipt);
+    const stampRow = document.createElement('div');
+    stampRow.className = 'card__stamp-row';
+    if (stampVal) {
+      const stampLead = document.createElement('span');
+      stampLead.className = 'card__stamp-lead';
+      stampLead.setAttribute('aria-hidden', 'true');
+      const stamp = document.createElement('span');
+      stamp.className = 'card__stamp';
+      stamp.textContent = stampVal;
+      const stampTail = document.createElement('span');
+      stampTail.className = 'card__stamp-tail';
+      stampTail.setAttribute('aria-hidden', 'true');
+      stampRow.append(stampLead, stamp, stampTail);
+    } else {
+      // No Drucksache or Aktenzeichen in the source: a clean full-width rule, no boxed stamp,
+      // so the divider does not repeat the AKTENLAGE record label directly below it.
+      const rule = document.createElement('span');
+      rule.className = 'card__stamp-tail';
+      rule.setAttribute('aria-hidden', 'true');
+      stampRow.append(rule);
+    }
+    card.appendChild(stampRow);
+
+    const recordBlock = document.createElement('div');
+    recordBlock.className = 'card__block card__block--record';
+    const recordLabel = document.createElement('p');
+    recordLabel.className = 'card__label card__label--accent';
+    recordLabel.textContent = 'Aktenlage';
+    const recordText = document.createElement('p');
+    recordText.className = 'card__record-text';
+    recordText.textContent = receipt.beleg_dagegen || '';
+    recordBlock.append(recordLabel, recordText);
+    card.appendChild(recordBlock);
+
+    const foot = document.createElement('footer');
+    foot.className = 'card__foot';
+    const source = document.createElement('p');
+    source.className = 'card__source';
+    const sourceKicker = document.createElement('span');
+    sourceKicker.className = 'card__source-kicker';
+    sourceKicker.textContent = 'Quelle:';
+    const sourceText = document.createElement('span');
+    sourceText.textContent = receipt.quelle_primaer || '';
+    const sourceDate = document.createElement('span');
+    sourceDate.className = 'card__source-date';
+    sourceDate.textContent = receipt.quelle_datum || '';
+    source.append(sourceKicker, sourceText, sourceDate);
+    if (String(receipt.verified_by || '').includes('oppo-verify')) {
+      const verified = document.createElement('span');
+      verified.className = 'card__verified';
+      verified.textContent = 'Primär bestätigt';
+      source.appendChild(verified);
+    }
+    const wordmark = document.createElement('p');
+    wordmark.className = 'card__wordmark';
+    wordmark.textContent = 'afd-check.de';
+    foot.append(source, wordmark);
+    card.appendChild(foot);
+
+    return card;
+  }
+
+  async function renderPrintStack(faktRows) {
+    app.innerHTML = '';
+    if (!faktRows.length) { app.appendChild(buildStateNode('empty')); return; }
+    const stack = document.createElement('div');
+    stack.id = 'print-stack';
+    const cardEls = faktRows.map((r) => {
+      const card = renderCard(r);
+      stack.appendChild(card);
+      return card;
+    });
+    app.appendChild(stack);
+    await nextFrame();
+    cardEls.forEach(fitCardText);
+    await nextFrame();
+  }
+
+  async function renderGallery(faktRows, withheldRows) {
+    app.innerHTML = '';
+
+    const banner = document.createElement('div');
+    banner.className = 'banner';
+    banner.lang = 'de';
+    banner.innerHTML = '<a href="/" style="color:inherit;text-decoration:none">afd-check.de</a>  &nbsp;·&nbsp;  Sachsen-Anhalt';
+    app.appendChild(banner);
+
+    const header = document.createElement('div');
+    header.className = 'gallery-head';
+    header.lang = 'de';
+    header.innerHTML = `
+      <h1>Sachsen-Anhalt <span class="sep">·</span> Aussage und Abstimmung</h1>
+      <p class="gallery-intro">Landtagswahl Sachsen-Anhalt am 6. September 2026. Was AfD-Politiker öffentlich sagen, und wie sie im Landtag abgestimmt haben. Jede Karte stellt eine öffentliche Aussage der belegten parlamentarischen oder gerichtlichen Aktenlage gegenüber, mit Originalquelle und Datum.</p>
+    `;
+    app.appendChild(header);
+
+    const controls = document.createElement('div');
+    controls.className = 'controls';
+    controls.lang = 'en';
+    const currentAr = document.documentElement.dataset.ar;
+    // Filter buttons are data-driven from the frames actually present in the FAKT set, so new
+    // frames (geschichte, programm) get a button automatically instead of only showing under Alle.
+    const FRAME_LABELS = { oekonomie: 'Ökonomie', rechtsextremismus: 'Rechtsextremismus', geschichte: 'Geschichte', programm: 'Programm', bruecke: 'Brücke' };
+    const FRAME_ORDER = ['oekonomie', 'rechtsextremismus', 'geschichte', 'programm', 'bruecke'];
+    const framesPresent = [...new Set(faktRows.map((r) => r.frame).filter(Boolean))]
+      .sort((a, b) => FRAME_ORDER.indexOf(a) - FRAME_ORDER.indexOf(b));
+    const filterButtons = ['<button type="button" class="filter-btn" data-filter-btn="alle" aria-pressed="true">Alle</button>']
+      .concat(framesPresent.map((f) => `<button type="button" class="filter-btn" data-filter-btn="${f}" aria-pressed="false">${FRAME_LABELS[f] || f}</button>`))
+      .join('\n        ');
+    controls.innerHTML = `
+      <div class="controls__group" role="group" aria-label="Card size">
+        <button type="button" class="toggle-btn" data-ar-btn="4x5" aria-pressed="${currentAr === '4x5'}">4:5</button>
+        <button type="button" class="toggle-btn" data-ar-btn="9x16" aria-pressed="${currentAr === '9x16'}">9:16</button>
+      </div>
+      <div class="controls__group" role="group" aria-label="Frame filter" lang="de">
+        ${filterButtons}
+      </div>
+    `;
+    app.appendChild(controls);
+
+    controls.querySelectorAll('[data-ar-btn]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.documentElement.dataset.ar = btn.dataset.arBtn;
+        controls.querySelectorAll('[data-ar-btn]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      });
+    });
+
+    if (!faktRows.length) {
+      app.appendChild(buildStateNode('empty'));
+      return;
+    }
+
+    const grid = document.createElement('div');
+    grid.className = 'card-grid';
+    const cardEls = [];
+    faktRows.forEach((r, i) => {
+      const frame = document.createElement('div');
+      frame.className = 'card-frame';
+      frame.dataset.frame = r.frame || '';
+      frame.style.setProperty('--i', i);
+      const card = renderCard(r);
+      frame.appendChild(card);
+      grid.appendChild(frame);
+      cardEls.push(card);
+    });
+    app.appendChild(grid);
+
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const scale = entry.contentRect.width / 1080;
+        const frame = entry.target;
+        frame.querySelector('.card').style.setProperty('--card-scale', scale);
+        frame.classList.add('is-scaled');
+      }
+    });
+    grid.querySelectorAll('.card-frame').forEach((f) => ro.observe(f));
+
+    controls.querySelectorAll('[data-filter-btn]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const val = btn.dataset.filterBtn;
+        controls.querySelectorAll('[data-filter-btn]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        grid.querySelectorAll('.card-frame').forEach((f) => {
+          f.hidden = val !== 'alle' && f.dataset.frame !== val;
+        });
+      });
+    });
+
+    if (withheldRows.length) {
+      const section = document.createElement('section');
+      section.className = 'withheld';
+      section.lang = 'de';
+      section.innerHTML = '<h2>Zurückgehalten <span class="withheld__meta">(BERICHTET, Right-of-Reply nötig)</span></h2>';
+      const list = document.createElement('ul');
+      list.className = 'withheld__list';
+      withheldRows.forEach((r) => {
+        const li = document.createElement('li');
+        const p = document.createElement('span');
+        p.className = 'withheld__person';
+        p.textContent = r.person || '';
+        const d = document.createElement('span');
+        d.className = 'withheld__desc';
+        d.textContent = r.beleg_dagegen || '';
+        li.append(p, d);
+        list.appendChild(li);
+      });
+      section.appendChild(list);
+      app.appendChild(section);
+    }
+
+    await nextFrame();
+    cardEls.forEach(fitCardText);
+    await nextFrame();
+    grid.classList.add('is-ready');
+  }
+
+  (async () => {
+    const fontsPromise = Promise.all([
+      document.fonts.load('700 46px Archivo'),
+      document.fonts.load('600 40px Archivo'),
+      document.fonts.load('500 22px Archivo'),
+      document.fonts.load('500 20px "IBM Plex Mono"'),
+      document.fonts.load('400 20px "IBM Plex Mono"'),
+    ]).catch(() => {});
+
+    let data;
+    try {
+      const [res] = await Promise.all([fetch('./receipts-db.json'), fontsPromise]);
+      if (!res.ok) throw new Error('HTTP ' + res.status + ' fetching receipts-db.json');
+      data = await res.json();
+    } catch (err) {
+      app.innerHTML = '';
+      app.appendChild(buildStateNode('error', { detail: err && err.message ? err.message : String(err) }));
+      document.documentElement.dataset.cardsReady = 'true';
+      return;
+    }
+
+    const receipts = Array.isArray(data.receipts) ? data.receipts : [];
+    const faktRows = receipts.filter((r) => r.klassifikation === 'FAKT');
+    const withheldRows = receipts.filter((r) => r.klassifikation === 'BERICHTET');
+
+    if (isPrint) {
+      await renderPrintStack(faktRows);
+    } else {
+      await renderGallery(faktRows, withheldRows);
+    }
+
+    document.documentElement.dataset.cardsReady = 'true';
+  })();
+</script>
+</body>
+</html>
