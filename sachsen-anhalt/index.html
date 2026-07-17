@@ -1,23 +1,22 @@
 <!doctype html>
 <!--
-  DESIGN DECISIONS  (afd-check.de/sachsen-anhalt, kinetic edition)
+  DESIGN DECISIONS  (afd-check.de/sachsen-anhalt, "aufklappen" edition)
 
-  Stance: Experimental (Frederik: "enticing, eye catching, frontier mechanics, motion mechanics, the whole lot").
-  Synthesis: spectacle in the frame, sobriety in the evidence. The hero and the choreography carry the
-  eye-catch; each receipt card stays a sober documentary register, because on a fact-check the credibility
-  is the asset. This is also the frontier thesis: one signature move, calm around it.
+  Stance: Experimental, deliberately NOT narradar. narradar = dark instrument, WebGL radar hero,
+  grotesk+mono, bright signal-red, two-tone kinetic headline. This shares none of that.
 
-  Signature move: the knife-edge. A live 97-seat projection bar fills on load and shows the AfD two seats
-  short of an absolute majority, then the page scrolls into evidence where every public claim is overturned
-  by the parliamentary or judicial record (a two-beat reveal per card: claim first, record after).
+  Signature move: the unfold. A single-column, numbered FEED of confrontations. Each row is a hook
+  (what the AfD said); clicking it opens the record that overturns it (the vote, the ruling, the
+  source). The one deliberate move is the open itself.
 
-  Frontier mechanics: lean WebGL ambient hero (raw fragment shader, one covering triangle, benign fallback),
-  kinetic two-tone display headline (Archivo variable), IntersectionObserver reveals, View-Transition
-  filtering, a scroll-progress rail, count-up. Native CSS platform, transform+opacity only, expo-out easing
-  cubic-bezier(.16,1,.3,1), tiered durations, prefers-reduced-motion fallbacks everywhere.
+  Frontier mechanics, native over JS: a real <details name="konter"> exclusive accordion (keyboard
+  accessible, works without JS), the open animated with the Web Animations API, :has()/[open] state
+  styling, View-Transition filtering. Progressive disclosure. Expressive variable type carries the
+  page; one hero object (the strongest confrontation is open on load).
 
-  Faces: Archivo 400..900 (display + body), IBM Plex Mono 400/500 (kickers, stamps, source). No Inter,
-  no serif, no italic, no emoji. Canvas #F7F8F6 light. One accent #B23A22 (5.6:1 on canvas). Radius 0.
+  Face: Bricolage Grotesque (variable, characterful), no mono, no Inter. Canvas cool near-white
+  #F7F8F6, warm terracotta accent only. Radius 0, hard left edge, tabular figures. Light mode.
+  No em dashes, no emoji, no serif, no italic. Reduced-motion fallbacks throughout.
 -->
 <html lang="de">
 <head>
@@ -26,9 +25,9 @@
 <meta name="color-scheme" content="light">
 <title>Sachsen-Anhalt: Was die AfD verspricht, und wie sie abstimmt | afd-check</title>
 <link rel="canonical" href="https://afd-check.de/sachsen-anhalt/">
-<meta name="description" content="Landtagswahl Sachsen-Anhalt 2026: Was AfD-Politiker öffentlich sagen, und wie sie im Landtag abstimmen. Belege mit Originalquellen.">
+<meta name="description" content="Landtagswahl Sachsen-Anhalt 2026: 14 Aussagen der AfD, jede aufklappbar bis zur Abstimmung, zum Urteil und zur Quelle.">
 <meta property="og:title" content="Sachsen-Anhalt: Was die AfD verspricht, und wie sie abstimmt">
-<meta property="og:description" content="Belege mit Originalquellen: öffentliche Aussagen gegen Abstimmungen und Gerichtsentscheidungen.">
+<meta property="og:description" content="14 Gegenüberstellungen mit Originalquellen: öffentliche Aussagen gegen Abstimmungen und Gerichtsentscheidungen.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://afd-check.de/sachsen-anhalt/">
 <meta property="og:image" content="https://afd-check.de/sachsen-anhalt/og.png">
@@ -36,329 +35,201 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
 <style>
   :root {
     --canvas: #F7F8F6;
-    --ink: #14161A;
+    --ink: #17181C;
     --muted: #6B7076;
-    --hairline: #DCDFDA;
-    /* #B23A22 on #F7F8F6 = 5.6:1, comfortable WCAG AA for text and marks. */
-    --accent: #B23A22;
-    --radius: 0;
-    --font: "Archivo", ui-sans-serif, system-ui, sans-serif;
-    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-    --claim-ink: color-mix(in srgb, var(--ink) 72%, var(--muted) 28%);
+    --hairline: #DCDDD8;
+    /* warm terracotta, not narradar signal-red. #A8380F on #F7F8F6 clears WCAG AA for text. */
+    --accent: #A8380F;
+    --font: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    --claim-ink: color-mix(in srgb, var(--ink) 78%, var(--muted) 22%);
     --ease: cubic-bezier(.16,1,.3,1);
-    --micro: 140ms;
-    --reveal: 640ms;
-    --page: 420ms;
+    --micro: 160ms;
+    --numcol: clamp(38px, 5vw, 60px);
+    --gap: clamp(16px, 3vw, 30px);
   }
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--canvas); color: var(--ink); font-family: var(--font);
-    font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    font-optical-sizing: auto; }
   a { color: inherit; }
-  h1, h2, h3, p { margin: 0; }
-  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  h1, h2, p { margin: 0; }
 
-  .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; background: var(--accent);
-    transform: scaleX(0); transform-origin: 0 50%; z-index: 40; will-change: transform; }
+  .wrap { max-width: 900px; margin-inline: auto; padding-inline: clamp(20px, 5vw, 56px); }
 
-  .masthead { position: relative; z-index: 20; display: flex; align-items: center; gap: 14px;
-    padding: 16px clamp(20px,5vw,72px); border-bottom: 1px solid var(--hairline);
-    font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
-  .masthead a { text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 1px; }
-  .masthead .dot { color: var(--muted); }
+  .masthead { border-bottom: 1px solid var(--hairline); }
+  .masthead .wrap { display: flex; align-items: center; gap: 12px; padding-block: 18px;
+    font-size: 14px; font-weight: 600; letter-spacing: .01em; }
+  .masthead a { text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 1px; }
+  .masthead .sep { color: var(--muted); font-weight: 400; }
+  .masthead .light { color: var(--muted); font-weight: 500; }
 
   /* ---------- HERO ---------- */
-  .hero { position: relative; overflow: hidden; padding: clamp(48px,9vh,120px) clamp(20px,5vw,72px) clamp(40px,7vh,88px);
-    background: linear-gradient(180deg,#F5F6F3,#FAFAF8); }
-  .hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
-  .hero__inner { position: relative; z-index: 1; max-width: 1180px; margin-inline: auto; }
-  .hero__kicker { font-family: var(--mono); font-size: clamp(12px,1.4vw,14px); font-weight: 500;
-    letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
-  .hero__title { margin-top: 20px; font-weight: 800; letter-spacing: -.035em; line-height: .96;
-    font-size: clamp(52px, 12vw, 168px); }
-  .hero__title .l { display: block; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
-  .hero__title .l span { display: inline-block; }
-  .hero__title .accent { color: var(--accent); }
-  .hero.go .hero__title .l span { animation: rise var(--reveal) var(--ease) both; }
-  .hero.go .hero__title .l:nth-child(2) span { animation-delay: 90ms; }
-  @keyframes rise { from { transform: translateY(102%); } to { transform: translateY(0); } }
-  .hero__sub { margin-top: 28px; max-width: 60ch; font-size: clamp(17px,1.5vw,21px); font-weight: 500;
-    line-height: 1.5; color: var(--claim-ink); }
-
-  .stakes { margin-top: clamp(36px,5vh,56px); max-width: 760px; }
-  .stakes__head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-  .stakes__num { font-size: clamp(44px,7vw,72px); font-weight: 800; letter-spacing: -.03em; line-height: 1; }
-  .stakes__of { font-family: var(--mono); font-size: 15px; color: var(--muted); letter-spacing: .04em; }
-  .seatbar { display: flex; align-items: flex-end; gap: 2px; height: 62px; margin-top: 22px; }
-  .tick { flex: 1 1 0; background: var(--hairline); height: 34%; transform: scaleY(.001); transform-origin: bottom;
-    transition: transform var(--reveal) var(--ease); transition-delay: calc(var(--i) * 7ms); }
-  .tick.afd { background: var(--ink); height: 74%; }
-  .tick.gap { background: var(--accent); height: 100%; }
-  .stakes.go .tick { transform: scaleY(1); }
-  .stakes__legend { margin-top: 16px; font-family: var(--mono); font-size: 13px; color: var(--muted);
-    letter-spacing: .02em; line-height: 1.7; }
-  .stakes__legend b { color: var(--ink); font-weight: 500; }
-  .stakes__legend .k { color: var(--accent); }
-  .hero__cue { margin-top: clamp(32px,5vh,52px); font-family: var(--mono); font-size: 13px; letter-spacing: .1em;
+  .hero { padding-block: clamp(52px, 10vh, 128px) clamp(36px, 6vh, 72px); }
+  .kicker { font-size: clamp(12px, 1.3vw, 14px); font-weight: 600; letter-spacing: .04em;
     text-transform: uppercase; color: var(--muted); }
+  .kicker b { color: var(--accent); }
+  h1.title { margin-top: 22px; font-weight: 700; letter-spacing: -.035em; line-height: .97;
+    font-size: clamp(46px, 9.5vw, 118px); }
+  .lede { margin-top: 26px; max-width: 40ch; font-size: clamp(18px, 1.7vw, 23px); font-weight: 500;
+    line-height: 1.42; color: var(--claim-ink); }
+  .stakes { margin-top: clamp(30px, 5vh, 46px); padding-top: 20px; border-top: 1px solid var(--hairline);
+    max-width: 62ch; font-size: 15px; font-weight: 500; line-height: 1.6; color: var(--muted); }
+  .stakes b { color: var(--ink); font-weight: 600; }
 
-  /* ---------- GALLERY ---------- */
-  #app { max-width: 1280px; margin: 0 auto; padding: clamp(48px,8vh,96px) clamp(20px,5vw,72px) 0; }
-  .controls { position: sticky; top: 0; z-index: 15; display: flex; flex-wrap: wrap; gap: 8px;
-    padding: 16px 0; margin-bottom: 40px; background: color-mix(in srgb, var(--canvas) 88%, transparent);
-    backdrop-filter: blur(6px); border-bottom: 1px solid var(--hairline); }
-  .fbtn { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase;
-    padding: 9px 15px; border: 1px solid var(--hairline); color: var(--muted); transition: color var(--micro) var(--ease), border-color var(--micro) var(--ease); }
-  .fbtn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
-  @media (hover: hover) { .fbtn:hover { border-color: var(--ink); color: var(--ink); } }
-  .fbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  /* ---------- FILTERS ---------- */
+  .filters { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; gap: 7px;
+    padding-block: 14px; margin-bottom: 8px;
+    background: color-mix(in srgb, var(--canvas) 90%, transparent); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--hairline); }
+  .chip { font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .01em; padding: 8px 14px;
+    border: 1px solid var(--hairline); background: none; color: var(--muted); cursor: pointer;
+    transition: color var(--micro) var(--ease), border-color var(--micro) var(--ease); }
+  .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { .chip:hover { border-color: var(--ink); color: var(--ink); } }
+  .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  .grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding-bottom: 40px; }
-  @media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
-  @media (min-width: 1080px) { .grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
+  /* ---------- FEED ---------- */
+  .row { border-top: 1px solid var(--hairline); }
+  .row:last-of-type { border-bottom: 1px solid var(--hairline); }
+  .row[hidden] { display: none; }
 
-  .card { border: 1px solid var(--hairline); background: #FCFCFB; padding: clamp(24px,3vw,40px);
-    display: flex; flex-direction: column; transition: border-color var(--micro) var(--ease), transform var(--micro) var(--ease); }
-  @media (hover: hover) { .card:hover { border-color: color-mix(in srgb, var(--ink) 34%, var(--hairline)); transform: translateY(-3px); } }
-  .card > * { opacity: 0; transform: translateY(16px); transition: opacity var(--reveal) var(--ease), transform var(--reveal) var(--ease); }
-  .card.in > * { opacity: 1; transform: none; }
-  .card.in .c-claim { transition-delay: 40ms; }
-  .card.in .c-div { transition-delay: 150ms; }
-  .card.in .c-record { transition-delay: 240ms; }
-  .card.in .c-foot { transition-delay: 360ms; }
+  .hook { display: grid; grid-template-columns: var(--numcol) 1fr auto; gap: var(--gap);
+    align-items: start; padding-block: clamp(22px, 3vw, 34px); cursor: pointer; list-style: none; }
+  .hook::-webkit-details-marker { display: none; }
+  .hook:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .num { font-size: clamp(20px, 2.4vw, 30px); font-weight: 300; color: var(--muted); line-height: 1.05;
+    letter-spacing: -.02em; transition: color var(--micro) var(--ease); }
+  .row[open] .num { color: var(--accent); font-weight: 500; }
+  .who { font-size: 14px; line-height: 1.3; }
+  .who b { font-weight: 600; }
+  .who .role { color: var(--muted); }
+  .claim { display: block; margin-top: 9px; font-size: clamp(19px, 2.1vw, 28px); font-weight: 600;
+    line-height: 1.24; letter-spacing: -.015em; color: var(--claim-ink); }
+  .aff { position: relative; width: 24px; height: 24px; align-self: center; }
+  .aff::before, .aff::after { content: ""; position: absolute; left: 50%; top: 50%; width: 16px; height: 2px;
+    background: var(--muted); transform: translate(-50%, -50%); transition: transform var(--micro) var(--ease), background-color var(--micro) var(--ease); }
+  .aff::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .row[open] .aff::before, .row[open] .aff::after { background: var(--accent); }
+  .row[open] .aff::after { transform: translate(-50%, -50%) rotate(0deg); }
 
-  .c-kicker { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
-  .c-person { margin-top: 8px; font-size: clamp(21px,2vw,26px); font-weight: 700; letter-spacing: -.02em; line-height: 1.12; }
-  .c-role { margin-top: 4px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
-  .c-label { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-  .c-label.accent { color: var(--accent); }
-  .c-claim { margin-top: 26px; }
-  .c-claim p { margin-top: 12px; font-size: clamp(18px,1.7vw,22px); font-weight: 600; line-height: 1.35; color: var(--claim-ink); }
-  .c-div { display: flex; align-items: center; gap: 14px; margin: 26px 0; }
-  .c-div .rule { flex: 1 1 auto; height: 1px; background: var(--hairline); }
-  .c-stamp { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .03em; color: var(--accent);
-    border: 1.5px solid var(--accent); padding: 7px 12px; white-space: nowrap; }
-  .c-record p { margin-top: 12px; font-size: clamp(19px,1.9vw,25px); font-weight: 700; line-height: 1.3; letter-spacing: -.01em; }
-  .c-foot { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--hairline); display: flex;
-    align-items: flex-end; justify-content: space-between; gap: 20px; }
-  .c-src { font-family: var(--mono); font-size: 12px; color: var(--muted); line-height: 1.55; min-width: 0; }
-  .c-src b { color: var(--ink); font-weight: 500; }
-  .c-badge { display: block; margin-top: 8px; font-family: var(--mono); font-size: 11px; font-weight: 500;
-    letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
-  .c-mark { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .06em; color: var(--muted); white-space: nowrap; }
+  .reveal { overflow: hidden; }
+  .reveal__pad { padding: 2px 0 clamp(28px, 3.4vw, 40px); padding-left: calc(var(--numcol) + var(--gap)); }
+  .rlabel { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .rlabel .ref { margin-left: 12px; color: var(--muted); font-weight: 500; letter-spacing: .04em; }
+  .record { margin-top: 13px; font-size: clamp(18px, 1.9vw, 23px); font-weight: 600; line-height: 1.36; color: var(--ink); }
+  .src { margin-top: 18px; font-size: 13px; font-weight: 400; line-height: 1.55; color: var(--muted); }
+  .src b { color: var(--ink); font-weight: 600; }
+  .badge { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 4px 9px; }
 
-  .site-foot { max-width: 84ch; margin: clamp(64px,10vh,120px) auto 0; padding: 28px clamp(20px,5vw,72px) 80px;
-    border-top: 1px solid var(--hairline); font-family: var(--mono); font-size: 14px; color: var(--muted); line-height: 1.7; }
-  .site-foot a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline); }
-  .site-foot__note { margin-top: 12px; }
-
-  .state { max-width: 60ch; padding: 48px clamp(20px,5vw,72px); font-family: var(--mono); font-size: 15px; color: var(--muted); }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .hero__title .l span { transform: none !important; animation: none !important; }
-    .tick { transform: scaleY(1) !important; transition: none !important; }
-    .card > * { opacity: 1 !important; transform: none !important; transition: none !important; }
-    .card { transition: none; }
+  @media (max-width: 560px) {
+    .claim { font-size: 21px; }
+    .aff { align-self: start; margin-top: 4px; }
   }
+
+  .site-foot { margin-top: clamp(56px, 9vh, 104px); border-top: 1px solid var(--hairline); }
+  .site-foot .wrap { padding-block: 28px 80px; font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .site-foot a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  .site-foot__note { margin-top: 12px; max-width: 74ch; }
+
+  .state { padding-block: 48px; font-size: 15px; color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
-<div class="scroll-progress" aria-hidden="true"></div>
+<header class="masthead"><div class="wrap"><a href="/">afd-check.de</a> <span class="sep">/</span> <span class="light">Sachsen-Anhalt</span></div></header>
 
-<header class="masthead"><a href="/">afd-check.de</a> <span class="dot">/</span> Sachsen-Anhalt</header>
+<section class="hero" aria-label="Einleitung"><div class="wrap">
+  <p class="kicker">Landtagswahl Sachsen-Anhalt · 6. September 2026 · <b>noch <span data-cd>50</span> Tage</b></p>
+  <h1 class="title">Gesagt. Und abgestimmt.</h1>
+  <p class="lede">14 Aussagen der AfD aus dem Landtag Sachsen-Anhalt. Klapp eine auf, und der Beleg erscheint: die Abstimmung, das Gerichts- oder Verfassungsschutz-Urteil, die Quelle.</p>
+  <p class="stakes">Umfragen sehen die AfD bei rund 41 Prozent, etwa <b>47 von 97 Sitzen, zwei unter der absoluten Mehrheit</b> (49). Quelle: INSA, 3. Juli 2026.</p>
+</div></section>
 
-<section class="hero" aria-labelledby="ht">
-  <canvas class="hero__bg" aria-hidden="true"></canvas>
-  <div class="hero__inner">
-    <p class="hero__kicker">Landtagswahl Sachsen-Anhalt <span class="dot" style="color:var(--muted)">·</span> 6. September 2026</p>
-    <h1 class="hero__title" id="ht"><span class="l"><span>Was sie sagt.</span></span><span class="l"><span class="accent">Was sie tut.</span></span></h1>
-    <p class="hero__sub">14 belegte Vorgänge aus dem Landtag: öffentliche Aussagen der AfD gegen ihre eigenen Abstimmungen, Gerichts- und Verfassungsschutz-Entscheidungen. Jeder mit Originalquelle und Datum.</p>
+<main class="wrap" id="app" role="main"></main>
 
-    <div class="stakes" aria-label="Sitzprojektion">
-      <div class="stakes__head">
-        <span class="stakes__num"><span data-count="47">47</span></span>
-        <span class="stakes__of">von 97 Sitzen, projiziert</span>
-      </div>
-      <div class="seatbar" data-seatbar aria-hidden="true"></div>
-      <p class="stakes__legend"><b>AfD: rund 47 Sitze.</b> <span class="k">Es fehlen 2 Sitze</span> zur absoluten Mehrheit (49). Umfrage: INSA, 3. Juli 2026, bei rund 41 Prozent. <b>Wahltag in <span data-countdown>50</span> Tagen.</b></p>
-    </div>
-
-    <p class="hero__cue">Nach unten: die Belege</p>
-  </div>
-</section>
-
-<main id="app" role="main"></main>
-
-<footer class="site-foot" lang="de">
+<footer class="site-foot"><div class="wrap">
   <p><a href="/">afd-check.de</a> · Sachsen-Anhalt · Autor: Frederik Metz · Stand: 18. Juli 2026 · <a href="/impressum.html">Impressum</a></p>
   <p class="site-foot__note">Gezeigt werden nur belegte Vorgänge (öffentliche Aussage plus Abstimmung, Gerichts- oder Verfassungsschutz-Entscheidung), jeweils mit Originalquelle und Datum. Vorwürfe ohne abgeschlossene Prüfung werden nicht veröffentlicht.</p>
-</footer>
+</div></footer>
 
 <script type="module">
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// ---- scroll progress rail ----
-const rail = document.querySelector('.scroll-progress');
-let raf = 0;
-addEventListener('scroll', () => {
-  if (raf) return;
-  raf = requestAnimationFrame(() => {
-    const d = document.documentElement;
-    const p = d.scrollTop / ((d.scrollHeight - d.clientHeight) || 1);
-    rail.style.transform = 'scaleX(' + Math.min(1, Math.max(0, p)) + ')';
-    raf = 0;
-  });
-}, { passive: true });
+const cdEl = document.querySelector('[data-cd]');
+if (cdEl) cdEl.textContent = Math.max(0, Math.ceil((new Date('2026-09-06T00:00:00') - new Date()) / 86400000));
 
-// ---- countdown ----
-const cd = document.querySelector('[data-countdown]');
-if (cd) {
-  const days = Math.max(0, Math.ceil((new Date('2026-09-06T00:00:00') - new Date()) / 86400000));
-  cd.textContent = days;
-}
-
-// ---- WebGL ambient hero (raw fragment shader, one covering triangle; benign fallback) ----
-function initHero() {
-  const cv = document.querySelector('.hero__bg');
-  let gl;
-  try { gl = cv.getContext('webgl', { antialias: false, alpha: true }); } catch (e) { gl = null; }
-  if (!gl) { cv.style.display = 'none'; return; }
-  const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
-  const fs = [
-    'precision mediump float;uniform vec2 u_res;uniform float u_t;',
-    'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
-    'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);',
-    'return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
-    'void main(){vec2 uv=gl_FragCoord.xy/u_res.xy;',
-    'vec3 c=mix(vec3(.965,.968,.960),vec3(.986,.982,.974),uv.y);',
-    'float lines=sin(uv.y*190.0+u_t*0.14);c-=0.006*smoothstep(0.55,1.0,lines);',
-    'float cl=n(uv*3.0+vec2(u_t*0.018,u_t*0.012));c+=(cl-0.5)*0.014;',
-    'float scan=smoothstep(0.0016,0.0,abs(uv.x-fract(u_t*0.028)));',
-    'c=mix(c,vec3(.70,.227,.133),scan*0.09);',
-    'gl_FragColor=vec4(c,1.0);}'
-  ].join('');
-  function sh(t, s) { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; }
-  const pr = gl.createProgram();
-  gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs));
-  gl.linkProgram(pr);
-  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { cv.style.display = 'none'; return; }
-  gl.useProgram(pr);
-  const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-  const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-  const uRes = gl.getUniformLocation(pr, 'u_res'), uT = gl.getUniformLocation(pr, 'u_t');
-  function size() {
-    const dpr = Math.min(2, devicePixelRatio || 1);
-    cv.width = cv.clientWidth * dpr; cv.height = cv.clientHeight * dpr;
-    gl.viewport(0, 0, cv.width, cv.height); gl.uniform2f(uRes, cv.width, cv.height);
-  }
-  size(); addEventListener('resize', size, { passive: true });
-  function frame(t) { gl.uniform1f(uT, t * 0.001); gl.drawArrays(gl.TRIANGLES, 0, 3); if (!reduce) requestAnimationFrame(frame); }
-  frame(0);
-}
-initHero();
-
-// ---- hero kinetic + seat bar ----
-requestAnimationFrame(() => document.querySelector('.hero').classList.add('go'));
-
-(function seatbar() {
-  const bar = document.querySelector('[data-seatbar]');
-  if (!bar) return;
-  const AFD = 47, MAJORITY = 49, TOTAL = 97;
-  for (let i = 0; i < TOTAL; i++) {
-    const t = document.createElement('span');
-    t.className = 'tick' + (i < AFD ? ' afd' : (i < MAJORITY ? ' gap' : ''));
-    t.style.setProperty('--i', i);
-    bar.appendChild(t);
-  }
-  requestAnimationFrame(() => document.querySelector('.stakes').classList.add('go'));
-  const num = document.querySelector('[data-count]');
-  if (num && !reduce) {
-    const target = +num.dataset.count; const t0 = performance.now(); const dur = 1100;
-    num.textContent = '0';
-    (function step(now) {
-      const k = Math.min(1, (now - t0) / dur); const e = 1 - Math.pow(1 - k, 3);
-      num.textContent = Math.round(target * e);
-      if (k < 1) requestAnimationFrame(step);
-    })(t0);
-  }
-})();
-
-// ---- gallery ----
 const app = document.getElementById('app');
-const FRAME_LABELS = { oekonomie: 'Ökonomie', rechtsextremismus: 'Rechtsextremismus', geschichte: 'Geschichte', programm: 'Programm', bruecke: 'Brücke' };
-const FRAME_ORDER = ['oekonomie', 'rechtsextremismus', 'geschichte', 'programm', 'bruecke'];
+const LABELS = { oekonomie: 'Ökonomie', rechtsextremismus: 'Rechtsextremismus', geschichte: 'Geschichte', programm: 'Programm', bruecke: 'Brücke' };
+const ORDER = ['oekonomie', 'rechtsextremismus', 'geschichte', 'programm', 'bruecke'];
 
-function stamp(r) {
+function stampOf(r) {
   const m = ((r.beleg_dagegen || '') + ' ' + (r.quelle_primaer || '')).match(/Drs\.\s*\d+\/\d+|Az\.\s*[A-Za-zÄÖÜäöü]+\s*\d+\/\d+/);
   return m ? m[0].replace(/\s+/g, ' ').trim() : null;
 }
 function el(tag, cls, txt) { const n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; }
 
-function renderCard(r) {
-  const paired = !String(r.persona_claim || '').trim().toLowerCase().startsWith('n/a');
-  const card = el('article', 'card'); card.dataset.frame = r.frame || '';
-  const head = el('div', 'c-head');
-  head.append(el('p', 'c-kicker', 'Beleg'), el('h2', 'c-person', r.person || ''), el('p', 'c-role', r.rolle || ''));
-  card.append(head);
-  if (paired) {
-    const cl = el('div', 'c-claim'); cl.append(el('p', 'c-label', 'Behauptung'), el('p', null, r.persona_claim || ''));
-    card.append(cl);
-  }
-  const div = el('div', 'c-div');
-  const s = stamp(r);
-  div.append(el('span', 'rule'));
-  if (s) { div.append(el('span', 'c-stamp', s), el('span', 'rule')); }
-  card.append(div);
-  const rec = el('div', 'c-record'); rec.append(el('p', 'c-label accent', 'Aktenlage'), el('p', null, r.beleg_dagegen || ''));
-  card.append(rec);
-  const foot = el('div', 'c-foot');
-  const src = el('p', 'c-src');
-  src.append(el('b', null, 'Quelle: '), document.createTextNode((r.quelle_primaer || '') + ' ' + (r.quelle_datum || '')));
-  if (String(r.verified_by || '').includes('oppo-verify')) src.append(el('span', 'c-badge', 'Primär bestätigt'));
-  foot.append(src, el('span', 'c-mark', 'afd-check.de'));
-  card.append(foot);
-  return card;
-}
+function renderRow(r, i) {
+  const d = el('details', 'row'); d.name = 'konter'; d.dataset.frame = r.frame || ''; if (i === 0) d.open = true;
 
-function buildFilters(frames, onPick) {
-  const wrap = el('div', 'controls'); wrap.setAttribute('role', 'group'); wrap.setAttribute('aria-label', 'Themenfilter'); wrap.lang = 'de';
-  const mk = (val, label, pressed) => {
-    const b = el('button', 'fbtn', label); b.type = 'button'; b.dataset.f = val; b.setAttribute('aria-pressed', String(pressed));
-    b.addEventListener('click', () => {
-      wrap.querySelectorAll('.fbtn').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-      onPick(val);
-    });
-    return b;
-  };
-  wrap.append(mk('alle', 'Alle', true));
-  frames.forEach(f => wrap.append(mk(f, FRAME_LABELS[f] || f, false)));
-  return wrap;
+  const sum = el('summary', 'hook');
+  sum.append(el('span', 'num', String(i + 1).padStart(2, '0')));
+  const body = el('span', 'hbody');
+  const who = el('span', 'who');
+  who.append(el('b', null, r.person || ''), document.createTextNode(' '), el('span', 'role', r.rolle || ''));
+  body.append(who);
+  if (!String(r.persona_claim || '').trim().toLowerCase().startsWith('n/a')) body.append(el('span', 'claim', r.persona_claim));
+  sum.append(body, el('span', 'aff'));
+  sum.querySelector('.aff').setAttribute('aria-hidden', 'true');
+  d.append(sum);
+
+  const reveal = el('div', 'reveal');
+  const pad = el('div', 'reveal__pad');
+  const label = el('p', 'rlabel', 'Die Aktenlage');
+  const s = stampOf(r);
+  if (s) label.append(el('span', 'ref', s));
+  pad.append(label, el('p', 'record', r.beleg_dagegen || ''));
+  const src = el('p', 'src'); src.append(el('b', null, 'Quelle: '), document.createTextNode((r.quelle_primaer || '') + ' ' + (r.quelle_datum || '')));
+  pad.append(src);
+  if (String(r.verified_by || '').includes('oppo-verify')) pad.append(el('span', 'badge', 'Primär bestätigt'));
+  reveal.append(pad); d.append(reveal);
+
+  d.addEventListener('toggle', () => {
+    if (reduce || !d.open) return;
+    const h = reveal.scrollHeight;
+    reveal.animate([{ height: '0px', opacity: 0 }, { height: h + 'px', opacity: 1 }], { duration: 520, easing: 'cubic-bezier(.16,1,.3,1)' });
+  });
+  return d;
 }
 
 fetch('./receipts-db.json').then(r => r.json()).then(data => {
   const rows = (data.receipts || []).filter(r => r.klassifikation === 'FAKT');
   if (!rows.length) { app.append(el('p', 'state', 'Noch keine veröffentlichten Belege.')); return; }
-  const frames = [...new Set(rows.map(r => r.frame).filter(Boolean))].sort((a, b) => (FRAME_ORDER.indexOf(a) + 1 || 99) - (FRAME_ORDER.indexOf(b) + 1 || 99));
-  const grid = el('div', 'grid');
-  const cards = rows.map(r => { const c = renderCard(r); grid.append(c); return c; });
+  const frames = [...new Set(rows.map(r => r.frame).filter(Boolean))].sort((a, b) => (ORDER.indexOf(a) + 1 || 99) - (ORDER.indexOf(b) + 1 || 99));
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-  if (reduce) cards.forEach(c => c.classList.add('in'));
-  else cards.forEach(c => io.observe(c));
+  const filters = el('div', 'filters'); filters.setAttribute('role', 'group'); filters.setAttribute('aria-label', 'Themenfilter');
+  const feed = el('div', 'feed');
+  const items = rows.map((r, i) => { const d = renderRow(r, i); feed.append(d); return d; });
 
-  function pick(val) {
-    const run = () => cards.forEach(c => { c.hidden = val !== 'alle' && c.dataset.frame !== val; });
-    if (document.startViewTransition && !reduce) document.startViewTransition(run); else run();
-  }
-  app.append(buildFilters(frames, pick), grid);
+  const mkChip = (val, label, pressed) => {
+    const b = el('button', 'chip', label); b.type = 'button'; b.setAttribute('aria-pressed', String(pressed));
+    b.addEventListener('click', () => {
+      filters.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      const run = () => items.forEach(d => { d.hidden = val !== 'alle' && d.dataset.frame !== val; });
+      if (document.startViewTransition && !reduce) document.startViewTransition(run); else run();
+    });
+    return b;
+  };
+  filters.append(mkChip('alle', 'Alle', true));
+  frames.forEach(f => filters.append(mkChip(f, LABELS[f] || f, false)));
+
+  app.append(filters, feed);
   document.documentElement.dataset.ready = 'true';
 });
 </script>
