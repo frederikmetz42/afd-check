@@ -1,29 +1,72 @@
 <!doctype html>
-<!--
-  DESIGN DECISIONS  (afd-check.de/sachsen-anhalt, "aufklappen" edition)
-
-  Stance: Experimental, deliberately NOT narradar. narradar = dark instrument, WebGL radar hero,
-  grotesk+mono, bright signal-red, two-tone kinetic headline. This shares none of that.
-
-  Signature move: the unfold. A single-column, numbered FEED of confrontations. Each row is a hook
-  (what the AfD said); clicking it opens the record that overturns it (the vote, the ruling, the
-  source). The one deliberate move is the open itself.
-
-  Frontier mechanics, native over JS: a real <details name="konter"> exclusive accordion (keyboard
-  accessible, works without JS), the open animated with the Web Animations API, :has()/[open] state
-  styling, View-Transition filtering. Progressive disclosure. Expressive variable type carries the
-  page; one hero object (the strongest confrontation is open on load).
-
-  Face: Bricolage Grotesque (variable, characterful), no mono, no Inter. Canvas cool near-white
-  #F7F8F6, warm terracotta accent only. Radius 0, hard left edge, tabular figures. Light mode.
-  No em dashes, no emoji, no serif, no italic. Reduced-motion fallbacks throughout.
--->
 <html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>Sachsen-Anhalt: Was die AfD verspricht, und wie sie abstimmt | afd-check</title>
+<!--
+  afd-check.de / Sachsen-Anhalt  ·  16c-ink.html  ·  Farbidentitaet-Variante "Ink pur"
+  Brief 10 (2026-07-22): identisch zu 15-finale.html, ABER monochrome Ink-Identitaet. Struktur (Spine,
+  Balken, Swatches, Rahmen, Chrome) komplett Ink/Grau (>=5.5:1); EINE Farbe nur auf dem einzelnen
+  entscheidenden Objekt pro Fall (Zahl/Zitat/Mechanismus) in tiefem Oxid #8B2E35 (--object, 7.7:1). Die
+  Restraint-Wette. Alignment = brief 10.
+  Karten-Architektur = brief 11 (Fall = Karte, Beweis + Claim = eingesetzte Boxen; Ink = linker Kartenrand, Oxid nur am Objekt).
+  Brief 7 (2026-07-22). Visual-Lab-Grammatik (14-visual-lab.html) + Sitz-Hemicycle (09-zahlenoper) als Hero.
+
+  STANCE: Signature. Face Bricolage Grotesque (opsz 12..96, wght 200..800), single family. Canvas
+          cool near-white #F5F7F6, light mode. Hard left edge, flat (unfilled) cards, radius 0,
+          tabular figures. Fuenf Frame-Farben (brief 2) NUR als Akzente, Wucht bleibt bei der Zahl.
+          Hero-Akzent Terrakotta #A8380F (Site-Identitaet, die knappe Fast-Mehrheit).
+  SIGNATURE (singular): jede dokumentierte Zahl ist ein von Hand gebauter Mechanismus, den man
+          einmal auflaufen sieht, nie ein Chart-Widget. Der Hemicycle im Hero ist die Hero-Instanz
+          derselben Idee: Sitze als physische Punkte. Roll-Call-Punkte, Muenzsaeulen, Kippwaage,
+          Zeitstrahl, Zitat-Tafeln, Zahl-Tafeln, Ablehnungs-Reihe, alle datenecht, alle ohne Bewegung lesbar.
+  MOTION: transform + opacity + clip-path, expo-out cubic-bezier(.16,1,.3,1), IntersectionObserver
+          reveal-once (iframe-robust) + viewport-only-Fallback. Hemicycle-Draw-in, Zaehl-Animation
+          47/97 und 502, Waage kippt, Zeiger faehrt einmal. prefers-reduced-motion: alles sichtbar,
+          Endzustaende, keine Animation. Kein Countdown.
+  DATA: fetch('./receipts-db.json'), nur klassifikation === "FAKT", Reihenfolge wie
+          im JSON. Records verbatim (persona_claim, beleg_dagegen, quelle_primaer, quelle_datum,
+          person, rolle). Kernbotschaften + Satz-Frames sind kuratierte Redaktions-Ebene (briefs 4,5,7),
+          NICHT aus den Records paraphrasiert. Badge "Primaer bestaetigt" nur bei verified_by === "oppo-verify".
+  Beweis-Baustein-Mapping (brief 7): coins(mindestlohn) · zahl(nepotismus 7.725/5.500) ·
+          rollcall(reform 72/22 + Doc 8/6653) · balance(medienstaatsvertrag 16/66 + Doc 8/6332) ·
+          tafel(lanz) · rollcall(kaffeekraenzchen 71/21) · tafel+Behoerde(vs-einstufung) ·
+          tafel+Behoerde+Doc(tillschneider-lverfg) · sincetl+Behoerde(tillschneider-vs) · tafel(kirchner) ·
+          tally+Behoerde(vp-ablehnung) · tafel(ddr-hymne) · tafel(simson) · zahl(schulpflicht 2/3).
+  ORTHOGRAPHIE: echte Umlaute und ß nach Duden. Briefs schrieben "heisst"/"abstossend" (ASCII);
+          hier bewusst korrigiert zu "heißt"/"abstoßend", weil (a) echte-Umlaute-Constraint, (b) der
+          Record selbst "abstoßend" verbatim fuehrt. Zero em/en dashes.
+  HINTERGRUND (brief 8, Option C, EINE Sprache konsequent): satter Fall-Farb-Balken (8px) an der
+          harten linken Kante jeder Zone (Hero = Terrakotta, jeder Fall = seine Frame-Farbe), bildet
+          eine durchlaufende farb-codierte Spine. PLUS ein Tint-Feld NUR hinter dem Beweis-Baustein
+          (.proofzone). v3-Fix (brief 9): der Tint ist jetzt COOL neutral (ink 4%, resultierendes rgb
+          b>=r, nie warm/beige), Kanten via neutrale Hairlines. Kein Raster: alle Fliesstexte liegen
+          auf ruhigem Canvas, nur Diagramm/Zahl auf dem Tint (flaches Feld, >=15:1 ink). Canvas bleibt
+          cool near-white #F5F7F6. Kein warmer Tint mehr irgendwo (auch Behoerde-Feld entfernt).
+  LOCKUP (v3, brief 9): jede Beweis-Zone ist EIN gebundenes Lockup, Mechanismus-Objekt links + die
+          vollen Saetze rechts daneben, Zone edge-to-edge gefuellt, kein leeres Halbfeld; mobil
+          gestapelt. Zahl-Tafel = EIN dominantes Zahl-Objekt (der zweite Betrag lebt subordinat in den
+          Saetzen, nie als gleichrangiger Zwilling), Fragment-Labels unter Zahlen geloescht. Euro-
+          Bindung: NBSP zwischen Ziffern und Euro/€ ueberall (7.725, 5.500, 502, 2) + nowrap.
+  HIERARCHIE (brief 8, ink-first): Kernbotschaft, Record ("Was die Akten zeigen") und beide Satz-
+          Frames sind pures Ink #17181C (>=15:1). Claim ("Was sie sagen") near-ink (88%, 11.7:1),
+          verliert gegen den Record ueber Groesse+Gewicht, nicht ueber Grau. Grau (muted 6.6 / faint
+          6.4) NUR fuer Eyebrow, Diagramm-Labels, Quellenzeilen, Footer. Beweis-Zahlen + Tafeln volle
+          Saettigung (Ink bzw. Frame-Dark). Behoerden-Label auf hellem Fall-Farb-Feld, Ink-Name +
+          Frame-Dark-Kennung (v3: satter Frame-Dark-Text + Balken auf Canvas, kein warmes Feld mehr).
+  FRONTIER-CHECK (selbst, brief 8): Signature singulaer = Hemicycle + hand-gebaute Bausteine; der
+          Hintergrund ist reine Atmosphaere (Farb-Spine + Tint), kein zweites Feature. Motion
+          unveraendert (transform/opacity/clip-path, expo-out, IO reveal-once, reduced-motion voll).
+          Nichts von der Tired-Liste: kein Glas, keine Gradient-Sludge, kein Scroll-Hijack, kein Dark,
+          kein 3D. Light mode. Kontraste neu gerechnet (>=4.5, Fliesstext >=11.7). Kein H-Scroll 1440/390.
+          Zero em/en dashes, echte Umlaute + ss/ß nach Duden.
+  CHANGELOG: 2026-07-22 v1 initial finale build. | v2 brief-8 Kontrast/Ink-first + Hintergrund Option C.
+          | v3 brief-9 Fix: Tint cool statt beige, Objekt+Satz-Lockup fuer alle Zonen, Zahl-Tafel als
+          ein Lockup, Euro-NBSP-Bindung, Behoerde ohne warmes Feld.
+          | v6 2026-07-22 Produktion: Umzug nach /sachsen-anhalt/
+-->
 <link rel="canonical" href="https://afd-check.de/sachsen-anhalt/">
 <meta name="description" content="Landtagswahl Sachsen-Anhalt 2026: 14 Aussagen der AfD, jede aufklappbar bis zur Abstimmung, zum Urteil und zur Quelle.">
 <meta property="og:title" content="Sachsen-Anhalt: Was die AfD verspricht, und wie sie abstimmt">
@@ -35,203 +78,901 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --canvas: #F7F8F6;
-    --ink: #17181C;
-    --muted: #6B7076;
-    --hairline: #DCDDD8;
-    /* warm terracotta, not narradar signal-red. #A8380F on #F7F8F6 clears WCAG AA for text. */
-    --accent: #A8380F;
-    --font: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-    --claim-ink: color-mix(in srgb, var(--ink) 78%, var(--muted) 22%);
-    --ease: cubic-bezier(.16,1,.3,1);
-    --micro: 160ms;
-    --numcol: clamp(38px, 5vw, 60px);
-    --gap: clamp(16px, 3vw, 30px);
+  :root{
+    --canvas:#F5F7F6;
+    --ink:#17181C;
+    --muted:#545a56;                 /* 6.6:1, grey only for chrome/Quellen/Footer */
+    --faint:#565b57;                 /* 6.4:1 */
+    --claim:color-mix(in srgb, var(--ink) 88%, var(--canvas));  /* 11.7:1, near-ink */
+    --hair:#d7dcd8;
+    --hero-accent:#8B2E35;              /* 16c: hero accent = the one oxide (seat-gap) */
+    --object:#8B2E35;                   /* 16c: the single decisive object colour, deep oxide, 7.7:1 */
+    --dot-soft:#c3ccc5;
+    --dot-soft-strong:#aeb8b1;
+    --frame:#A05A00;         /* per-section overridden inline */
+    --frame-dark:#6E3E00;
+    --ease:cubic-bezier(.16,1,.3,1);
+    --measure:min(880px, calc(100% - 2.8rem));
   }
-  *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--canvas); color: var(--ink); font-family: var(--font);
-    font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; overflow-x: hidden;
-    font-optical-sizing: auto; }
-  a { color: inherit; }
-  h1, h2, p { margin: 0; }
+  *{box-sizing:border-box}
+  html,body{margin:0; overflow-x:hidden; background:var(--canvas)}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    color:var(--ink); line-height:1.5;
+    font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1;
+    font-optical-sizing:auto; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,p,blockquote,figure{margin:0}
+  a{color:inherit}
+  .tnum{font-variant-numeric:tabular-nums}
+  .is-hidden{display:none !important}
 
-  .wrap { max-width: 900px; margin-inline: auto; padding-inline: clamp(20px, 5vw, 56px); }
+  /* ---- masthead (KEINE Reiter-Optik) ---- */
+  .masthead{
+    display:flex; align-items:baseline; gap:.55rem;
+    padding:1.15rem clamp(1.3rem,5vw,3rem);
+    font-size:.9rem; letter-spacing:.01em;
+    border-bottom:1px solid var(--hair);
+  }
+  .masthead .brand{font-weight:800; text-decoration:none; letter-spacing:-.01em; border-bottom:2px solid var(--hero-accent); padding-bottom:1px}
+  .masthead .sep{color:var(--faint); font-weight:300}
+  .masthead .region{color:var(--muted); font-weight:600}
+  .masthead .when{margin-left:auto; color:var(--faint); font-weight:600; font-size:.82rem; letter-spacing:.01em}
 
-  .masthead { border-bottom: 1px solid var(--hairline); }
-  .masthead .wrap { display: flex; align-items: center; gap: 12px; padding-block: 18px;
-    font-size: 14px; font-weight: 600; letter-spacing: .01em; }
-  .masthead a { text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 1px; }
-  .masthead .sep { color: var(--muted); font-weight: 400; }
-  .masthead .light { color: var(--muted); font-weight: 500; }
+  /* ---- shared grid shell ---- */
+  .hero, .fall{
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr var(--measure) 1fr;
+    row-gap:clamp(1rem,2.4vw,1.6rem);
+    padding:clamp(3rem,8vh,5.5rem) 0;
+    border-bottom:1px solid var(--hair);
+  }
+  .hero > *, .fall > *{grid-column:2}
+  .hero > .wide, .fall > .wide{grid-column:1 / -1; width:100%}
 
-  /* ---------- HERO ---------- */
-  .hero { padding-block: clamp(52px, 10vh, 128px) clamp(36px, 6vh, 72px); }
-  .kicker { font-size: clamp(12px, 1.3vw, 14px); font-weight: 600; letter-spacing: .04em;
-    text-transform: uppercase; color: var(--muted); }
-  .kicker b { color: var(--accent); }
-  h1.title { margin-top: 22px; font-weight: 700; letter-spacing: -.035em; line-height: .97;
-    font-size: clamp(46px, 9.5vw, 118px); }
-  .lede { margin-top: 26px; max-width: 40ch; font-size: clamp(18px, 1.7vw, 23px); font-weight: 500;
-    line-height: 1.42; color: var(--claim-ink); }
-  .stakes { margin-top: clamp(30px, 5vh, 46px); padding-top: 20px; border-top: 1px solid var(--hairline);
-    max-width: 62ch; font-size: 15px; font-weight: 500; line-height: 1.6; color: var(--muted); }
-  .stakes b { color: var(--ink); font-weight: 600; }
-
-  /* ---------- FILTERS ---------- */
-  .filters { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; gap: 7px;
-    padding-block: 14px; margin-bottom: 8px;
-    background: color-mix(in srgb, var(--canvas) 90%, transparent); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--hairline); }
-  .chip { font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .01em; padding: 8px 14px;
-    border: 1px solid var(--hairline); background: none; color: var(--muted); cursor: pointer;
-    transition: color var(--micro) var(--ease), border-color var(--micro) var(--ease); }
-  .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
-  @media (hover: hover) { .chip:hover { border-color: var(--ink); color: var(--ink); } }
-  .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-  /* ---------- FEED ---------- */
-  .row { border-top: 1px solid var(--hairline); }
-  .row:last-of-type { border-bottom: 1px solid var(--hairline); }
-  .row[hidden] { display: none; }
-
-  .hook { display: grid; grid-template-columns: var(--numcol) 1fr auto; gap: var(--gap);
-    align-items: start; padding-block: clamp(22px, 3vw, 34px); cursor: pointer; list-style: none; }
-  .hook::-webkit-details-marker { display: none; }
-  .hook:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-  .num { font-size: clamp(20px, 2.4vw, 30px); font-weight: 300; color: var(--muted); line-height: 1.05;
-    letter-spacing: -.02em; transition: color var(--micro) var(--ease); }
-  .row[open] .num { color: var(--accent); font-weight: 500; }
-  .who { font-size: 14px; line-height: 1.3; }
-  .who b { font-weight: 600; }
-  .who .role { color: var(--muted); }
-  .claim { display: block; margin-top: 9px; font-size: clamp(19px, 2.1vw, 28px); font-weight: 600;
-    line-height: 1.24; letter-spacing: -.015em; color: var(--claim-ink); }
-  .aff { position: relative; width: 24px; height: 24px; align-self: center; }
-  .aff::before, .aff::after { content: ""; position: absolute; left: 50%; top: 50%; width: 16px; height: 2px;
-    background: var(--muted); transform: translate(-50%, -50%); transition: transform var(--micro) var(--ease), background-color var(--micro) var(--ease); }
-  .aff::after { transform: translate(-50%, -50%) rotate(90deg); }
-  .row[open] .aff::before, .row[open] .aff::after { background: var(--accent); }
-  .row[open] .aff::after { transform: translate(-50%, -50%) rotate(0deg); }
-
-  .reveal { overflow: hidden; }
-  .reveal__pad { padding: 2px 0 clamp(28px, 3.4vw, 40px); padding-left: calc(var(--numcol) + var(--gap)); }
-  .rlabel { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
-  .rlabel .ref { margin-left: 12px; color: var(--muted); font-weight: 500; letter-spacing: .04em; }
-  .record { margin-top: 13px; font-size: clamp(18px, 1.9vw, 23px); font-weight: 600; line-height: 1.36; color: var(--ink); }
-  .src { margin-top: 18px; font-size: 13px; font-weight: 400; line-height: 1.55; color: var(--muted); }
-  .src b { color: var(--ink); font-weight: 600; }
-  .badge { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 600; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 4px 9px; }
-
-  @media (max-width: 560px) {
-    .claim { font-size: 21px; }
-    .aff { align-self: start; margin-top: 4px; }
+  /* ---- background language C: saturated fall-colour spine + 4% proof-zone tint ---- */
+  .hero::before, .fall::before{
+    content:""; position:absolute; left:0; top:-1px; bottom:-1px; width:8px;
+    background:var(--frame); z-index:1;
+  }
+  /* COOL neutral tint only (ink 4% -> b>=r, never warm/beige); colour lives in the 8px spine + the mechanism */
+  .proofzone{
+    background:color-mix(in srgb, var(--ink) 4%, var(--canvas));
+    border-top:1px solid var(--hair);
+    border-bottom:1px solid var(--hair);
+    padding:clamp(1.7rem,4.2vw,2.8rem) clamp(1.3rem,5vw,3rem);
+  }
+  /* composition (brief 10): full sentences hard-LEFT, mechanism object flush-RIGHT -> tension against the
+     otherwise left-bound column. Lockup aligns to the measure column, so sentence-left == Kernbotschaft-left
+     and object-right == record-right. Mobile stacks OBJECT first, sentences under (DOM order). */
+  .lockup{
+    max-width:var(--measure); margin-inline:auto;
+    display:grid; grid-template-columns:minmax(0,42ch) minmax(0,1fr);
+    gap:clamp(1.4rem,5vw,4rem); align-items:center;
+  }
+  .lockup .proof-frame{order:-1; max-width:42ch}     /* left column (rendered first), hard left */
+  .lockup-obj{min-width:0; text-align:right}         /* right column, object flush right */
+  .lockup-obj > :first-child{margin-top:0}
+  .lk-tafel{align-items:start}
+  .lk-coins .coins{justify-content:flex-end}
+  .lk-wide .rollcall, .lk-wide .rc-legend, .lk-wide .sincetl-orgs{justify-content:flex-end}
+  .lk-wide .rc-stage{margin-left:auto; text-align:right}
+  .lk-balance .balance{margin-left:auto; margin-right:0}
+  .lockup .tafel{max-width:none; margin:0; text-align:right; border-left:0; border-right:.4rem solid var(--frame); padding:.15rem 1.4rem .15rem 0}
+  .lockup .tafel-src{text-align:right}
+  @media (max-width:760px){
+    .lockup{grid-template-columns:1fr; gap:clamp(1.3rem,5vw,1.9rem); align-items:start}
+    .lockup .proof-frame{order:0; max-width:none}    /* object first, sentences under */
+    .lockup-obj{text-align:left}
+    .lk-coins .coins{justify-content:center}
+    .lk-wide .rollcall, .lk-wide .rc-legend, .lk-wide .sincetl-orgs{justify-content:flex-start}
+    .lk-wide .rc-stage{margin-left:0; text-align:left}
+    .lk-balance .balance{margin-inline:auto}
+    .lockup .tafel{text-align:left; border-right:0; border-left:.4rem solid var(--frame); padding:.15rem 0 .15rem 1.4rem}
+    .lockup .tafel-src{text-align:left}
   }
 
-  .site-foot { margin-top: clamp(56px, 9vh, 104px); border-top: 1px solid var(--hairline); }
-  .site-foot .wrap { padding-block: 28px 80px; font-size: 14px; color: var(--muted); line-height: 1.7; }
-  .site-foot a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline); }
-  .site-foot__note { margin-top: 12px; max-width: 74ch; }
+  /* ---- HERO ---- */
+  .hero{padding-top:clamp(2.6rem,6vh,4.4rem); --frame:var(--hero-accent); --frame-dark:#7d2a0b}
+  .hero .eyebrow{margin:0; font-size:.82rem; letter-spacing:.2em; text-transform:uppercase; font-weight:700; color:var(--faint)}
+  .hero-h{
+    margin:.55rem 0 0; font-weight:800; letter-spacing:-.03em; line-height:1;
+    font-size:clamp(2.2rem,6.6vw,4.2rem); text-wrap:balance;
+    font-variation-settings:"opsz" 96,"wght" 800;
+  }
+  .hero-sub{margin:.85rem 0 0; max-width:34ch; font-size:clamp(1.05rem,2.2vw,1.4rem); font-weight:500; color:var(--ink); line-height:1.4}
+  .hemi{margin:clamp(1.4rem,4vw,2.6rem) 0 0; width:100%}
+  .hemi svg{width:100%; max-width:620px; height:auto; display:block}
+  .hemi-legend{display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; margin-top:1rem; font-size:.86rem; color:var(--muted)}
+  .hemi-legend .k{display:inline-flex; align-items:center; gap:.5em}
+  .hemi-legend .d{width:.7rem; height:.7rem; border-radius:50%; flex:none}
+  .hemi-legend .d.afd{background:var(--ink)} .hemi-legend .d.gap{background:var(--hero-accent)} .hemi-legend .d.other{background:#c3c9c4}
+  .insa{margin:clamp(1.2rem,3vw,1.8rem) 0 0; max-width:62ch; font-size:.95rem; line-height:1.55; color:var(--muted); border-left:3px solid var(--hero-accent); padding-left:1rem}
+  .tally-line{margin:clamp(1.8rem,5vw,3rem) 0 0; font-weight:800; letter-spacing:-.02em; line-height:1.02; font-size:clamp(1.8rem,5.5vw,3.4rem); text-wrap:balance; font-variation-settings:"opsz" 96,"wght" 800}
+  .hero-mech{margin:.8rem 0 0; max-width:52ch; color:var(--ink); font-size:clamp(1rem,1.9vw,1.2rem); font-weight:500; line-height:1.45}
 
-  .state { padding-block: 48px; font-size: 15px; color: var(--muted); }
+  /* ---- filter tabs (ruhige Unterstrich-Tabs) ---- */
+  .tabs{border-bottom:1px solid var(--hair)}
+  .tabs-inner{display:flex; gap:clamp(.9rem,3vw,2rem); max-width:var(--measure); margin-inline:auto; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:thin}
+  .tab{appearance:none; -webkit-appearance:none; background:none; border:0; font:inherit; cursor:pointer; padding:.95rem .1rem; color:var(--muted); font-weight:700; font-size:.95rem; white-space:nowrap; border-bottom:2.5px solid transparent; letter-spacing:.01em; transition:color .18s var(--ease)}
+  .tab .n{color:var(--faint); font-weight:600; margin-left:.4rem; font-size:.82em}
+  .tab[aria-pressed="true"]{color:var(--ink); border-bottom-color:var(--ink)}
+  .tab:hover{color:var(--ink)}
+  .tab:focus-visible{outline:2px solid var(--ink); outline-offset:3px}
 
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  /* ---- feed states ---- */
+  .feed-state{max-width:var(--measure); margin-inline:auto; padding:clamp(2.4rem,7vh,4.5rem) 0; color:var(--muted); font-size:1rem; line-height:1.55}
+  .feed-state a{font-weight:700; color:var(--frame-dark)}
+  .feed-error strong{color:var(--ink)}
+
+  /* ---- fall head ---- */
+  .fall-head{display:flex; align-items:center; flex-wrap:wrap; gap:.5rem .9rem; font-size:.86rem; color:var(--muted)}
+  .fall-head .idx{font-weight:800; letter-spacing:.02em; color:var(--ink); font-variation-settings:"opsz" 24,"wght" 800; font-size:.94rem; border:1.5px solid var(--frame); padding:.1em .5em; line-height:1}
+  .fall-head .cat{display:inline-flex; align-items:center; gap:.5rem; font-weight:700; color:var(--ink)}
+  .fall-head .swatch{width:.72rem; height:.72rem; background:var(--frame); flex:none}
+  .fall-head .who{color:var(--muted); font-weight:600}
+
+  /* ---- Behoerden-Label (Vertrauensanker) ---- */
+  .behoerde{display:inline-flex; align-items:center; gap:.6rem; border-left:.42rem solid var(--frame); padding:.15rem 0 .15rem .9rem; font-size:.98rem; color:var(--frame-dark); font-weight:600; max-width:100%}
+  .behoerde svg{width:1.35rem; height:1.35rem; color:var(--frame-dark); flex:none}
+  .behoerde .b-name{font-weight:800; color:var(--frame-dark)}
+  .behoerde .b-meta{color:var(--frame-dark); font-weight:700}
+
+  /* ---- Kernbotschaft ---- */
+  .kern{max-width:22ch; font-size:clamp(1.85rem,5vw,3.3rem); font-weight:800; line-height:1.03; letter-spacing:-.02em; color:var(--ink); text-wrap:balance; font-variation-settings:"opsz" 96,"wght" 800}
+  .kern::before{content:""; display:block; width:clamp(2.2rem,6vw,3rem); height:.32rem; background:var(--frame); margin-bottom:clamp(.6rem,1.8vw,1rem)}
+
+  /* ---- proof frame (brief 5, ganze Saetze) ---- */
+  .proof-frame{max-width:58ch; display:flex; flex-direction:column; gap:.3rem}
+  .proof-frame p{text-wrap:pretty; font-size:clamp(1.02rem,1.7vw,1.28rem); line-height:1.42; font-weight:600; color:var(--ink)}
+  .proof-frame p + p{color:var(--ink); font-weight:500}
+
+  /* ---- claim + record ---- */
+  .tag{display:block; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--faint); margin-bottom:.45rem}
+  .claim{max-width:60ch; font-size:clamp(.98rem,1.6vw,1.13rem); font-weight:400; color:var(--claim); border-left:2px solid var(--hair); padding-left:1rem; line-height:1.5}
+  .record-block{max-width:62ch}
+  .record-block .tag{color:var(--frame-dark)}
+  .record{margin-top:.1rem; font-size:clamp(1.08rem,2.1vw,1.34rem); line-height:1.5; font-weight:500; color:var(--ink)}
+
+  /* ---- chrome ---- */
+  .chrome{display:flex; flex-wrap:wrap; align-items:baseline; gap:.5rem 1.1rem; padding-top:.9rem; border-top:1px solid var(--hair); font-size:.82rem; color:var(--faint)}
+  .chrome .date{color:var(--muted); font-weight:600}
+  .chrome .id{font-weight:700; color:var(--muted); border:1px solid var(--hair); padding:.05em .45em}
+  .chrome .badge{display:inline-flex; align-items:center; gap:.4em; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); font-size:.74rem}
+  .chrome .badge svg{width:.95em; height:.95em; flex:none}
+  .chrome .site{margin-left:auto; font-weight:700; color:var(--muted); letter-spacing:.01em}
+  .chrome .srcwrap{flex-basis:100%; line-height:1.5; color:var(--faint)}
+  .chrome .src-link{color:var(--frame-dark); font-weight:700; text-decoration:none; border-bottom:1px solid currentColor; white-space:nowrap; display:inline-flex; align-items:center; gap:.3em}
+  .chrome .src-link svg{width:.85em; height:.85em}
+  .permalink{display:inline-flex; align-items:center; gap:.4rem; appearance:none; -webkit-appearance:none; background:transparent; border:1px solid var(--hair); color:var(--muted); font:inherit; font-size:.8rem; font-weight:700; padding:.35rem .7rem; cursor:pointer; letter-spacing:.01em; transition:border-color .18s var(--ease), color .18s var(--ease)}
+  .permalink svg{width:.95em; height:.95em; flex:none}
+  .permalink:hover{border-color:var(--frame); color:var(--ink)}
+  .permalink:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+  .permalink.copied{border-color:var(--frame); color:var(--frame-dark)}
+
+  /* =========================================================
+     BAUSTEIN A: roll-call dot grid
+     ========================================================= */
+  .rollcall{display:flex; flex-wrap:wrap; align-items:flex-end; gap:clamp(1.4rem,4vw,3rem); margin:.4rem 0 0}
+  .rc-group{appearance:none; -webkit-appearance:none; background:transparent; border:0; padding:0; margin:0; font:inherit; color:inherit; text-align:left; cursor:pointer; display:flex; flex-direction:column; gap:.65rem; transition:transform .28s var(--ease)}
+  .rc-group:hover, .rc-group:focus-visible{transform:translateY(-9px)}
+  .rc-group:focus-visible{outline:2.5px solid var(--ink); outline-offset:8px}
+  .rc-label{display:flex; align-items:baseline; gap:.4rem; font-weight:700; font-size:.92rem; letter-spacing:.02em; color:var(--muted)}
+  .rc-label b{font-size:1.15rem; color:var(--ink); font-variation-settings:"opsz" 24,"wght" 800}
+  .rc-grid{display:grid; gap:.42rem}
+  .dot{width:clamp(.7rem,2vw,1.05rem); aspect-ratio:1; background:var(--dot-soft); flex:none}
+  .rc-grid.strong .dot{background:var(--frame)}
+  .rc-group:hover .rc-grid:not(.strong) .dot, .rc-group:focus-visible .rc-grid:not(.strong) .dot{background:var(--dot-soft-strong)}
+  .rc-legend{display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; margin:1.1rem 0 0; font-size:.86rem; color:var(--muted)}
+  .rc-legend .k{display:inline-flex; align-items:center; gap:.5em}
+  .rc-legend .chip{width:.8rem; height:.8rem; flex:none; background:var(--dot-soft)}
+  .rc-legend .chip.strong{background:var(--frame)}
+  .rc-stage{margin:1.3rem 0 0; min-height:2.6em; max-width:26ch; font-size:clamp(1.5rem,4.4vw,2.7rem); font-weight:800; line-height:1.06; letter-spacing:-.015em; color:var(--ink); text-wrap:balance; font-variation-settings:"opsz" 72,"wght" 800; transition:opacity .2s var(--ease)}
+
+  /* =========================================================
+     BAUSTEIN B: coin columns (2 vs 502)
+     ========================================================= */
+  .coins{display:flex; align-items:flex-end; justify-content:center; gap:clamp(2rem,10vw,6rem); --H:clamp(20rem,52svh,29rem); --coin:calc(var(--H) / 502); margin:.4rem 0 0}
+  .coin-stack{display:flex; flex-direction:column; align-items:center; gap:.9rem}
+  .coin-num{font-size:clamp(2.6rem,9vw,5.2rem); font-weight:800; line-height:.9; letter-spacing:-.03em; font-variation-settings:"opsz" 96,"wght" 800}
+  .coin-num.real{color:var(--frame-dark)}
+  .coin-cap{font-size:.9rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--muted)}
+  .coin-col{position:relative; width:clamp(3.4rem,12vw,5.2rem); height:var(--H); border:1.5px solid var(--hair); border-bottom:2.5px solid var(--ink); background:repeating-linear-gradient(180deg, transparent 0, transparent calc(var(--coin) - .4px), rgba(23,26,25,.06) calc(var(--coin) - .4px), rgba(23,26,25,.06) var(--coin)); overflow:hidden}
+  .coin-fill{position:absolute; left:0; bottom:0; width:100%; background:repeating-linear-gradient(180deg, #B5761A 0, #B5761A calc(var(--coin) - .5px), var(--frame-dark) calc(var(--coin) - .5px), var(--frame-dark) var(--coin))}
+  .coin-fill.real{height:var(--H)}
+  .coin-fill.claim{height:calc(var(--coin) * 2)}
+
+  /* =========================================================
+     BAUSTEIN C: tipping balance (16:66)
+     ========================================================= */
+  .balance-wrap{margin:.4rem 0 0}
+  .balance{width:100%; max-width:560px; height:auto; display:block; margin-inline:auto}
+  .balance-beam{transform-box:view-box; transform-origin:200px 66px; transition:transform 1s var(--ease); transform:rotate(0deg)}
+  .balance-legend{display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem 1.6rem; margin:.8rem 0 0; font-size:.86rem; color:var(--muted)}
+  .balance-legend .k{display:inline-flex; align-items:center; gap:.5em}
+  .balance-legend .chip{width:.8rem; height:.8rem; border-radius:50%; flex:none}
+  .balance-legend .chip.ja{background:var(--dot-soft-strong)} .balance-legend .chip.nein{background:var(--frame)}
+
+  /* =========================================================
+     BAUSTEIN D: since-timeline (Beobachtung seit 02/2020)
+     ========================================================= */
+  .sincetl{margin:1.2rem 0 0; padding:0 clamp(.4rem,2vw,1rem)}
+  .sincetl-rail{position:relative; height:3px; background:var(--hair); margin:2.6rem 0 6.5rem}
+  .sincetl-fill{position:absolute; left:0; top:0; height:100%; width:100%; background:var(--frame); transform:scaleX(var(--p,0)); transform-origin:left center}
+  .sincetl-pointer{position:absolute; left:0; top:50%; width:0; height:0; margin-left:-9px; border-left:9px solid transparent; border-right:9px solid transparent; border-top:12px solid var(--ink); transform:translate(calc(var(--p,0) * var(--rail-len,0px)), -1px); opacity:var(--p-op,0)}
+  .sincetl-node{position:absolute; top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center}
+  .sincetl-node .knob{width:1.05rem; height:1.05rem; background:var(--canvas); border:3px solid var(--frame); border-radius:50%; box-shadow:0 0 0 4px var(--canvas)}
+  .sincetl-node .sincetl-date{position:absolute; bottom:calc(100% + .75rem); white-space:nowrap; font-weight:800; font-size:.98rem; color:var(--ink); font-variation-settings:"opsz" 20,"wght" 800}
+  .sincetl-node .sincetl-text{position:absolute; top:calc(100% + .8rem); width:16ch; text-align:center; font-size:.9rem; line-height:1.35; color:var(--muted); font-weight:500}
+  .sincetl-node.n1{left:5%} .sincetl-node.n2{left:95%}
+  .sincetl-node.n2 .knob{border-style:dashed}
+  .sincetl-node.n2 .sincetl-date{color:var(--frame-dark)}
+  .sincetl-orgs{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.4rem}
+  .org-chip{border:1px solid var(--hair); padding:.32rem .7rem; font-size:.82rem; color:var(--muted); font-weight:600}
+
+  /* =========================================================
+     BAUSTEIN E: quote tablet (Zitat-Tafel)
+     ========================================================= */
+  .tafel{max-width:24ch; border-left:.4rem solid var(--frame); padding:.15rem 0 .15rem 1.4rem; margin:.4rem 0 0}
+  .tafel-quote{font-size:clamp(1.9rem,5vw,3.3rem); font-weight:800; line-height:1.05; letter-spacing:-.02em; color:var(--ink); text-wrap:balance; overflow-wrap:break-word; hyphens:auto; font-variation-settings:"opsz" 96,"wght" 800}
+  .tafel-src{margin-top:1rem; font-size:.9rem; font-weight:600; color:var(--muted); letter-spacing:.01em}
+
+  /* =========================================================
+     BAUSTEIN F: rejection row (Ablehnungs-Reihe)
+     ========================================================= */
+  .tally-row{display:flex; flex-wrap:wrap; gap:.7rem; margin:.4rem 0 0}
+  .tally-mark{display:flex; flex-direction:column; align-items:center; gap:.5rem; border:1px solid var(--hair); padding:.9rem .7rem; min-width:5.4rem; text-align:center}
+  .tally-mark .tally-x{width:1.5rem; height:1.5rem; color:var(--frame)}
+  .tally-name{font-weight:800; font-size:.95rem; color:var(--ink); font-variation-settings:"opsz" 20,"wght" 800}
+  .tally-status{font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--frame-dark); font-weight:700}
+
+  /* =========================================================
+     BAUSTEIN G: number tablet (Zahl-Tafel)
+     ========================================================= */
+  .zahl{margin:0}
+  .zahl-num{display:block; white-space:nowrap; font-size:clamp(2.6rem,7vw,5.2rem); font-weight:800; line-height:.86; letter-spacing:-.03em; color:var(--frame-dark); font-variation-settings:"opsz" 96,"wght" 800}
+
+  /* ---- doc crop (Original-Ausschnitt): stays LEFT-composed (a right-flushed document scan reads absurd) ---- */
+  .doc{margin-top:.2rem; max-width:var(--measure); margin-inline:auto}
+  .doc-link{display:block; text-decoration:none; max-width:560px}
+  .doc-img{display:block; width:100%; height:auto; border:1.5px solid var(--ink); background:#fff}
+  .doc-cap{display:flex; flex-wrap:wrap; gap:.3rem .8rem; margin-top:.6rem; font-size:.82rem; color:var(--faint)}
+  .doc-label{font-weight:700; color:var(--muted)}
+  .doc-open{display:inline-flex; align-items:center; gap:.3rem; color:var(--frame-dark); font-weight:700}
+  .doc-open svg{width:.9em; height:.9em}
+  .doc-link:hover .doc-img{border-color:var(--frame)}
+  .doc-link:focus-visible{outline:2px solid var(--ink); outline-offset:3px}
+
+  /* ---- footer ---- */
+  .site-foot{max-width:var(--measure); margin:clamp(2.4rem,6vw,4rem) auto 0; padding:1.3rem 0 2.6rem; font-size:.86rem; color:var(--faint); line-height:1.55}
+  .site-foot a{font-weight:700; color:var(--muted)}
+  .site-foot .note{margin-top:.6rem; max-width:70ch; color:var(--faint)}
+
+  /* ---- motion (JS-gated) ---- */
+  .js .anim{opacity:0; transform:translateY(34px); transition:opacity .66s var(--ease) var(--d,0s), transform .66s var(--ease) var(--d,0s)}
+  .js .in .anim{opacity:1; transform:none}
+  .a1{--d:.04s} .a2{--d:.12s} .a3{--d:.22s} .a4{--d:.32s} .a5{--d:.42s} .a6{--d:.52s}
+  .js .hemi svg circle{opacity:0; transition:opacity .5s var(--ease) var(--sd,0s)}
+  .js .in .hemi svg circle{opacity:1}
+  .js .coin-fill.real{clip-path:inset(100% 0 0 0); transition:clip-path .8s var(--ease) .15s}
+  .js .in .coin-fill.real{clip-path:inset(0 0 0 0)}
+  .js .in .balance-beam{transform:rotate(9.5deg)}
+  .js .tally-mark{opacity:0; transform:translateY(14px); transition:opacity .5s var(--ease) var(--md,0s), transform .5s var(--ease) var(--md,0s)}
+  .js .in .tally-mark{opacity:1; transform:none}
+
+  @media (prefers-reduced-motion: reduce){
+    .js .anim{opacity:1 !important; transform:none !important; transition:none !important}
+    .js .hemi svg circle{opacity:1 !important; transition:none !important}
+    .js .coin-fill.real{clip-path:inset(0 0 0 0) !important; transition:none !important}
+    .js .in .balance-beam, .balance-beam{transition:none !important; transform:rotate(9.5deg) !important}
+    .js .tally-mark{opacity:1 !important; transform:none !important; transition:none !important}
+    .js .rc-group{transition:none !important}
+    .js .rc-group:hover, .js .rc-group:focus-visible{transform:none !important}
+    html{scroll-behavior:auto}
+  }
+
+  /* ---- responsive ---- */
+  @media (max-width:640px){
+    .hero, .fall{grid-template-columns:1fr calc(100% - 2.2rem) 1fr}
+    .coins{gap:2.2rem}
+    .chrome .site{margin-left:0; flex-basis:100%}
+    .permalink{margin-left:auto}
+    .sincetl-rail{margin:2.4rem 0 7.5rem}
+    .sincetl-node .sincetl-text{width:13ch}
+  }
+
+  /* ===== CARD ARCHITECTURE (brief 11): each Fall is a contained CARD; the proof zone and the claim are
+     inset BOXES on card ground; no wall-to-wall bands, everything inside the max-width column. Same
+     structure in all four files; each keeps its own colour tokens (card left border = identity frame). ===== */
+  #feed{padding-top:clamp(1.6rem,4vw,2.6rem)}
+  .fall{
+    position:static; display:block;
+    max-width:var(--measure); margin:0 auto clamp(40px,6vw,60px);
+    padding:clamp(1.5rem,4vw,2.6rem);
+    background:#FBFCFB;
+    border:1px solid color-mix(in srgb, var(--ink) 15%, var(--canvas));
+    border-left:7px solid var(--frame);
+    border-radius:0;
+  }
+  .fall::before{display:none}                       /* colour edge is now the card's left border */
+  .fall > * + *{margin-top:clamp(1.1rem,2.8vw,1.6rem)}
+  .fall > .wide{width:100%}
+  .fall .proofzone{                                 /* proof = inset cool-grey box, never touching card edges */
+    background:#ECEFEF;
+    border:1px solid color-mix(in srgb, var(--ink) 13%, var(--canvas));
+    border-radius:0;
+    padding:clamp(1.3rem,3.4vw,2rem);
+    margin-top:clamp(1.2rem,3vw,1.7rem);
+  }
+  .fall .lockup{max-width:none; margin:0; grid-template-columns:minmax(0,40ch) minmax(0,1fr); gap:clamp(1.2rem,4vw,3rem)}
+  .fall .lockup .proof-frame{max-width:40ch}
+  .fall .zahl-num{font-size:clamp(2.4rem,6vw,4.6rem)}
+  .fall .lockup .tafel-quote{font-size:clamp(1.8rem,4.6vw,3rem)}
+  .fall .claim{                                     /* claim = its own subtle backing box (hairline + light cool fill) */
+    max-width:none;
+    background:#F1F4F3;
+    border:1px solid color-mix(in srgb, var(--ink) 12%, var(--canvas));
+    border-radius:0;
+    padding:clamp(.95rem,2.5vw,1.35rem) clamp(1.05rem,2.7vw,1.4rem);
+    line-height:1.5;
+  }
+  .fall .doc{max-width:none}                        /* record stays on plain card ground (no box) */
+  @media (max-width:760px){
+    .fall .lockup{grid-template-columns:1fr; gap:clamp(1.3rem,5vw,1.9rem)}   /* re-stack object-first on mobile */
+  }
+  @media (max-width:640px){
+    .fall{margin-bottom:clamp(28px,7vw,44px); padding:clamp(1.15rem,4.5vw,1.6rem); border-left-width:6px}
+  }
+
+  /* ===== 16c "Ink pur" overrides: structure stays ink; ONE oxide accent (--object) on the decisive object per case ===== */
+  .hero{--frame:var(--ink); --frame-dark:var(--ink)}          /* hero spine ink; oxide only on the seat-gap */
+  .masthead .brand{border-bottom-color:var(--ink)}
+  .insa{border-left-color:var(--ink)}
+  .zahl-num, .coin-num.real{color:var(--object)}
+  .tafel-quote{color:var(--object)}
+  .rc-grid.strong .dot, .rc-legend .chip.strong, .balance-legend .chip.nein{background:var(--object)}
+  .tally-mark .tally-x{color:var(--object)}
+  .sincetl-fill{background:var(--object)}
+  .sincetl-pointer{border-top-color:var(--object)}
+  .coin-fill{background:repeating-linear-gradient(180deg, #A83A42 0, #A83A42 calc(var(--coin) - .5px), #6E2129 calc(var(--coin) - .5px), #6E2129 var(--coin))}
 </style>
 </head>
 <body>
-<header class="masthead"><div class="wrap"><a href="/">afd-check.de</a> <span class="sep">/</span> <span class="light">Sachsen-Anhalt</span></div></header>
 
-<section class="hero" aria-label="Einleitung"><div class="wrap">
-  <p class="kicker">Landtagswahl Sachsen-Anhalt · 6. September 2026 · <b>noch <span data-cd>50</span> Tage</b></p>
-  <h1 class="title">Gesagt. Und abgestimmt.</h1>
-  <p class="lede">14 Aussagen der AfD aus dem Landtag Sachsen-Anhalt. Klapp eine auf, und der Beleg erscheint: die Abstimmung, das Gerichts- oder Verfassungsschutz-Urteil, die Quelle.</p>
-  <p class="stakes">Umfragen sehen die AfD bei rund 41 Prozent, etwa <b>47 von 97 Sitzen, zwei unter der absoluten Mehrheit</b> (49). Quelle: INSA, 3. Juli 2026.</p>
-</div></section>
+<header class="masthead">
+  <a class="brand" href="/">afd-check.de</a>
+  <span class="sep">/</span>
+  <span class="region">Sachsen-Anhalt</span>
+  <span class="when">Landtagswahl · 6. September 2026</span>
+</header>
 
-<main class="wrap" id="app" role="main"></main>
+<main>
 
-<footer class="site-foot"><div class="wrap">
-  <p><a href="/">afd-check.de</a> · Sachsen-Anhalt · Autor: Frederik Metz · Stand: 18. Juli 2026 · <a href="/impressum.html">Impressum</a></p>
-  <p class="site-foot__note">Gezeigt werden nur belegte Vorgänge (öffentliche Aussage plus Abstimmung, Gerichts- oder Verfassungsschutz-Entscheidung), jeweils mit Originalquelle und Datum. Vorwürfe ohne abgeschlossene Prüfung werden nicht veröffentlicht.</p>
-</div></footer>
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="hero" aria-labelledby="hero-h">
+    <p class="eyebrow anim a1">afd-check.de · Sachsen-Anhalt</p>
+    <h1 class="hero-h anim a2" id="hero-h"><span class="count tnum" data-to="47">47</span> von <span class="count tnum" data-to="97">97</span> Sitzen.</h1>
+    <p class="hero-sub anim a3">Zwei unter der absoluten Mehrheit. Was die Partei behauptet, und wie sie abstimmt.</p>
+    <div class="hemi proofzone anim a4">
+      <svg id="hemi" viewBox="-206 -200 412 220" role="img" aria-label="Sitzverteilung im Landtag Sachsen-Anhalt: Prognose 47 von 97 Sitzen für die AfD, zwei Sitze unter der absoluten Mehrheit von 49"></svg>
+      <div class="hemi-legend" aria-hidden="true">
+        <span class="k"><span class="d afd"></span>47 AfD, Prognose</span>
+        <span class="k"><span class="d gap"></span>2 fehlen zur Mehrheit</span>
+        <span class="k"><span class="d other"></span>48 übrige Sitze</span>
+      </div>
+    </div>
+    <p class="insa anim a5">Umfragen sehen die AfD bei rund 41 Prozent, etwa 47 von 97 Sitzen, zwei unter der absoluten Mehrheit (49). Quelle: INSA, 3. Juli 2026.</p>
+    <p class="tally-line anim a5">14 Behauptungen. 14 dokumentierte Vorgänge.</p>
+    <p class="hero-mech anim a6">Jede Aussage steht hier neben der Abstimmung, dem Urteil oder der Quelle, die ihr widerspricht. Nur belegte Vorgänge, jeweils mit Originalquelle und Datum.</p>
+  </section>
 
-<script type="module">
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  <!-- ================= FILTER ================= -->
+  <nav class="tabs" id="tabs" aria-label="Faelle nach Thema filtern"></nav>
 
-const cdEl = document.querySelector('[data-cd]');
-if (cdEl) cdEl.textContent = Math.max(0, Math.ceil((new Date('2026-09-06T00:00:00') - new Date()) / 86400000));
+  <!-- ================= FEED ================= -->
+  <div id="feed">
+    <noscript><p class="feed-state">Diese Seite lädt die 14 Belege per JavaScript aus receipts-db.json. Ohne JavaScript stehen alle Quellen und Vorgänge in der Datei <a href="./receipts-db.json">receipts-db.json</a>.</p></noscript>
+    <p class="feed-state" id="feed-loading" hidden>Belege werden geladen.</p>
+  </div>
 
-const app = document.getElementById('app');
-const LABELS = { oekonomie: 'Ökonomie', rechtsextremismus: 'Rechtsextremismus', geschichte: 'Geschichte', programm: 'Programm', bruecke: 'Brücke' };
-const ORDER = ['oekonomie', 'rechtsextremismus', 'geschichte', 'programm', 'bruecke'];
+  <footer class="site-foot">
+    <p><a href="/">afd-check.de</a> · Sachsen-Anhalt · Autor: Frederik Metz · Stand: 22. Juli 2026 · <a href="/impressum.html">Impressum</a></p>
+    <p class="note">Gezeigt werden nur belegte Vorgänge (öffentliche Aussage plus Abstimmung, Gerichts- oder Verfassungsschutz-Entscheidung), jeweils mit Originalquelle und Datum. Vorwürfe ohne abgeschlossene Prüfung werden nicht veröffentlicht.</p>
+  </footer>
 
-function stampOf(r) {
-  const m = ((r.beleg_dagegen || '') + ' ' + (r.quelle_primaer || '')).match(/Drs\.\s*\d+\/\d+|Az\.\s*[A-Za-zÄÖÜäöü]+\s*\d+\/\d+/);
-  return m ? m[0].replace(/\s+/g, ' ').trim() : null;
-}
-function el(tag, cls, txt) { const n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; }
+</main>
 
-function renderRow(r, i) {
-  const d = el('details', 'row'); d.name = 'konter'; d.dataset.frame = r.frame || ''; if (i === 0) d.open = true;
+<script>
+(function(){
+  var root = document.documentElement;
+  root.className += " js";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const sum = el('summary', 'hook');
-  sum.append(el('span', 'num', String(i + 1).padStart(2, '0')));
-  const body = el('span', 'hbody');
-  const who = el('span', 'who');
-  who.append(el('b', null, r.person || ''), document.createTextNode(' '), el('span', 'role', r.rolle || ''));
-  body.append(who);
-  if (!String(r.persona_claim || '').trim().toLowerCase().startsWith('n/a')) body.append(el('span', 'claim', r.persona_claim));
-  sum.append(body, el('span', 'aff'));
-  sum.querySelector('.aff').setAttribute('aria-hidden', 'true');
-  d.append(sum);
-
-  const reveal = el('div', 'reveal');
-  const pad = el('div', 'reveal__pad');
-  const label = el('p', 'rlabel', 'Die Aktenlage');
-  const s = stampOf(r);
-  if (s) label.append(el('span', 'ref', s));
-  pad.append(label, el('p', 'record', r.beleg_dagegen || ''));
-  const src = el('p', 'src'); src.append(el('b', null, 'Quelle: '), document.createTextNode((r.quelle_primaer || '') + ' ' + (r.quelle_datum || '')));
-  pad.append(src);
-  if (String(r.verified_by || '').includes('oppo-verify')) pad.append(el('span', 'badge', 'Primär bestätigt'));
-  reveal.append(pad); d.append(reveal);
-
-  d.addEventListener('toggle', () => {
-    if (reduce || !d.open) return;
-    const h = reveal.scrollHeight;
-    reveal.animate([{ height: '0px', opacity: 0 }, { height: h + 'px', opacity: 1 }], { duration: 520, easing: 'cubic-bezier(.16,1,.3,1)' });
-  });
-  return d;
-}
-
-fetch('./receipts-db.json').then(r => r.json()).then(data => {
-  const rows = (data.receipts || []).filter(r => r.klassifikation === 'FAKT');
-  if (!rows.length) { app.append(el('p', 'state', 'Noch keine veröffentlichten Belege.')); return; }
-  const frames = [...new Set(rows.map(r => r.frame).filter(Boolean))].sort((a, b) => (ORDER.indexOf(a) + 1 || 99) - (ORDER.indexOf(b) + 1 || 99));
-
-  const filters = el('div', 'filters'); filters.setAttribute('role', 'group'); filters.setAttribute('aria-label', 'Themenfilter');
-  const feed = el('div', 'feed');
-  const items = rows.map((r, i) => { const d = renderRow(r, i); feed.append(d); return d; });
-
-  const mkChip = (val, label, pressed) => {
-    const b = el('button', 'chip', label); b.type = 'button'; b.setAttribute('aria-pressed', String(pressed));
-    b.addEventListener('click', () => {
-      filters.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-      const run = () => items.forEach(d => { d.hidden = val !== 'alle' && d.dataset.frame !== val; });
-      if (document.startViewTransition && !reduce) document.startViewTransition(run); else run();
-    });
-    return b;
+  /* ---------- SVG snippets ---------- */
+  var CHECK='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M5.3 8.2l1.9 1.9 3.5-4"/></svg>';
+  var EXT='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h4v4"/><path d="M13 3l-6 6"/><path d="M11 9.5V12a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 2 12V6a1.5 1.5 0 0 1 1.5-1.5H6"/></svg>';
+  var LINKIC='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 9.4a2.6 2.6 0 0 0 3.7.1l2-2a2.6 2.6 0 1 0-3.7-3.7l-1.1 1.1"/><path d="M9.4 6.6a2.6 2.6 0 0 0-3.7-.1l-2 2a2.6 2.6 0 1 0 3.7 3.7l1.1-1.1"/></svg>';
+  var ICON={
+    court:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-5 9 5"/><path d="M5 9v8M12 9v8M19 9v8"/><path d="M3 20h18"/></svg>',
+    shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>',
+    plenum:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-5 9 5"/><path d="M5 9v8M12 9v8M19 9v8"/><path d="M3 20h18"/></svg>'
   };
-  filters.append(mkChip('alle', 'Alle', true));
-  frames.forEach(f => filters.append(mkChip(f, LABELS[f] || f, false)));
+  var TALLYX='<svg class="tally-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 
-  app.append(filters, feed);
-  document.documentElement.dataset.ready = 'true';
-});
+  /* ---------- frame palette (brief 2) ---------- */
+  /* 16c "Ink pur": all frame STRUCTURE is ink; the one oxide accent lives on the decisive object (--object) */
+  var FRAMES={
+    oekonomie:{label:'Ökonomie', color:'#17181C', dark:'#17181C'},
+    rechtsextremismus:{label:'Rechtsextremismus', color:'#17181C', dark:'#17181C'},
+    geschichte:{label:'Geschichte', color:'#17181C', dark:'#17181C'},
+    programm:{label:'Programm', color:'#17181C', dark:'#17181C'},
+    bruecke:{label:'Brücke', color:'#17181C', dark:'#17181C'}
+  };
+
+  /* ---------- curated per-record config (kern, baustein, frames; NOT record text) ---------- */
+  var CONF={
+    'sig-mindestlohn':{
+      kern:'Aus 502 Euro macht er 2.',
+      baustein:'coins',
+      frames:['Er sagt: 2 Euro mehr im Monat.','Real sind es 502 Euro mehr, mit dem Kinderzuschlag gerechnet.'],
+      idchip:'Drs. 8/7150'
+    },
+    'sig-nepotismus':{
+      kern:'Gegen Filz im Wahlkampf. Der eigene Vater auf der Gehaltsliste.',
+      baustein:'zahl',
+      figures:[{v:'7.725 €',cap:'ZDF frontal, zeitweise pro Monat'},{v:'5.500 €',cap:'Siegmund selbst, aktuell pro Monat'}],
+      frames:['ZDF frontal dokumentiert: zeitweise 7.725 Euro im Monat.','Siegmund bestätigt selbst: aktuell rund 5.500 Euro.']
+    },
+    'reform-vote-vetternwirtschaft':{
+      kern:'Gegen den Filz reden. Für den Filz stimmen.',
+      baustein:'rollcall',
+      groups:[
+        {n:72,label:'Ja',strong:false,line:'72 Stimmen für schärfere Regeln nach dem Vetternwirtschafts-Skandal.'},
+        {n:22,label:'Nein',strong:true,line:'Alle 22 Nein-Stimmen kamen von der AfD.'}
+      ],
+      stage:'72 Ja zu 22 Nein bei 0 Enthaltungen.',
+      frames:['72 Stimmen für schärfere Regeln nach dem Vetternwirtschafts-Skandal.','Alle 22 Nein-Stimmen kamen von der AfD.'],
+      idchip:'Drs. 8/6653',
+      doc:{src:'./assets/drs-8-6653.png',label:'Original: Drs. 8/6653',href:'https://padoka.landtag.sachsen-anhalt.de/files/drs/wp8/drs/d6653wge.pdf',alt:'Ausschnitt aus dem Gesetzentwurf Drucksache 8/6653, Parlamentsreform 2026.',w:1073,h:604}
+    },
+    'sig-medienstaatsvertrag':{
+      kern:'Das Tag-1-Versprechen ist längst gescheitert.',
+      baustein:'balance',
+      frames:['Sein eigener Antrag bekam nur 16 Stimmen, 66 stimmten dagegen.','Und eine Kündigung dauert rechtlich Jahre, nicht einen Tag.'],
+      idchip:'Drs. 8/6332',
+      doc:{src:'./assets/drs-8-6332.png',label:'Original: Drs. 8/6332',href:'https://padoka.landtag.sachsen-anhalt.de/files/drs/wp8/drs/d6332aan.pdf',alt:'Ausschnitt aus dem Antrag Drucksache 8/6332, Rundfunkstaatsverträge kündigen.',w:1073,h:604}
+    },
+    'sig-lanz-ministerien':{
+      kern:'Was er streichen will? „Das sage ich Ihnen vor der Wahl nicht.“',
+      baustein:'tafel',
+      quote:'Das sage ich Ihnen vor der Wahl nicht.',
+      attr:'Markus Lanz, ZDF · 02.07.2026',
+      frames:['Bei Markus Lanz gefragt, welche Ministerien er als Ministerpräsident streichen würde, verweigert er vor der Wahl die Antwort.']
+    },
+    'sig-kaffeekraenzchen':{
+      kern:'Für ihn ein „Kaffeekränzchen“. Der Landtag berief ihn ab: 71 zu 21.',
+      baustein:'rollcall',
+      groups:[
+        {n:71,label:'für Abberufung',strong:true,line:'71 Abgeordnete stimmten für seine Abberufung als Ausschussvorsitzender.'},
+        {n:21,label:'dagegen',strong:false,line:'21 stimmten dagegen.'}
+      ],
+      stage:'71 für die Abberufung, 21 dagegen.',
+      frames:['71 Abgeordnete stimmten für seine Abberufung als Ausschussvorsitzender, 21 dagegen.','Grund: seine Teilnahme am Potsdamer Treffen mit Martin Sellner.'],
+      idchip:'Drs. 8/3676'
+    },
+    'party-vs-einstufung':{
+      kern:'„Normal“? Der Verfassungsschutz sagt: gesichert rechtsextremistisch.',
+      baustein:'tafel',
+      quote:'gesichert rechtsextremistisch',
+      attr:'Verfassungsschutz Sachsen-Anhalt · Einstufung seit 07.11.2023',
+      frames:['Der Verfassungsschutz führt die AfD Sachsen-Anhalt seit November 2023 als „gesichert rechtsextremistisch“.'],
+      behoerde:{kind:'shield',name:'Verfassungsschutz Sachsen-Anhalt',meta:'Einstufung seit 07.11.2023'}
+    },
+    'tillschneider-lverfg':{
+      kern:'Ein Gericht stellt fest: Herabwürdigung statt Argument.',
+      baustein:'tafel',
+      quote:'Herabwürdigung des politischen Gegners',
+      attr:'Landesverfassungsgericht Sachsen-Anhalt · 21.08.2023',
+      frames:['Das Landesverfassungsgericht nennt seine Rede: „Herabwürdigung des politischen Gegners“.'],
+      behoerde:{kind:'court',name:'Landesverfassungsgericht Sachsen-Anhalt',meta:'Az. LVG 20/22'},
+      doc:{src:'./assets/gerichts-pm-lvg2022.png',label:'Original: Pressemitteilung 006/2023, Az. LVG 20/22',href:'https://presse.sachsen-anhalt.de/landesverfassungsgericht/2023/08/21/entscheidung-des-landesverfassungsgerichts-vom-21-august-2023-in-dem-organstreitverfahren-lvg-20-22-ordnungsruf',alt:'Ausschnitt aus der Pressemitteilung des Landesverfassungsgerichts Sachsen-Anhalt, Az. LVG 20/22.',w:650,h:370}
+    },
+    'tillschneider-vs-beobachtung':{
+      kern:'„Bürgerlich“? Seit 2020 persönlich vom Verfassungsschutz beobachtet.',
+      baustein:'sincetl',
+      orgs:['Institut für Staatspolitik','Compact','Ein Prozent'],
+      frames:['Seit Februar 2020 mit nachrichtendienstlichen Mitteln, dokumentierte Verbindungen zu Institut für Staatspolitik, Compact und Ein Prozent.'],
+      behoerde:{kind:'shield',name:'Verfassungsschutz Sachsen-Anhalt',meta:'nachrichtendienstliche Beobachtung seit Februar 2020'}
+    },
+    'kirchner-journalisten':{
+      kern:'Pressefreiheit predigen. Journalisten namentlich an den Pranger stellen.',
+      baustein:'tafel',
+      quote:'Wut und Hass',
+      attr:'Offener Brief der Landespressekonferenz · 05.09.2022',
+      frames:['Auf dem Magdeburger Domplatz prangerte er einzelne MDR-Journalisten vor Publikum an; die Landespressekonferenz antwortete mit einem offenen Brief.']
+    },
+    'vp-ablehnungs-muster':{
+      kern:'„Staatstragend“? Das Plenum lehnte jeden AfD-Vizepräsidenten ab.',
+      baustein:'tally',
+      names:['Hecht','Kohl','Kohl','Scharfenort','Lizureck','Koppehel','Mertens','Lieschke'],
+      frames:['Wieder und wieder nominiert. Das Plenum lehnte jedes Mal ab.'],
+      behoerde:{kind:'plenum',name:'Landtag Sachsen-Anhalt',meta:'Plenum, mehrere Wahlgänge 2021 bis 2023'}
+    },
+    'ddr-hymne':{
+      kern:'Die DDR verteufeln und die SED-Hymne singen.',
+      baustein:'tafel',
+      quote:'Auferstanden aus Ruinen',
+      attr:'SED-Hymne, öffentlich mitgesungen · 14.07.2026',
+      frames:['Am 14. Juli 2026 sangen Chrupalla und Siegmund öffentlich die SED-Hymne „Auferstanden aus Ruinen“.']
+    },
+    'simson-ostalgie':{
+      kern:'Die Simson als Wahlkampf-Deko. Die Nachfahren der Gründer: „abstoßend“.',
+      baustein:'tafel',
+      quote:'Wir empfinden jede Verbindung mit der AfD als abstoßend.',
+      attr:'Jüdische Nachfahren der Simson-Gründerfamilie · 2026',
+      frames:['Die jüdischen Nachfahren der 1935/36 enteigneten Gründerfamilie verbitten sich die Vereinnahmung.']
+    },
+    'schulpflicht-abschaffung':{
+      kern:'„Elternfreiheit“ heißt hier: die Schulpflicht abschaffen.',
+      baustein:'zahl',
+      figures:[{v:'2/3',cap:'Zwei-Drittel-Mehrheit nötig, um die Schulpflicht zu kippen'}],
+      frames:['Die Schulpflicht steht in der Landesverfassung. Sie zu kippen bräuchte eine Zwei-Drittel-Mehrheit.','Angekündigt im eigenen X-Video: Homeschooling statt Schulpflicht, Prüfungen nur alle halbe Jahr.']
+    }
+  };
+
+  /* ---------- helpers ---------- */
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function attr(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+  var MONTHS=['','Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  function formatDate(s){
+    if(!s) return '';
+    var m;
+    if((m=s.match(/^(\d{4})-(\d{2})-(\d{2})$/))) return m[3]+'.'+m[2]+'.'+m[1];
+    if((m=s.match(/^(\d{4})-(\d{2})$/))) return MONTHS[parseInt(m[2],10)]+' '+m[1];
+    if((m=s.match(/^(\d{4})-(\d{4})$/))) return m[1]+' bis '+m[2];
+    return s;
+  }
+  function urlOf(s){
+    if(!s || /\s/.test(s)) return '';
+    if(!/^(https?:\/\/)?[a-z0-9.-]+\.[a-z]{2,}([\/?#]|$)/i.test(s)) return '';
+    return /^https?:\/\//i.test(s) ? s : 'https://'+s;
+  }
+  function gridCols(n){return Math.min(14, Math.max(4, Math.ceil(Math.sqrt(n)*1.4)));}
+  /* bind money figures: no line break between digits and Euro/€ (U+00A0) */
+  function nb(s){return String(s).replace(/(\d[\d.]*) (Euro|€)/g,'$1 $2');}
+
+  /* ---------- baustein builders return the OBJECT only; zone() binds it to the sentences ---------- */
+  function bCoins(){
+    return '<div class="coins" aria-hidden="true">'+
+      '<div class="coin-stack"><span class="coin-num tnum">2</span><div class="coin-col"><div class="coin-fill claim"></div></div><span class="coin-cap">Behauptung</span></div>'+
+      '<div class="coin-stack"><span class="coin-num real tnum" data-count="502">502</span><div class="coin-col"><div class="coin-fill real"></div></div><span class="coin-cap">Real</span></div>'+
+    '</div>';
+  }
+  function bRollcall(c){
+    var h='<div class="rollcall">';
+    c.groups.forEach(function(g){
+      h+='<button type="button" class="rc-group" data-line="'+attr(g.line)+'" aria-label="'+attr(g.n+' '+g.label)+'">'+
+         '<span class="rc-label"><b class="tnum">'+g.n+'</b> '+esc(g.label)+'</span>'+
+         '<span class="rc-grid'+(g.strong?' strong':'')+'" data-n="'+g.n+'" aria-hidden="true"></span></button>';
+    });
+    h+='</div><div class="rc-legend" aria-hidden="true">';
+    c.groups.forEach(function(g){ h+='<span class="k"><span class="chip'+(g.strong?' strong':'')+'"></span>'+esc(g.label)+' ('+g.n+')</span>'; });
+    h+='</div><p class="rc-stage" aria-live="polite">'+esc(c.stage)+'</p>';
+    return h;
+  }
+  function bBalance(){
+    return '<div class="balance-wrap">'+
+      '<svg class="balance" viewBox="0 0 400 240" role="img" aria-label="Eine Balkenwaage kippt zur schwereren Seite: 16 Ja auf der leichten Seite, 66 Nein auf der schweren Seite.">'+
+        '<rect x="150" y="216" width="100" height="8" fill="#171a19"/>'+
+        '<path d="M200 216 L182 216 L200 96 L218 216 Z" fill="#d7dcd8"/>'+
+        '<line x1="200" y1="96" x2="200" y2="216" stroke="#171a19" stroke-width="2.5"/>'+
+        '<circle cx="200" cy="66" r="7" fill="#171a19"/>'+
+        '<g class="balance-beam">'+
+          '<line x1="70" y1="66" x2="330" y2="66" stroke="#171a19" stroke-width="6" stroke-linecap="round"/>'+
+          '<line x1="90" y1="66" x2="90" y2="112" stroke="#171a19" stroke-width="2"/>'+
+          '<circle cx="90" cy="126" r="20" fill="#aeb8b1"/>'+
+          '<text x="90" y="126" text-anchor="middle" dominant-baseline="central" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="20" fill="#171a19">16</text>'+
+          '<line x1="310" y1="66" x2="310" y2="120" stroke="#171a19" stroke-width="2"/>'+
+          '<circle cx="310" cy="140" r="36" fill="#8B2E35"/>'+
+          '<text x="310" y="140" text-anchor="middle" dominant-baseline="central" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="34" fill="#ffffff">66</text>'+
+        '</g></svg>'+
+        '<div class="balance-legend" aria-hidden="true"><span class="k"><span class="chip ja"></span>16 Ja</span><span class="k"><span class="chip nein"></span>66 Nein</span></div>'+
+      '</div>';
+  }
+  function bSince(c){
+    var orgs=(c.orgs||[]).map(function(o){return '<span class="org-chip">'+esc(o)+'</span>';}).join('');
+    return '<div class="sincetl">'+
+      '<div class="sincetl-rail">'+
+        '<div class="sincetl-fill"></div>'+
+        '<div class="sincetl-pointer" aria-hidden="true"></div>'+
+        '<div class="sincetl-node n1"><span class="sincetl-date">Februar 2020</span><span class="knob"></span><span class="sincetl-text">Nachrichtendienstliche Beobachtung beginnt.</span></div>'+
+        '<div class="sincetl-node n2"><span class="sincetl-date">bis heute</span><span class="knob"></span><span class="sincetl-text">Beobachtung läuft weiter.</span></div>'+
+      '</div>'+
+      '<div class="sincetl-orgs" role="group" aria-label="dokumentierte Verbindungen">'+orgs+'</div>'+
+    '</div>';
+  }
+  function bTafel(c){
+    return '<blockquote class="tafel">'+
+      '<p class="tafel-quote">„'+esc(c.quote)+'“</p>'+
+      '<footer class="tafel-src">'+esc(c.attr)+'</footer></blockquote>';
+  }
+  function bTally(c){
+    var marks=c.names.map(function(nm,i){
+      return '<div class="tally-mark" style="--md:'+(0.05*i).toFixed(2)+'s">'+TALLYX+'<span class="tally-name">'+esc(nm)+'</span><span class="tally-status">abgelehnt</span></div>';
+    }).join('');
+    return '<div class="tally-row" role="group" aria-label="acht abgelehnte Nominierungen">'+marks+'</div>';
+  }
+  /* Zahl-Tafel: ONE dominant number object; the second amount lives subordinate in the sentences */
+  function bZahl(c){
+    return '<div class="zahl"><span class="zahl-num tnum">'+esc(nb(c.figures[0].v))+'</span></div>';
+  }
+  function bDoc(c){
+    var d=c.doc;
+    return '<figure class="wide doc anim a5"><a class="doc-link" href="'+attr(d.href)+'" target="_blank" rel="noopener noreferrer">'+
+      '<img class="doc-img" src="'+attr(d.src)+'" alt="'+attr(d.alt)+'" loading="lazy" width="'+d.w+'" height="'+d.h+'">'+
+      '<span class="doc-cap"><span class="doc-label">'+esc(d.label)+'</span><span class="doc-open">Original öffnen '+EXT+'</span></span></a></figure>';
+  }
+  /* sentences beside the object; euro-bound; ink (set in .proof-frame) */
+  function framesInner(c){
+    return '<div class="proof-frame">'+c.frames.map(function(s){return '<p>'+esc(nb(s))+'</p>';}).join('')+'</div>';
+  }
+  /* bind mechanism object + sentences into ONE lockup filling the proof zone (no empty half) */
+  function zone(obj, c, mod){
+    return '<figure class="wide proofzone anim a3"><div class="lockup'+(mod||'')+'">'+
+      '<div class="lockup-obj">'+obj+'</div>'+framesInner(c)+'</div></figure>';
+  }
+  function baustein(c){
+    switch(c.baustein){
+      case 'coins': return zone(bCoins(), c, ' lk-coins');
+      case 'rollcall': return zone(bRollcall(c), c, ' lk-wide');
+      case 'balance': return zone(bBalance(), c, ' lk-balance');
+      case 'sincetl': return zone(bSince(c), c, ' lk-wide');
+      case 'tafel': return zone(bTafel(c), c, ' lk-tafel');
+      case 'tally': return zone(bTally(c), c, ' lk-wide');
+      case 'zahl': return zone(bZahl(c), c, ' lk-zahl');
+      default: return c.quote ? zone(bTafel(c), c, ' lk-tafel') : '';
+    }
+  }
+  function behoerde(c){
+    if(!c.behoerde) return '';
+    var b=c.behoerde;
+    return '<div class="behoerde">'+(ICON[b.kind]||'')+'<span><span class="b-name">'+esc(b.name)+'</span>'+(b.meta?' <span class="b-meta">· '+esc(b.meta)+'</span>':'')+'</span></div>';
+  }
+  function chrome(rec,c){
+    var badge = rec.verified_by==='oppo-verify' ? '<span class="badge">'+CHECK+'Primär bestätigt</span>' : '';
+    var idchip = c.idchip ? '<span class="id">'+esc(c.idchip)+'</span>' : '';
+    var beleg = urlOf(rec.kontext_link);
+    var beleglink = beleg ? ' <a class="src-link" href="'+attr(beleg)+'" target="_blank" rel="noopener noreferrer">Beleg öffnen '+EXT+'</a>' : '';
+    return '<footer class="chrome anim a6">'+
+      '<span class="date tnum">'+esc(formatDate(rec.quelle_datum))+'</span>'+idchip+badge+
+      '<span class="site">afd-check.de/sachsen-anhalt</span>'+
+      '<button type="button" class="permalink" data-fall="'+attr(rec.id)+'">'+LINKIC+'<span class="pl-txt">Link kopieren</span></button>'+
+      '<span class="srcwrap"><span class="src-text"></span>'+beleglink+'</span></footer>';
+  }
+
+  function buildSection(rec, i){
+    var c = CONF[rec.id];
+    if(!c) c = {kern:rec.person, baustein:'tafel', quote:(rec.beleg_dagegen||'').slice(0,120), attr:'', frames:[rec.beleg_dagegen||'']};
+    var f = FRAMES[rec.frame] || FRAMES.oekonomie;
+    var idx = ('0'+(i+1)).slice(-2);
+    var sec = document.createElement('section');
+    sec.className='fall';
+    sec.id='fall-'+rec.id;
+    sec.setAttribute('data-frame', rec.frame);
+    sec.setAttribute('aria-labelledby','h-'+rec.id);
+    sec.style.setProperty('--frame', f.color);
+    sec.style.setProperty('--frame-dark', f.dark);
+    sec.innerHTML =
+      '<div class="fall-head anim a1"><span class="idx tnum">'+idx+'</span>'+
+        '<span class="cat"><span class="swatch"></span>'+esc(f.label)+'</span>'+
+        '<span class="who"></span></div>'+
+      '<h2 class="kern anim a2" id="h-'+rec.id+'">'+esc(c.kern)+'</h2>'+
+      behoerde(c)+
+      baustein(c)+
+      (c.doc? bDoc(c) : '')+
+      '<blockquote class="claim anim a5"><span class="tag">Was sie sagen</span><span class="claim-text"></span></blockquote>'+
+      '<div class="record-block anim a5"><span class="tag">Was die Akten zeigen</span><p class="record record-text"></p></div>'+
+      chrome(rec,c);
+    // verbatim record text via textContent
+    sec.querySelector('.who').textContent = rec.person + ' · ' + rec.rolle;
+    sec.querySelector('.claim-text').textContent = rec.persona_claim;
+    sec.querySelector('.record-text').textContent = rec.beleg_dagegen;
+    sec.querySelector('.src-text').textContent = 'Quelle: ' + rec.quelle_primaer;
+    return sec;
+  }
+
+  /* ---------- per-section init ---------- */
+  function initRollcall(sec){
+    sec.querySelectorAll('.rc-grid').forEach(function(grid){
+      var n=+grid.getAttribute('data-n');
+      grid.style.gridTemplateColumns='repeat('+gridCols(n)+',1fr)';
+      var frag=document.createDocumentFragment();
+      for(var k=0;k<n;k++){var d=document.createElement('span'); d.className='dot'; frag.appendChild(d);}
+      grid.appendChild(frag);
+    });
+    var stage=sec.querySelector('.rc-stage');
+    if(stage){
+      var idle=stage.textContent;
+      sec.querySelectorAll('.rc-group').forEach(function(gr){
+        var line=gr.getAttribute('data-line');
+        function on(){stage.textContent=line;} function off(){stage.textContent=idle;}
+        gr.addEventListener('mouseenter',on); gr.addEventListener('mouseleave',off);
+        gr.addEventListener('focus',on); gr.addEventListener('blur',off);
+      });
+    }
+  }
+  function countUp(el){
+    var to=parseInt(el.getAttribute('data-count')||el.getAttribute('data-to'),10);
+    if(isNaN(to)) return;
+    if(reduce){ el.textContent=to; return; }
+    var dur=to>200?700:520, start=null;
+    function tick(now){
+      if(start===null) start=now;
+      var p=Math.min(1,(now-start)/dur), e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(e*to);
+      if(p<1) requestAnimationFrame(tick); else el.textContent=to;
+    }
+    requestAnimationFrame(tick);
+  }
+  function runSince(sec){
+    var rail=sec.querySelector('.sincetl-rail'); if(!rail) return;
+    var node=sec.querySelector('.sincetl');
+    node.style.setProperty('--rail-len', rail.clientWidth+'px');
+    if(reduce){ node.style.setProperty('--p',1); node.style.setProperty('--p-op',1); return; }
+    node.style.setProperty('--p-op',1);
+    var dur=950, start=null;
+    function tick(now){
+      if(start===null) start=now;
+      var p=Math.min(1,(now-start)/dur), e=1-Math.pow(1-p,3);
+      node.style.setProperty('--p', e.toFixed(4));
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- hero hemicycle: 97 seats, 47 AfD, 2 gap, 48 other ---------- */
+  function buildHemi(){
+    var svg=document.getElementById('hemi'); if(!svg) return;
+    var ns='http://www.w3.org/2000/svg';
+    var total=97, rows=6, r0=66, dr=22, seatR=6.4, i;
+    var radii=[], sum=0;
+    for(i=0;i<rows;i++){ radii.push(r0+i*dr); sum+=radii[i]; }
+    var counts=radii.map(function(r){ return Math.max(1, Math.round(total*r/sum)); });
+    var diff=total-counts.reduce(function(a,b){return a+b;},0), idx=rows-1;
+    while(diff!==0){ counts[idx]+=(diff>0?1:-1); diff+=(diff>0?-1:1); idx=(idx-1+rows)%rows; }
+    var seats=[];
+    for(i=0;i<rows;i++){
+      var n=counts[i], r=radii[i];
+      for(var j=0;j<n;j++){
+        var t=n===1?0.5:j/(n-1), ang=Math.PI-t*Math.PI;
+        seats.push({x:Math.cos(ang)*r, y:-Math.sin(ang)*r, ang:ang});
+      }
+    }
+    seats.sort(function(a,b){return b.ang-a.ang;});
+    var COL={afd:'#171a19', gap:'#8B2E35', other:'#c3c9c4'};
+    seats.forEach(function(s,k){
+      var kind = k<47?'afd':(k<49?'gap':'other');
+      var c=document.createElementNS(ns,'circle');
+      c.setAttribute('cx', s.x.toFixed(2)); c.setAttribute('cy', s.y.toFixed(2)); c.setAttribute('r', seatR);
+      c.setAttribute('fill', COL[kind]);
+      if(!reduce) c.style.setProperty('--sd',(0.4+k*0.006).toFixed(3)+'s');
+      svg.appendChild(c);
+    });
+    var m48=seats[47], m49=seats[48];
+    var mx=(m48.x+m49.x)/2, my=(m48.y+m49.y)/2, len=Math.sqrt(mx*mx+my*my)||1;
+    var mark=document.createElementNS(ns,'line');
+    mark.setAttribute('x1',(mx/len*44).toFixed(1)); mark.setAttribute('y1',(my/len*44).toFixed(1));
+    mark.setAttribute('x2',(mx/len*196).toFixed(1)); mark.setAttribute('y2',(my/len*196).toFixed(1));
+    mark.setAttribute('stroke','#8B2E35'); mark.setAttribute('stroke-width','1.6'); mark.setAttribute('stroke-dasharray','3 4');
+    svg.appendChild(mark);
+    var lab=document.createElementNS(ns,'text');
+    lab.setAttribute('x','0'); lab.setAttribute('y','14'); lab.setAttribute('text-anchor','middle');
+    lab.setAttribute('font-size','13'); lab.setAttribute('font-weight','700'); lab.setAttribute('fill','#545a56');
+    lab.setAttribute('font-family','Bricolage Grotesque, sans-serif');
+    lab.textContent='49 = absolute Mehrheit';
+    svg.appendChild(lab);
+  }
+
+  /* ---------- IO reveal + per-section enter ---------- */
+  function enter(sec){
+    sec.classList.add('in');
+    sec.querySelectorAll('[data-count],[data-to]').forEach(countUp);
+    if(sec.querySelector('.sincetl')) runSince(sec);
+  }
+  function observe(nodes){
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){ enter(en.target); io.unobserve(en.target); } });
+      }, {threshold:0.15, rootMargin:'0px 0px -8% 0px'});
+      nodes.forEach(function(s){ io.observe(s); });
+    } else {
+      nodes.forEach(enter);
+    }
+  }
+
+  /* ---------- filter tabs ---------- */
+  function buildTabs(order, sections){
+    var tabs=document.getElementById('tabs');
+    var counts={}; order.forEach(function(fr){ counts[fr]=(counts[fr]||0)+1; });
+    var inner=document.createElement('div'); inner.className='tabs-inner'; inner.setAttribute('role','group');
+    var defs=[{k:'all',label:'Alle',n:order.length}];
+    ['oekonomie','rechtsextremismus','geschichte','programm','bruecke'].forEach(function(fr){
+      if(counts[fr]) defs.push({k:fr,label:FRAMES[fr].label,n:counts[fr]});
+    });
+    defs.forEach(function(d,i){
+      var b=document.createElement('button');
+      b.type='button'; b.className='tab'; b.setAttribute('data-filter',d.k);
+      b.setAttribute('aria-pressed', i===0?'true':'false');
+      b.innerHTML=esc(d.label)+'<span class="n">'+d.n+'</span>';
+      b.addEventListener('click', function(){
+        inner.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-pressed', t===b?'true':'false'); });
+        sections.forEach(function(sec){
+          var show = d.k==='all' || sec.getAttribute('data-frame')===d.k;
+          sec.classList.toggle('is-hidden', !show);
+        });
+      });
+      inner.appendChild(b);
+    });
+    tabs.appendChild(inner);
+  }
+
+  /* ---------- boot ---------- */
+  buildHemi();
+  observe([document.getElementById('hero')]);
+
+  var feed=document.getElementById('feed');
+  var loading=document.getElementById('feed-loading');
+  if(loading) loading.hidden=false;
+
+  fetch('./receipts-db.json', {cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(db){
+      var recs=(db.receipts||[]).filter(function(r){ return r.klassifikation==='FAKT'; });
+      if(!recs.length) throw new Error('keine FAKT-Records');
+      feed.innerHTML='';
+      var sections=[], order=[];
+      recs.forEach(function(rec,i){
+        var sec=buildSection(rec,i);
+        feed.appendChild(sec);
+        sections.push(sec); order.push(rec.frame);
+        if(CONF[rec.id] && CONF[rec.id].baustein==='rollcall') initRollcall(sec);
+      });
+      buildTabs(order, sections);
+      observe(sections);
+      // permalink copy (delegated)
+      feed.addEventListener('click', function(e){
+        var btn=e.target.closest('.permalink'); if(!btn) return;
+        var url='https://afd-check.de/sachsen-anhalt/#fall-'+btn.getAttribute('data-fall');
+        var txt=btn.querySelector('.pl-txt'), old=txt.textContent;
+        function done(){ btn.classList.add('copied'); txt.textContent='Kopiert'; setTimeout(function(){ btn.classList.remove('copied'); txt.textContent=old; },1600); }
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(url).then(done, function(){ window.prompt('Link zu diesem Fall:', url); });
+        } else {
+          window.prompt('Link zu diesem Fall:', url);
+        }
+      });
+      // deep-link: if arriving with a hash, make sure the target is visible (filter=all is default)
+      if(location.hash){ var t=document.getElementById(location.hash.slice(1)); if(t) t.scrollIntoView(); }
+    })
+    .catch(function(err){
+      feed.innerHTML='<div class="feed-state feed-error"><p><strong>Die Belege konnten nicht geladen werden.</strong> ('+esc(err.message)+')</p>'+
+        '<p>Alle 14 Vorgänge mit Quelle und Datum stehen in der Datei <a href="./receipts-db.json">receipts-db.json</a>.</p></div>';
+    });
+
+  // rail re-measure on resize (single since-timeline)
+  var rz;
+  window.addEventListener('resize', function(){
+    clearTimeout(rz);
+    rz=setTimeout(function(){
+      var node=document.querySelector('.sincetl'); var rail=document.querySelector('.sincetl-rail');
+      if(node&&rail) node.style.setProperty('--rail-len', rail.clientWidth+'px');
+    },150);
+  }, {passive:true});
+})();
 </script>
 </body>
 </html>
